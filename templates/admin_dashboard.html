@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Admin Dashboard | DevPath AI
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/admin_dashboard.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<section class="admin-dashboard">
+
+    <div class="container py-5">
+
+        <div class="admin-header">
+            <span class="admin-badge">
+                🛡️ ADMIN PANEL
+            </span>
+
+            <h1>Welcome, Administrator 👋</h1>
+
+            <p>
+                Manage DevPath AI, students, skills and learning content
+                from your dashboard.
+            </p>
+        </div>
+
+
+        <div class="row g-4 mt-4">
+
+            <div class="col-md-3">
+                <div class="admin-card">
+                    <div class="admin-card-icon">👨‍🎓</div>
+                    <h3>Students</h3>
+                    <p>Manage registered students.</p>
+                    <a href="#">View Students →</a>
+                </div>
+            </div>
+
+
+            <div class="col-md-3">
+                <div class="admin-card">
+                    <div class="admin-card-icon">🧠</div>
+                    <h3>Skills</h3>
+                    <p>Manage technical skills.</p>
+                    <a href="#">Manage Skills →</a>
+                </div>
+            </div>
+
+
+            <div class="col-md-3">
+                <div class="admin-card">
+                    <div class="admin-card-icon">🗺️</div>
+                    <h3>Career Paths</h3>
+                    <p>Manage developer career paths.</p>
+                    <a href="#">View Paths →</a>
+                </div>
+            </div>
+
+
+            <div class="col-md-3">
+                <div class="admin-card">
+                    <div class="admin-card-icon">📚</div>
+                    <h3>Roadmaps</h3>
+                    <p>Manage learning roadmaps.</p>
+                    <a href="#">Manage Roadmaps →</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+.admin-dashboard {
+    min-height: 75vh;
+    background: #f8f7f0;
+    padding: 60px 0;
+}
+
+.admin-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.admin-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: #e2efe8;
+    color: #0b4d3b;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.admin-header h1 {
+    margin-top: 18px;
+    color: #073f32;
+    font-size: 42px;
+    font-weight: 700;
+}
+
+.admin-header p {
+    color: #66746f;
+    font-size: 17px;
+}
+
+.admin-card {
+    height: 100%;
+    padding: 28px;
+    background: white;
+    border: 1px solid #e1e8e4;
+    border-radius: 18px;
+    transition: 0.3s;
+}
+
+.admin-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(11, 77, 59, 0.10);
+}
+
+.admin-card-icon {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.admin-card h3 {
+    color: #073f32;
+    font-size: 21px;
+}
+
+.admin-card p {
+    color: #68756f;
+}
+
+.admin-card a {
+    color: #0b4d3b;
+    font-weight: 600;
+    text-decoration: none;
+}

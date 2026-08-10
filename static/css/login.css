@@ -1,0 +1,126 @@
+/* Role Selection */
+.role-selection {
+    display: flex;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.role-option {
+    flex: 1;
+    cursor: pointer;
+}
+
+.role-option input {
+    display: none;
+}
+
+.role-option span {
+    display: block;
+    padding: 14px 20px;
+    text-align: center;
+    border: 1px solid #d9e3df;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #31544a;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.role-option span:hover {
+    border-color: #0b4d3b;
+}
+
+.role-option input:checked + span {
+    background: #0b4d3b;
+    color: #ffffff;
+    border-color: #0b4d3b;
+}
+
+/* Login Form */
+.login-form {
+    width: 100%;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 8px;
+    margin-top: 18px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    height: 54px;
+    padding: 0 16px;
+    border: 1px solid #d9e3df;
+    border-radius: 10px;
+    background: #ffffff;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.login-form input[type="text"]:focus,
+.login-form input[type="password"]:focus {
+    border-color: #0b4d3b;
+    box-shadow: 0 0 0 3px rgba(11, 77, 59, 0.08);
+}
+
+/* Login Button */
+.login-form button {
+    width: 100%;
+    height: 56px;
+    margin-top: 28px;
+    border: none;
+    border-radius: 30px;
+    background: #0b4d3b;
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-form button:hover {
+    background: #083b2e;
+    transform: translateY(-1px);
+}
+
+/* Error Message */
+.login-error {
+    background: #ffe8e8;
+    color: #b42318;
+    border: 1px solid #f5b5b5;
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+.login-badge {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 7px 15px;
+    border-radius: 20px;
+    background: #e3f0e9;
+    color: #0b4d3b;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.admin-badge {
+    background: #fff2d6;
+    color: #8a6418;
+}
+
+.auth-header h1 {
+    margin-bottom: 12px;
+}
+
+.auth-header p {
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+}

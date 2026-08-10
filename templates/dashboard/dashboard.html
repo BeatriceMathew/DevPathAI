@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Dashboard | DevPath AI
+{% endblock %}
+
+{% block content %}
+
+<section class="py-5">
+    <div class="container">
+        <a href="{% url 'logout' %}" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+        </a>
+
+        <div class="text-center mb-5">
+            <h1>Welcome to DevPath AI 👋</h1>
+
+            <p class="text-muted">
+                Your personalized developer journey starts here.
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="p-4 bg-white rounded-4 shadow-sm">
+                    <h4>🎯 Skill Assessment</h4>
+                    <p>
+                        Tell us about your current technical skills.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="p-4 bg-white rounded-4 shadow-sm">
+                    <h4>🧠 AI Skill Analysis</h4>
+                    <p>
+                        Identify the skills you need for your career goal.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="p-4 bg-white rounded-4 shadow-sm">
+                    <h4>🗺️ My Roadmap</h4>
+                    <p>
+                        Follow your personalized learning roadmap.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

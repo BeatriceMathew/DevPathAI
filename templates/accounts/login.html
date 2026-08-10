@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Login | DevPath AI
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/login.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="container">
+
+        <div class="auth-wrapper">
+
+            <div class="auth-card">
+
+                <!-- Header -->
+                <div class="auth-header">
+
+                    <div class="auth-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+
+                    <!-- Student Welcome -->
+                    <div id="studentWelcome">
+
+                        <span class="login-badge">
+                            STUDENT PORTAL
+                        </span>
+
+                        <h1>Welcome, Future Developer 👋</h1>
+
+                        <p>
+                            Continue building your skills and follow your
+                            personalized AI learning roadmap.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Admin Welcome -->
+                    <div id="adminWelcome" style="display: none;">
+
+                        <span class="login-badge admin-badge">
+                            ADMIN PORTAL
+                        </span>
+
+                        <h1>Welcome, Administrator 🛡️</h1>
+
+                        <p>
+                            Manage students, learning paths and platform
+                            content from your admin dashboard.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Error -->
+                {% if error %}
+                    <div class="login-error">
+                        {{ error }}
+                    </div>
+                {% endif %}
+
+
+                <!-- Login Form -->
+                <form method="POST" class="login-form">
+
+                    {% csrf_token %}
+
+
+                    <!-- Role Selection -->
+                    <div class="role-selection">
+
+                        <label class="role-option">
+
+                            <input
+                                type="radio"
+                                name="role"
+                                value="student"
+                                checked
+                            >
+
+                            <span>
+                                🎓 Student
+                            </span>
+
+                        </label>
+
+
+                        <label class="role-option">
+
+                            <input
+                                type="radio"
+                                name="role"
+                                value="admin"
+                            >
+
+                            <span>
+                                🛡️ Admin
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- Username -->
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your username"
+                        required
+                    >
+
+
+                    <!-- Password -->
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+
+                    <!-- Login Button -->
+                    <button type="submit">
+                        Login →
+                    </button>
+
+                </form>
+                <script>
+                document.addEventListener("DOMContentLoaded", function () {
+
+                    const studentRadio = document.querySelector(
+                        'input[name="role"][value="student"]'
+                    );
+
+                    const adminRadio = document.querySelector(
+                        'input[name="role"][value="admin"]'
+                    );
+
+                    const studentWelcome = document.getElementById(
+                        "studentWelcome"
+                    );
+
+                    const adminWelcome = document.getElementById(
+                        "adminWelcome"
+                    );
+
+
+                    function updateWelcome() {
+
+                        if (adminRadio.checked) {
+
+                            studentWelcome.style.display = "none";
+                            adminWelcome.style.display = "block";
+
+                        } else {
+
+                            studentWelcome.style.display = "block";
+                            adminWelcome.style.display = "none";
+
+                        }
+
+                    }
+
+
+                    studentRadio.addEventListener(
+                        "change",
+                        updateWelcome
+                    );
+
+                    adminRadio.addEventListener(
+                        "change",
+                        updateWelcome
+                    );
+
+
+                    updateWelcome();
+
+                });
+                </script>
+
+
+                <!-- Footer -->
+                <div class="auth-footer">
+
+                    Don't have an account?
+
+                    <a href="{% url 'register' %}">
+                        Create Account
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

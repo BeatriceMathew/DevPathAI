@@ -1,0 +1,92 @@
+<nav class="navbar navbar-expand-lg fixed-top">
+
+    <div class="container">
+
+        <!-- Logo -->
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <i class="fas fa-robot"></i>
+            DevPath AI
+        </a>
+
+        <!-- Mobile Button -->
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <!-- Navigation -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <!-- Home -->
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="{% url 'home' %}">
+                        Home
+                    </a>
+                </li>
+
+
+                <!-- Features -->
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="{% url 'home' %}#features">
+                        Features
+                    </a>
+                </li>
+
+
+                <!-- Career Paths -->
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="{% url 'home' %}#careers">
+                        Career Paths
+                    </a>
+                </li>
+
+
+                <!-- About -->
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="{% url 'home' %}#about">
+                        About
+                    </a>
+                </li>
+
+
+                <!-- Login -->
+                <li class="nav-item">
+
+                    <a class="btn btn-outline-light btn-sm ms-lg-3"
+                        href="{% url 'login' %}">
+                        Login
+                    </a>
+
+                </li>
+
+
+                <!-- Get Started -->
+                <li class="nav-item">
+
+                    <a class="btn btn-primary-modern btn-sm ms-lg-2" href="{% url 'register' %}">
+                        Get Started
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
