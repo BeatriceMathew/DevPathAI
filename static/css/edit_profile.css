@@ -1,0 +1,379 @@
+/* =====================================================
+   EDIT PROFILE
+===================================================== */
+
+.profile-page {
+    min-height: 100vh;
+    background: #f8f7f0;
+
+    padding: 20px 35px 40px;
+
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.profile-header {
+    max-width: 900px;
+
+    margin: 0 auto 18px;
+}
+
+
+.profile-header .dashboard-label {
+    display: block;
+
+    color: #0b4d3b;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 4px;
+}
+
+
+.profile-header h1 {
+    margin: 0;
+
+    color: #073f32;
+
+    font-size: 34px;
+    font-weight: 700;
+
+    line-height: 1.15;
+}
+
+
+.profile-header p {
+    margin: 5px 0 0;
+
+    color: #66746f;
+
+    font-size: 15px;
+}
+
+
+/* =====================================================
+   PROFILE CARD
+===================================================== */
+
+.profile-card {
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe8e3;
+
+    border-radius: 18px;
+
+    padding: 24px 32px 22px;
+
+    box-sizing: border-box;
+
+    box-shadow: 0 5px 18px rgba(7, 63, 50, 0.05);
+}
+
+
+/* =====================================================
+   PROFILE ICON
+===================================================== */
+
+.profile-avatar-large {
+    width: 68px;
+    height: 68px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 16px;
+
+    border-radius: 50%;
+
+    background: #e2efe8;
+
+    color: #0b4d3b;
+
+    font-size: 28px;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.profile-form {
+    width: 100%;
+}
+
+
+/* =====================================================
+   FORM GROUP
+===================================================== */
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #68756f;
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   INPUTS
+===================================================== */
+
+.profile-form input {
+    width: 100%;
+
+    height: 48px;
+
+    padding: 0 13px;
+
+    border: 1px solid #dfe7e3;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #073f32;
+
+    font-size: 15px;
+
+    box-sizing: border-box;
+
+    outline: none;
+
+    transition: all 0.2s ease;
+}
+
+
+/* INPUT HOVER */
+
+.profile-form input:hover {
+    border-color: #b9cec5;
+}
+
+
+/* INPUT FOCUS */
+
+.profile-form input:focus {
+    border-color: #0b4d3b;
+
+    box-shadow:
+        0 0 0 3px rgba(11, 77, 59, 0.08);
+}
+
+
+/* USERNAME / READONLY */
+
+.profile-form input[readonly] {
+    background: #f3f6f4;
+
+    color: #68756f;
+
+    cursor: not-allowed;
+}
+
+
+/* =====================================================
+   FIRST NAME + LAST NAME
+===================================================== */
+
+.form-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.profile-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 18px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid #e5ebe8;
+}
+
+
+.profile-btn {
+    min-height: 42px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 0 17px;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    border: none;
+
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+/* =====================================================
+   SAVE CHANGES
+===================================================== */
+
+.edit-btn {
+    background: #0b4d3b;
+
+    color: #ffffff;
+}
+
+
+.edit-btn:hover {
+    background: #083b2e;
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   CANCEL
+===================================================== */
+
+.back-btn {
+    background: #f0f4f2;
+
+    color: #31544a;
+}
+
+
+.back-btn:hover {
+    background: #e2ebe7;
+
+    color: #073f32;
+
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   FORM ERRORS
+===================================================== */
+
+.form-error {
+    margin-top: 5px;
+
+    color: #b42318;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   DJANGO FORM ERROR LIST
+===================================================== */
+
+.profile-form ul.errorlist {
+    margin: 5px 0 0;
+
+    padding: 0;
+
+    list-style: none;
+
+    color: #b42318;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .profile-page {
+        padding: 18px 25px 35px;
+    }
+
+    .profile-card {
+        padding: 22px 25px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .profile-page {
+        padding: 15px 15px 30px;
+    }
+
+    .profile-header h1 {
+        font-size: 30px;
+    }
+
+    .profile-card {
+        padding: 20px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+    .profile-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .profile-btn {
+        width: 100%;
+    }
+
+}

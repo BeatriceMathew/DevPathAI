@@ -24,12 +24,16 @@
 
 <body>
 
+    {% block navbar %}
     {% include 'components/navbar.html' %}
+    {% endblock %}
 
     {% block content %}
     {% endblock %}
 
+    {% block footer %}
     {% include 'components/footer.html' %}
+    {% endblock %}
 
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 

@@ -87,3 +87,44 @@ class RegisterForm(UserCreationForm):
             )
 
         return email
+
+
+
+class EditProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+
+        fields = [
+            "username",
+            "email",
+            "first_name",
+            "last_name",
+        ]
+
+        widgets = {
+
+            "username": forms.TextInput(
+                attrs={
+                    "placeholder": "Enter username"
+                }
+            ),
+
+            "email": forms.EmailInput(
+                attrs={
+                    "placeholder": "Enter email address"
+                }
+            ),
+
+            "first_name": forms.TextInput(
+                attrs={
+                    "placeholder": "Enter first name"
+                }
+            ),
+
+            "last_name": forms.TextInput(
+                attrs={
+                    "placeholder": "Enter last name"
+                }
+            ),
+        }

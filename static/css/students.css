@@ -1,0 +1,291 @@
+.students-page {
+    min-height: 100vh;
+    background: #f8f7f0;
+    padding: 45px 50px;
+    margin-left: 250px;
+}
+
+
+.students-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+
+.page-label {
+    color: #0b4d3b;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+
+.students-header h1 {
+    color: #073f32;
+    font-size: 38px;
+    margin: 8px 0;
+}
+
+
+.students-header p {
+    color: #66746f;
+    margin: 0;
+}
+
+
+.student-count {
+    background: white;
+    border: 1px solid #e1e8e4;
+    border-radius: 16px;
+    padding: 18px 25px;
+    text-align: center;
+}
+
+
+.student-count strong {
+    display: block;
+    color: #0b4d3b;
+    font-size: 30px;
+}
+
+
+.student-count span {
+    color: #66746f;
+    font-size: 13px;
+}
+
+
+.students-card {
+    background: white;
+    border: 1px solid #e1e8e4;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 28px;
+    border-bottom: 1px solid #e8eeeb;
+}
+
+
+.table-header h2 {
+    margin: 0;
+    color: #073f32;
+    font-size: 21px;
+}
+
+
+.table-header a {
+    color: #0b4d3b;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+thead {
+    background: #f3f7f4;
+}
+
+
+th {
+    padding: 16px 20px;
+    text-align: left;
+    color: #31544a;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+td {
+    padding: 17px 20px;
+    border-top: 1px solid #edf1ef;
+    color: #4d5d57;
+    font-size: 14px;
+}
+
+
+tbody tr:hover {
+    background: #fafcfb;
+}
+
+
+.student-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.student-avatar {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e2efe8;
+    color: #0b4d3b;
+
+    font-weight: 700;
+}
+
+
+.student-name strong {
+    color: #073f32;
+}
+
+
+.no-students {
+    text-align: center;
+    padding: 70px 20px;
+}
+
+
+.empty-icon {
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #e2efe8;
+    color: #0b4d3b;
+
+    border-radius: 50%;
+
+    font-size: 25px;
+}
+
+
+.no-students h3 {
+    color: #073f32;
+}
+
+
+.no-students p {
+    color: #68756f;
+}
+
+/* =========================
+   DELETE STUDENTS
+========================= */
+
+.delete-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    background: #fff0f0;
+    color: #b42318;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.delete-btn:hover {
+    background: #ffe0e0;
+    color: #9f1c12;
+}
+
+/* DELETE PAGE */
+
+.delete-page {
+    min-height: 75vh;
+    margin-left: 250px;
+    background: #f8f7f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+}
+
+.delete-card {
+    width: 450px;
+    background: white;
+    border: 1px solid #e1e8e4;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(11,77,59,0.08);
+}
+
+.delete-icon {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #ffe8e8;
+    color: #b42318;
+    font-size: 25px;
+}
+
+.delete-card h1 {
+    color: #073f32;
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+
+.delete-card p {
+    color: #68756f;
+    line-height: 1.6;
+}
+
+.warning-text {
+    color: #b42318 !important;
+    font-size: 13px;
+}
+
+.confirm-delete {
+    width: 100%;
+    padding: 13px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #b42318;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.confirm-delete:hover {
+    background: #921b13;
+}
+
+.cancel-delete {
+    display: block;
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 10px;
+    background: #f0f3f1;
+    color: #31544a;
+    text-decoration: none;
+    font-weight: 600;
+}

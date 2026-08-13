@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
-from .forms import RegisterForm
-
+from .forms import RegisterForm, EditProfileForm
+from django.contrib.auth.models import User
 
 # ==============================
 # STUDENT REGISTRATION
@@ -138,23 +138,117 @@ def user_login(request):
 
 def admin_dashboard(request):
 
-    # User is not logged in
     if not request.user.is_authenticated:
-
         return redirect("login")
 
-
-    # User is not an administrator
     if not request.user.is_staff:
-
         return redirect("dashboard")
 
+    students_count = User.objects.filter(
+        is_staff=False
+    ).count()
 
     return render(
         request,
-        "admin_dashboard.html"
+        "admin_dashboard.html",
+        {
+            "students_count": students_count
+        }
     )
 
+def admin_profile(request):
+
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    if not request.user.is_staff:
+        return redirect("dashboard")
+
+    return render(
+        request,
+        "accounts/admin_profile.html"
+    )
+
+
+def students_list(request):
+
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    if not request.user.is_staff:
+        return redirect("dashboard")
+
+    students = User.objects.filter(is_staff=False).order_by("-date_joined")
+
+    return render(
+        request,
+        "accounts/students.html",
+        {
+            "students": students
+        }
+    )
+
+def delete_student(request, student_id):
+
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    if not request.user.is_staff:
+        return redirect("dashboard")
+
+    student = User.objects.get(
+        id=student_id,
+        is_staff=False
+    )
+
+    if request.method == "POST":
+
+        student.delete()
+
+        return redirect("students_list")
+
+    return render(
+        request,
+        "accounts/delete_student.html",
+        {
+            "student": student
+        }
+    )
+
+def edit_profile(request):
+
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    if not request.user.is_staff:
+        return redirect("dashboard")
+
+    if request.method == "POST":
+
+        form = EditProfileForm(
+            request.POST,
+            instance=request.user
+        )
+
+        if form.is_valid():
+
+            form.save()
+
+            return redirect("admin_profile")
+
+    else:
+
+        form = EditProfileForm(
+            instance=request.user
+        )
+
+    return render(
+        request,
+        "accounts/edit_profile.html",
+        {
+            "form": form
+        }
+    )
 
 # ==============================
 # LOGOUT

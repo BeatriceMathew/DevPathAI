@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Delete Student | DevPath AI
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/students.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="delete-page">
+
+    <div class="delete-card">
+
+        <div class="delete-icon">
+            <i class="fas fa-user-times"></i>
+        </div>
+
+        <h1>Delete Student?</h1>
+
+        <p>
+            Are you sure you want to delete
+            <strong>{{ student.username }}</strong>?
+        </p>
+
+        <p class="warning-text">
+            This action cannot be undone.
+        </p>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <button type="submit"
+                    class="confirm-delete">
+
+                <i class="fas fa-trash"></i>
+
+                Yes, Delete Student
+
+            </button>
+
+            <a href="{% url 'students_list' %}"
+               class="cancel-delete">
+
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

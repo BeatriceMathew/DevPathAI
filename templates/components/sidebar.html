@@ -1,0 +1,212 @@
+{% load static %}
+
+<aside class="admin-sidebar">
+
+    <!-- ================= LOGO ================= -->
+
+    <div class="admin-logo">
+
+        <div class="logo-icon">
+            <i class="fas fa-robot"></i>
+        </div>
+
+        <div class="logo-text">
+            <span>DevPathAI</span>
+        </div>
+
+    </div>
+
+
+    <!-- ================= ADMIN PROFILE ================= -->
+
+    <div class="admin-profile">
+
+        <div class="profile-icon">
+
+            <i class="fas fa-user-shield"></i>
+
+        </div>
+
+
+        <div class="profile-details">
+
+            <strong>
+                {{ request.user.username }}
+            </strong>
+
+            <small>
+                Administrator
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= MAIN MENU ================= -->
+
+    <nav class="admin-menu">
+
+        <!-- Dashboard -->
+
+        <a href="{% url 'admin_dashboard' %}"
+           class="{% if request.resolver_match.url_name == 'admin_dashboard' %}active{% endif %}">
+
+            <i class="fas fa-chart-line"></i>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <!-- Students -->
+
+        <a href="{% url 'students_list' %}"
+           class="{% if request.resolver_match.url_name == 'students_list' %}active{% endif %}">
+
+            <i class="fas fa-user-graduate"></i>
+
+            <span>Students</span>
+
+        </a>
+
+
+        <!-- Skills -->
+
+        <a href="#"
+           class="">
+
+            <i class="fas fa-code"></i>
+
+            <span>Skills</span>
+
+        </a>
+
+
+        <!-- Career Paths -->
+
+        <a href="#"
+           class="">
+
+            <i class="fas fa-route"></i>
+
+            <span>Career Paths</span>
+
+        </a>
+
+
+        <!-- Roadmaps -->
+
+        <a href="#"
+           class="">
+
+            <i class="fas fa-map"></i>
+
+            <span>Roadmaps</span>
+
+        </a>
+
+
+        <!-- Assessments -->
+
+        <a href="#"
+           class="">
+
+            <i class="fas fa-clipboard-check"></i>
+
+            <span>Assessments</span>
+
+        </a>
+
+
+        <!-- Projects -->
+
+        <a href="#"
+           class="">
+
+            <i class="fas fa-lightbulb"></i>
+
+            <span>Projects</span>
+
+        </a>
+
+
+        <!-- Reports -->
+
+        <a href="#"
+           class="">
+
+            <i class="fas fa-chart-pie"></i>
+
+            <span>Reports</span>
+
+        </a>
+
+    </nav>
+
+
+    <!-- ================= BOTTOM MENU ================= -->
+
+    <div class="sidebar-bottom">
+
+
+        <!-- Profile -->
+
+        <a href="{% url 'admin_profile' %}"
+           class="{% if request.resolver_match.url_name == 'admin_profile' %}active{% endif %}">
+
+            <i class="fas fa-user"></i>
+
+            <span>My Profile</span>
+
+        </a>
+
+
+        <!-- Edit Profile -->
+
+        <a href="{% url 'edit_profile' %}"
+           class="{% if request.resolver_match.url_name == 'edit_profile' %}active{% endif %}">
+
+            <i class="fas fa-user-edit"></i>
+
+            <span>Edit Profile</span>
+
+        </a>
+
+
+        <!-- Change Password -->
+
+        <a href="{% url 'password_change' %}">
+
+            <i class="fas fa-lock"></i>
+
+            <span>Change Password</span>
+
+        </a>
+
+
+        <!-- View Website -->
+
+        <a href="{% url 'home' %}">
+
+            <i class="fas fa-home"></i>
+
+            <span>View Website</span>
+
+        </a>
+
+
+        <!-- Logout -->
+
+        <a href="{% url 'logout' %}">
+
+            <i class="fas fa-sign-out-alt"></i>
+
+            <span>Logout</span>
+
+        </a>
+
+
+    </div>
+
+</aside>

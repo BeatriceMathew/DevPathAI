@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'admin_base.html' %}
 
 {% load static %}
 
@@ -6,78 +6,360 @@
 Admin Dashboard | DevPath AI
 {% endblock %}
 
-{% block extra_css %}
-
-<link rel="stylesheet"
-      href="{% static 'css/admin_dashboard.css' %}">
-
-{% endblock %}
 
 {% block content %}
 
-<section class="admin-dashboard">
+<div class="admin-dashboard-content">
 
-    <div class="container py-5">
 
-        <div class="admin-header">
-            <span class="admin-badge">
-                🛡️ ADMIN PANEL
+    <!-- ================= TOP HEADER ================= -->
+
+    <header class="admin-topbar">
+
+        <div>
+
+            <span class="dashboard-label">
+                ADMIN DASHBOARD
             </span>
 
-            <h1>Welcome, Administrator 👋</h1>
+            <h1>
+                Welcome back, Administrator 👋
+            </h1>
 
             <p>
-                Manage DevPath AI, students, skills and learning content
-                from your dashboard.
+                Manage and monitor the DevPath AI platform.
             </p>
+
         </div>
 
 
-        <div class="row g-4 mt-4">
+        <div class="admin-top-actions">
 
-            <div class="col-md-3">
-                <div class="admin-card">
-                    <div class="admin-card-icon">👨‍🎓</div>
-                    <h3>Students</h3>
-                    <p>Manage registered students.</p>
-                    <a href="#">View Students →</a>
-                </div>
-            </div>
+            <button type="button"
+                    class="notification-btn">
+
+                <i class="fas fa-bell"></i>
+
+            </button>
 
 
-            <div class="col-md-3">
-                <div class="admin-card">
-                    <div class="admin-card-icon">🧠</div>
-                    <h3>Skills</h3>
-                    <p>Manage technical skills.</p>
-                    <a href="#">Manage Skills →</a>
-                </div>
-            </div>
+            <div class="admin-avatar">
 
+                {{ request.user.username|first|upper }}
 
-            <div class="col-md-3">
-                <div class="admin-card">
-                    <div class="admin-card-icon">🗺️</div>
-                    <h3>Career Paths</h3>
-                    <p>Manage developer career paths.</p>
-                    <a href="#">View Paths →</a>
-                </div>
-            </div>
-
-
-            <div class="col-md-3">
-                <div class="admin-card">
-                    <div class="admin-card-icon">📚</div>
-                    <h3>Roadmaps</h3>
-                    <p>Manage learning roadmaps.</p>
-                    <a href="#">Manage Roadmaps →</a>
-                </div>
             </div>
 
         </div>
 
-    </div>
+    </header>
 
-</section>
+
+
+    <!-- ================= STATISTICS ================= -->
+
+    <section class="stats-grid">
+
+
+        <!-- STUDENTS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon students">
+
+                <i class="fas fa-user-graduate"></i>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Total Students
+                </span>
+
+                <h2>
+                    {{ students_count }}
+                </h2>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SKILLS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon skills">
+
+                <i class="fas fa-code"></i>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Total Skills
+                </span>
+
+                <h2>
+                    0
+                </h2>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CAREER PATHS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon careers">
+
+                <i class="fas fa-route"></i>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Career Paths
+                </span>
+
+                <h2>
+                    0
+                </h2>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ASSESSMENTS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon assessments">
+
+                <i class="fas fa-clipboard-check"></i>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Assessments
+                </span>
+
+                <h2>
+                    0
+                </h2>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= MANAGEMENT ================= -->
+
+    <section class="section-heading">
+
+        <div>
+
+            <span>
+                PLATFORM MANAGEMENT
+            </span>
+
+            <h2>
+                Manage DevPath AI
+            </h2>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="management-grid">
+
+
+        <!-- STUDENTS -->
+
+        <div class="management-card">
+
+            <div class="management-icon">
+
+                <i class="fas fa-user-graduate"></i>
+
+            </div>
+
+
+            <h3>
+                Student Management
+            </h3>
+
+
+            <p>
+                View registered students, monitor their
+                learning progress and manage accounts.
+            </p>
+
+
+            <a href="{% url 'students_list' %}">
+                Manage Students →
+            </a>
+
+        </div>
+
+
+
+        <!-- SKILLS -->
+
+        <div class="management-card">
+
+            <div class="management-icon">
+
+                <i class="fas fa-code"></i>
+
+            </div>
+
+
+            <h3>
+                Skill Management
+            </h3>
+
+
+            <p>
+                Add, update and manage technical skills used
+                by the AI recommendation system.
+            </p>
+
+
+            <a href="#">
+                Manage Skills →
+            </a>
+
+        </div>
+
+
+
+        <!-- CAREER PATHS -->
+
+        <div class="management-card">
+
+            <div class="management-icon">
+
+                <i class="fas fa-route"></i>
+
+            </div>
+
+
+            <h3>
+                Career Paths
+            </h3>
+
+
+            <p>
+                Manage developer career paths and required
+                technical skills.
+            </p>
+
+
+            <a href="#">
+                Manage Career Paths →
+            </a>
+
+        </div>
+
+
+
+        <!-- ROADMAPS -->
+
+        <div class="management-card">
+
+            <div class="management-icon">
+
+                <i class="fas fa-map"></i>
+
+            </div>
+
+
+            <h3>
+                Learning Roadmaps
+            </h3>
+
+
+            <p>
+                Create and manage personalized learning
+                roadmap content.
+            </p>
+
+
+            <a href="#">
+                Manage Roadmaps →
+            </a>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= RECENT ACTIVITY ================= -->
+
+    <section class="activity-section">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <span>
+                    ACTIVITY
+                </span>
+
+                <h2>
+                    Recent Activity
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="empty-activity">
+
+            <i class="fas fa-chart-line"></i>
+
+
+            <h3>
+                No recent activity
+            </h3>
+
+
+            <p>
+                Student registrations and platform activities
+                will appear here.
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+</div>
 
 {% endblock %}
