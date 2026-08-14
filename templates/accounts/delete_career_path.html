@@ -1,0 +1,147 @@
+{% extends 'admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+Deactivate Career Path | DevPath AI
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/career_paths.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="career-paths-page">
+
+    <div class="career-confirm-page">
+
+        <div class="career-confirm-card">
+
+
+            <!-- WARNING -->
+
+            <div class="career-confirm-icon">
+
+                <i class="fas fa-exclamation-triangle"></i>
+
+            </div>
+
+
+            <!-- LABEL -->
+
+            <span class="page-label">
+                CAREER PATH MANAGEMENT
+            </span>
+
+
+            <!-- TITLE -->
+
+            <h1>
+                Deactivate Career Path?
+            </h1>
+
+
+            <!-- MESSAGE -->
+
+            <p class="career-confirm-message">
+
+                Are you sure you want to deactivate
+
+                <strong>
+                    {{ career_path.name }}
+                </strong>?
+
+            </p>
+
+
+            <!-- DESCRIPTION -->
+
+            <p class="career-confirm-description">
+
+                This career path will no longer appear in the
+                active career paths list. It will not be deleted
+                permanently and can be restored later.
+
+            </p>
+
+
+            <!-- CAREER PREVIEW -->
+
+            <div class="career-confirm-preview">
+
+                <div class="career-confirm-preview-icon">
+
+                    <i class="fas fa-route"></i>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        {{ career_path.name }}
+                    </strong>
+
+                    <p>
+
+                        {{ career_path.skills.count }}
+
+                        required skill{{ career_path.skills.count|pluralize }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="career-confirm-actions">
+
+
+                    <a href="{% url 'career_paths_list' %}"
+                       class="career-cancel-btn">
+
+                        <i class="fas fa-arrow-left"></i>
+
+                        Cancel
+
+                    </a>
+
+
+                    <button type="submit"
+                            class="career-deactivate-btn">
+
+                        <i class="fas fa-ban"></i>
+
+                        Yes, Deactivate
+
+                    </button>
+
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

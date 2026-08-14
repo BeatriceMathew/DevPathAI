@@ -1,0 +1,451 @@
+{% extends 'admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+Learning Roadmaps | DevPath AI
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/learning_roadmaps.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="learning-roadmaps-page">
+
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="learning-roadmaps-header">
+
+        <div>
+
+            <span class="page-label">
+                ADMINISTRATION
+            </span>
+
+            <h1>
+                Learning Roadmaps
+            </h1>
+
+            <p>
+                Manage learning roadmap templates for different
+                developer career paths.
+            </p>
+
+        </div>
+
+
+        <div class="roadmap-count">
+
+            <strong>
+                {{ active_roadmaps_count }}
+            </strong>
+
+            <span>
+                Active Roadmaps
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= MAIN CARD ================= -->
+
+    <div class="learning-roadmaps-card">
+
+
+        <!-- ================= TABS ================= -->
+
+        <div class="roadmap-tabs">
+
+            <a href="{% url 'learning_roadmaps_list' %}?status=active"
+               class="{% if current_status == 'active' %}active{% endif %}">
+
+                <i class="fas fa-check-circle"></i>
+
+                Active
+
+                <span>
+                    {{ active_roadmaps_count }}
+                </span>
+
+            </a>
+
+
+            <a href="{% url 'learning_roadmaps_list' %}?status=inactive"
+               class="{% if current_status == 'inactive' %}active{% endif %}">
+
+                <i class="fas fa-ban"></i>
+
+                Inactive
+
+                <span>
+                    {{ inactive_roadmaps_count }}
+                </span>
+
+            </a>
+
+        </div>
+
+
+
+        <!-- ================= TABLE HEADER ================= -->
+
+        <div class="roadmap-table-header">
+
+            <div>
+
+                <h2>
+
+                    {% if current_status == 'active' %}
+
+                        Active Learning Roadmaps
+
+                    {% else %}
+
+                        Inactive Learning Roadmaps
+
+                    {% endif %}
+
+                </h2>
+
+                <p>
+                    Manage roadmap templates and career learning paths.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                {% if current_status == 'active' %}
+
+                    <a href="{% url 'add_learning_roadmap' %}"
+                       class="add-roadmap-btn">
+
+                        <i class="fas fa-plus"></i>
+
+                        Add Roadmap
+
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= TABLE ================= -->
+
+        {% if roadmaps %}
+
+            <div class="roadmap-table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>Roadmap</th>
+
+                            <th>Career Path</th>
+
+                            <th>Description</th>
+
+                            <th>Duration</th>
+
+                            <th>Difficulty</th>
+
+                            <th>Status</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for roadmap in roadmaps %}
+
+                        <tr>
+
+
+                            <!-- NUMBER -->
+
+                            <td>
+                                {{ forloop.counter }}
+                            </td>
+
+
+
+                            <!-- ROADMAP -->
+
+                            <td>
+
+                                <div class="roadmap-name">
+
+                                    <div class="roadmap-icon">
+
+                                        <i class="fas fa-map"></i>
+
+                                    </div>
+
+                                    <strong>
+                                        {{ roadmap.title }}
+                                    </strong>
+
+                                </div>
+
+                            </td>
+
+
+
+                            <!-- CAREER PATH -->
+
+                            <td>
+
+                                <span class="career-path-badge">
+
+                                    <i class="fas fa-route"></i>
+
+                                    {{ roadmap.career_path.name }}
+
+                                </span>
+
+                            </td>
+
+
+
+                            <!-- DESCRIPTION -->
+
+                            <td>
+
+                                {% if roadmap.description %}
+
+                                    <span class="roadmap-description">
+
+                                        {{ roadmap.description }}
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="no-roadmap-description">
+
+                                        No description
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+
+                            <!-- DURATION -->
+
+                            <td>
+
+                                {% if roadmap.duration %}
+
+                                    <span class="roadmap-duration">
+
+                                        <i class="far fa-clock"></i>
+
+                                        {{ roadmap.duration }}
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="no-roadmap-description">
+                                        —
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+
+                            <!-- DIFFICULTY -->
+
+                            <td>
+
+                                <span class="difficulty-badge
+                                    difficulty-{{ roadmap.difficulty|lower }}">
+
+                                    {{ roadmap.difficulty }}
+
+                                </span>
+
+                            </td>
+
+
+
+                            <!-- STATUS -->
+
+                            <td>
+
+                                {% if roadmap.is_active %}
+
+                                    <span class="roadmap-status active-roadmap-status">
+
+                                        <span class="roadmap-status-dot"></span>
+
+                                        Active
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="roadmap-status inactive-roadmap-status">
+
+                                        <span class="roadmap-status-dot"></span>
+
+                                        Inactive
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+
+                            <!-- ACTIONS -->
+
+                            <td>
+
+                                <div class="roadmap-actions">
+
+                                    <!-- EDIT -->
+
+                                    <a href="{% url 'edit_learning_roadmap' roadmap.id %}"
+                                       class="edit-roadmap-btn">
+
+                                        <i class="fas fa-edit"></i>
+
+                                        Edit
+
+                                    </a>
+
+
+                                    <!-- DEACTIVATE / RESTORE -->
+
+                                    {% if roadmap.is_active %}
+
+                                        <a href="{% url 'deactivate_learning_roadmap' roadmap.id %}"
+                                            class="delete-roadmap-btn">
+                                            <i class="fas fa-ban"></i>
+                                            Deactivate
+
+                                        </a>
+
+                                    {% else %}
+
+                                        <a href="{% url 'restore_learning_roadmap' roadmap.id %}"
+                                            class="restore-roadmap-btn">
+
+                                            <i class="fas fa-undo"></i>
+
+                                            Restore
+
+                                        </a>
+                                    {% endif %}
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        {% else %}
+
+
+            <!-- ================= EMPTY STATE ================= -->
+
+            <div class="no-roadmaps">
+
+                {% if current_status == 'active' %}
+
+                    <div class="empty-roadmap-icon">
+
+                        <i class="fas fa-map"></i>
+
+                    </div>
+
+                    <h3>
+                        No active learning roadmaps
+                    </h3>
+
+                    <p>
+                        Create a roadmap template and connect it
+                        to a developer career path.
+                    </p>
+
+                    <a href="{% url 'add_learning_roadmap' %}"
+                       class="empty-add-roadmap-btn">
+
+                        <i class="fas fa-plus"></i>
+
+                        Add Roadmap
+
+                    </a>
+
+                {% else %}
+
+                    <div class="empty-roadmap-icon inactive">
+
+                        <i class="fas fa-ban"></i>
+
+                    </div>
+
+                    <h3>
+                        No inactive learning roadmaps
+                    </h3>
+
+                    <p>
+                        Deactivated roadmaps will appear here.
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

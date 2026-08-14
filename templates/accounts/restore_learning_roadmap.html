@@ -1,0 +1,127 @@
+{% extends 'admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+Restore Roadmap | DevPath AI
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/learning_roadmaps.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="learning-roadmaps-page">
+
+    <div class="roadmap-confirm-page">
+
+        <div class="roadmap-confirm-card">
+
+
+            <!-- ICON -->
+
+            <div class="roadmap-restore-icon">
+
+                <i class="fas fa-undo"></i>
+
+            </div>
+
+
+            <!-- TITLE -->
+
+            <h1>
+                Restore Learning Roadmap?
+            </h1>
+
+
+            <p class="roadmap-confirm-message">
+
+                Are you sure you want to restore this
+                learning roadmap?
+
+            </p>
+
+
+            <!-- ROADMAP INFO -->
+
+            <div class="roadmap-confirm-info">
+
+                <div class="confirm-info-icon">
+
+                    <i class="fas fa-map"></i>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        {{ roadmap.title }}
+                    </strong>
+
+                    <span>
+                        {{ roadmap.career_path.name }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- INFORMATION -->
+
+            <p class="roadmap-restore-message">
+
+                <i class="fas fa-info-circle"></i>
+
+                This roadmap will become active again and
+                appear in the Active Roadmaps list.
+
+            </p>
+
+
+            <!-- ACTIONS -->
+
+            <form method="POST"
+                  class="roadmap-confirm-actions">
+
+                {% csrf_token %}
+
+
+                <a href="{% url 'learning_roadmaps_list' %}?status=inactive"
+                   class="roadmap-confirm-cancel">
+
+                    <i class="fas fa-arrow-left"></i>
+
+                    Cancel
+
+                </a>
+
+
+                <button type="submit"
+                        class="roadmap-confirm-restore">
+
+                    <i class="fas fa-undo"></i>
+
+                    Yes, Restore
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

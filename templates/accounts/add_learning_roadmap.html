@@ -1,0 +1,295 @@
+{% extends 'admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+Add Learning Roadmap | DevPath AI
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/learning_roadmaps.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="learning-roadmaps-page">
+
+    <div class="roadmap-form-page">
+
+
+        <!-- ================= HEADER ================= -->
+
+        <div class="roadmap-form-header">
+
+            <span class="page-label">
+                ROADMAP MANAGEMENT
+            </span>
+
+            <h1>
+                Add Learning Roadmap
+            </h1>
+
+            <p>
+                Create a learning roadmap template for a developer
+                career path.
+            </p>
+
+        </div>
+
+
+        <!-- ================= FORM CARD ================= -->
+
+        <div class="roadmap-form-card">
+
+
+            <div class="roadmap-form-icon">
+
+                <i class="fas fa-map"></i>
+
+            </div>
+
+
+            {% if error %}
+
+                <div class="roadmap-form-error">
+
+                    <i class="fas fa-exclamation-circle"></i>
+
+                    {{ error }}
+
+                </div>
+
+            {% endif %}
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <!-- TITLE -->
+
+                <div class="roadmap-form-group">
+
+                    <label for="roadmapTitle">
+
+                        Roadmap Title
+
+                        <span>*</span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="roadmapTitle"
+                        name="title"
+                        maxlength="150"
+                        placeholder="Example: Full Stack Developer Roadmap"
+                        value="{{ request.POST.title|default:'' }}"
+                        required
+                    >
+
+                    <small>
+                        Give the learning roadmap a clear and meaningful title.
+                    </small>
+
+                </div>
+
+
+                <!-- CAREER PATH -->
+
+                <div class="roadmap-form-group">
+
+                    <label for="careerPath">
+
+                        Career Path
+
+                        <span>*</span>
+
+                    </label>
+
+                    <select
+                        id="careerPath"
+                        name="career_path"
+                        required
+                    >
+
+                        <option value="">
+                            Select a Career Path
+                        </option>
+
+                        {% for career_path in career_paths %}
+
+                            <option
+                                value="{{ career_path.id }}"
+                                {% if request.POST.career_path == career_path.id|stringformat:"s" %}
+                                    selected
+                                {% endif %}
+                            >
+
+                                {{ career_path.name }}
+
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                    <small>
+                        Select the career path this roadmap belongs to.
+                    </small>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="roadmap-form-group">
+
+                    <label for="roadmapDescription">
+
+                        Description
+
+                        <span class="optional">
+                            Optional
+                        </span>
+
+                    </label>
+
+                    <textarea
+                        id="roadmapDescription"
+                        name="description"
+                        rows="5"
+                        placeholder="Describe what students will learn through this roadmap..."
+                    >{{ request.POST.description|default:'' }}</textarea>
+
+                </div>
+
+
+                <!-- DURATION + DIFFICULTY -->
+
+                <div class="roadmap-form-row">
+
+
+                    <!-- DURATION -->
+
+                    <div class="roadmap-form-group">
+
+                        <label for="roadmapDuration">
+
+                            Estimated Duration
+
+                            <span class="optional">
+                                Optional
+                            </span>
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="roadmapDuration"
+                            name="duration"
+                            maxlength="100"
+                            placeholder="Example: 6 Months"
+                            value="{{ request.POST.duration|default:'' }}"
+                        >
+
+                    </div>
+
+
+                    <!-- DIFFICULTY -->
+
+                    <div class="roadmap-form-group">
+
+                        <label for="roadmapDifficulty">
+
+                            Difficulty Level
+
+                            <span>*</span>
+
+                        </label>
+
+                        <select
+                            id="roadmapDifficulty"
+                            name="difficulty"
+                            required
+                        >
+
+                            <option
+                                value="Beginner"
+                                {% if request.POST.difficulty == "Beginner" or not request.POST.difficulty %}
+                                    selected
+                                {% endif %}
+                            >
+                                Beginner
+                            </option>
+
+                            <option
+                                value="Intermediate"
+                                {% if request.POST.difficulty == "Intermediate" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Intermediate
+                            </option>
+
+                            <option
+                                value="Advanced"
+                                {% if request.POST.difficulty == "Advanced" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Advanced
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="roadmap-form-actions">
+
+                    <a href="{% url 'learning_roadmaps_list' %}"
+                       class="roadmap-cancel-btn">
+
+                        <i class="fas fa-times"></i>
+
+                        Cancel
+
+                    </a>
+
+
+                    <button type="submit"
+                            class="roadmap-save-btn">
+
+                        <i class="fas fa-save"></i>
+
+                        Save Roadmap
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

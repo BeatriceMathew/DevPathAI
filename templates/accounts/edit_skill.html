@@ -1,0 +1,165 @@
+{% extends 'admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+Edit Skill | DevPath AI
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/skills.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="skills-page">
+
+    <div class="skill-form-page">
+
+        <!-- HEADER -->
+
+        <div class="skill-form-header">
+
+            <span class="page-label">
+                SKILL MANAGEMENT
+            </span>
+
+            <h1>
+                Edit Skill
+            </h1>
+
+            <p>
+                Update the technical skill information.
+            </p>
+
+        </div>
+
+
+        <!-- FORM CARD -->
+
+        <div class="skill-form-card">
+
+            <div class="skill-form-icon">
+
+                <i class="fas fa-edit"></i>
+
+            </div>
+
+
+            {% if error %}
+
+                <div class="skill-form-error">
+
+                    <i class="fas fa-exclamation-circle"></i>
+
+                    {{ error }}
+
+                </div>
+
+            {% endif %}
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <!-- SKILL NAME -->
+
+                <div class="skill-form-group">
+
+                    <label for="skillName">
+
+                        Skill Name
+
+                        <span>*</span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="skillName"
+                        name="name"
+                        value="{{ skill.name }}"
+                        maxlength="100"
+                        required
+                    >
+
+                    <small>
+                        Update the name of this technical skill.
+                    </small>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="skill-form-group">
+
+                    <label for="skillDescription">
+
+                        Description
+
+                        <span class="optional">
+                            Optional
+                        </span>
+
+                    </label>
+
+                    <textarea
+                        id="skillDescription"
+                        name="description"
+                        rows="5"
+                        placeholder="Describe this skill..."
+                    >{{ skill.description }}</textarea>
+
+                    <small>
+                        Update the description of this skill.
+                    </small>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="skill-form-actions">
+
+                    <a href="{% url 'skills_list' %}"
+                       class="skill-cancel-btn">
+
+                        <i class="fas fa-times"></i>
+
+                        Cancel
+
+                    </a>
+
+
+                    <button type="submit"
+                            class="skill-save-btn">
+
+                        <i class="fas fa-save"></i>
+
+                        Save Changes
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

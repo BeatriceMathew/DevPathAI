@@ -1,0 +1,222 @@
+{% extends 'admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+Student Details | DevPath AI
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/student_detail.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="student-detail-page">
+
+    <div class="student-detail-header">
+
+        <span class="page-label">
+            STUDENT MANAGEMENT
+        </span>
+
+        <h1>
+            Student Details
+        </h1>
+
+        <p>
+            View information about this DevPath AI student account.
+        </p>
+
+    </div>
+
+
+    <div class="student-detail-card">
+
+        <!-- PROFILE HEADER -->
+
+        <div class="student-profile-header">
+
+            <div class="student-detail-avatar">
+
+                {{ student.username|first|upper }}
+
+            </div>
+
+            <div>
+
+                <h2>
+                    {{ student.username }}
+                </h2>
+
+                {% if student.is_active %}
+
+                    <span class="detail-status active-status">
+                        <span></span>
+                        Active Student
+                    </span>
+
+                {% else %}
+
+                    <span class="detail-status inactive-status">
+                        <span></span>
+                        Inactive Student
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- INFORMATION -->
+
+        <div class="student-information">
+
+            <div class="detail-row">
+
+                <span>
+                    <i class="fas fa-user"></i>
+                    Username
+                </span>
+
+                <strong>
+                    {{ student.username }}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>
+                    <i class="fas fa-envelope"></i>
+                    Email
+                </span>
+
+                <strong>
+                    {{ student.email|default:"Not provided" }}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>
+                    <i class="fas fa-id-card"></i>
+                    First Name
+                </span>
+
+                <strong>
+                    {{ student.first_name|default:"Not provided" }}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>
+                    <i class="fas fa-user"></i>
+                    Last Name
+                </span>
+
+                <strong>
+                    {{ student.last_name|default:"Not provided" }}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>
+                    <i class="fas fa-calendar"></i>
+                    Date Joined
+                </span>
+
+                <strong>
+                    {{ student.date_joined|date:"d M Y, h:i A" }}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>
+                    <i class="fas fa-clock"></i>
+                    Last Login
+                </span>
+
+                <strong>
+                    {% if student.last_login %}
+                        {{ student.last_login|date:"d M Y, h:i A" }}
+                    {% else %}
+                        Never
+                    {% endif %}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="student-detail-actions">
+
+            <a href="{% url 'students_list' %}"
+               class="detail-btn back-detail-btn">
+
+                <i class="fas fa-arrow-left"></i>
+
+                Back to Students
+
+            </a>
+
+
+            {% if student.is_active %}
+
+                <a href="{% url 'delete_student' student.id %}"
+                   class="detail-btn deactivate-detail-btn">
+
+                    <i class="fas fa-user-slash"></i>
+
+                    Deactivate Student
+
+                </a>
+
+            {% else %}
+
+                <form method="POST"
+                      action="{% url 'restore_student' student.id %}">
+
+                    {% csrf_token %}
+
+                    <button type="submit"
+                            class="detail-btn restore-detail-btn">
+
+                        <i class="fas fa-user-check"></i>
+
+                        Restore Student
+
+                    </button>
+
+                </form>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

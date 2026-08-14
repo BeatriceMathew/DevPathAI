@@ -1,0 +1,385 @@
+/* =========================================================
+   STUDENT DETAIL PAGE
+========================================================= */
+
+.student-detail-page {
+    min-height: 100vh;
+
+    background: #f8f7f0;
+
+    padding: 30px 40px 50px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.student-detail-header {
+    max-width: 900px;
+
+    margin: 0 auto 22px;
+}
+
+.student-detail-header .page-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #0b4d3b;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+.student-detail-header h1 {
+    margin: 0;
+
+    color: #073f32;
+
+    font-size: 34px;
+
+    font-weight: 700;
+}
+
+.student-detail-header p {
+    margin: 6px 0 0;
+
+    color: #66746f;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.student-detail-card {
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    padding: 30px 35px 25px;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe8e3;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 7px 24px rgba(7, 63, 50, 0.06);
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PROFILE HEADER
+========================================================= */
+
+.student-profile-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding-bottom: 24px;
+
+    border-bottom: 1px solid #e5ebe8;
+}
+
+.student-detail-avatar {
+    width: 72px;
+    height: 72px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e2efe8;
+
+    color: #0b4d3b;
+
+    font-size: 28px;
+
+    font-weight: 800;
+}
+
+.student-profile-header h2 {
+    margin: 0 0 7px;
+
+    color: #073f32;
+
+    font-size: 24px;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.detail-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.detail-status span {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+}
+
+.detail-status.active-status {
+    background: #e6f4ec;
+
+    color: #17633f;
+}
+
+.detail-status.active-status span {
+    background: #2e9d63;
+}
+
+.detail-status.inactive-status {
+    background: #f3eeee;
+
+    color: #8b4545;
+}
+
+.detail-status.inactive-status span {
+    background: #b85c5c;
+}
+
+
+/* =========================================================
+   INFORMATION
+========================================================= */
+
+.student-information {
+    padding-top: 5px;
+}
+
+.detail-row {
+    min-height: 56px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    border-bottom: 1px solid #edf1ef;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-row span {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #66746f;
+
+    font-size: 14px;
+}
+
+.detail-row span i {
+    width: 18px;
+
+    color: #0b4d3b;
+
+    text-align: center;
+}
+
+.detail-row strong {
+    color: #073f32;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.student-detail-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 22px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #e5ebe8;
+}
+
+.student-detail-actions form {
+    margin: 0;
+}
+
+.detail-btn {
+    min-height: 42px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 17px;
+
+    border-radius: 9px;
+
+    border: none;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition: 0.2s ease;
+}
+
+
+/* BACK */
+
+.back-detail-btn {
+    background: #eef3f0;
+
+    color: #31544a;
+}
+
+.back-detail-btn:hover {
+    background: #e2ebe7;
+
+    color: #073f32;
+
+    transform: translateY(-1px);
+}
+
+
+/* DEACTIVATE */
+
+.deactivate-detail-btn {
+    background: #fff0f0;
+
+    color: #c62828;
+}
+
+.deactivate-detail-btn:hover {
+    background: #ffe0e0;
+
+    color: #a91f1f;
+
+    transform: translateY(-1px);
+}
+
+
+/* RESTORE */
+
+.restore-detail-btn {
+    background: #0b4d3b;
+
+    color: #ffffff;
+}
+
+.restore-detail-btn:hover {
+    background: #083b2e;
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .student-detail-page {
+        padding: 22px 18px 35px;
+    }
+
+    .student-detail-card {
+        padding: 25px 20px;
+    }
+
+    .student-profile-header {
+        align-items: flex-start;
+    }
+
+    .detail-row {
+        min-height: auto;
+
+        padding: 15px 0;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 5px;
+    }
+
+    .detail-row strong {
+        text-align: left;
+    }
+
+    .student-detail-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .detail-btn {
+        width: 100%;
+    }
+
+}

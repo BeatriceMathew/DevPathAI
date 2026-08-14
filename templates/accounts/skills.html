@@ -3,24 +3,25 @@
 {% load static %}
 
 {% block title %}
-Students | DevPath AI
+Skills | DevPath AI
 {% endblock %}
+
 
 {% block extra_css %}
 
 <link rel="stylesheet"
-      href="{% static 'css/students.css' %}">
+      href="{% static 'css/skills.css' %}">
 
 {% endblock %}
 
 
 {% block content %}
 
-<div class="students-page">
+<div class="skills-page">
 
     <!-- ================= PAGE HEADER ================= -->
 
-    <div class="students-header">
+    <div class="skills-header">
 
         <div>
 
@@ -29,26 +30,27 @@ Students | DevPath AI
             </span>
 
             <h1>
-                Students
+                Skills
             </h1>
 
             <p>
-                View and manage students registered on DevPath AI.
+                Manage technical skills used by the
+                DevPath AI recommendation system.
             </p>
 
         </div>
 
 
-        <!-- TOTAL STUDENTS -->
+        <!-- TOTAL SKILLS -->
 
-        <div class="student-count">
+        <div class="skill-count">
 
             <strong>
-                {{ active_students_count }}
+                {{ active_skills_count }}
             </strong>
 
             <span>
-                Active Students
+                Active Skills
             </span>
 
         </div>
@@ -56,38 +58,38 @@ Students | DevPath AI
     </div>
 
 
-    <!-- ================= STUDENT CARD ================= -->
+    <!-- ================= MAIN CARD ================= -->
 
-    <div class="students-card">
+    <div class="skills-card">
 
 
         <!-- ================= TABS ================= -->
 
-        <div class="student-tabs">
+        <div class="skill-tabs">
 
-            <a href="{% url 'students_list' %}?status=active"
+            <a href="{% url 'skills_list' %}?status=active"
                class="{% if current_status == 'active' %}active{% endif %}">
 
-                <i class="fas fa-user-check"></i>
+                <i class="fas fa-check-circle"></i>
 
-                Active Students
+                Active Skills
 
                 <span class="tab-count">
-                    {{ active_students_count }}
+                    {{ active_skills_count }}
                 </span>
 
             </a>
 
 
-            <a href="{% url 'students_list' %}?status=inactive"
+            <a href="{% url 'skills_list' %}?status=inactive"
                class="{% if current_status == 'inactive' %}active{% endif %}">
 
-                <i class="fas fa-user-slash"></i>
+                <i class="fas fa-ban"></i>
 
-                Inactive Students
+                Inactive Skills
 
                 <span class="tab-count">
-                    {{ inactive_students_count }}
+                    {{ inactive_skills_count }}
                 </span>
 
             </a>
@@ -95,32 +97,31 @@ Students | DevPath AI
         </div>
 
 
-        <!-- ================= TOOLBAR ================= -->
+        <!-- ================= TABLE HEADER ================= -->
 
-        <div class="table-header">
+        <div class="skill-table-header">
 
             <div>
 
                 {% if current_status == 'active' %}
 
                     <h2>
-                        Active Students
+                        Active Skills
                     </h2>
 
                     <p>
-                        Students who currently have access
-                        to the DevPath AI platform.
+                        Skills currently available for
+                        the AI recommendation system.
                     </p>
 
                 {% else %}
 
                     <h2>
-                        Inactive Students
+                        Inactive Skills
                     </h2>
 
                     <p>
-                        Students whose accounts have been
-                        deactivated.
+                        Skills that are currently disabled.
                     </p>
 
                 {% endif %}
@@ -128,44 +129,58 @@ Students | DevPath AI
             </div>
 
 
-            <div class="student-header-actions">
+            <div class="skill-header-actions">
 
 
                 <!-- SEARCH -->
 
-                <div class="student-search">
+                <div class="skill-search">
 
                     <i class="fas fa-search"></i>
 
                     <input
                         type="text"
-                        id="studentSearch"
-                        placeholder="Search students..."
+                        id="skillSearch"
+                        placeholder="Search skills..."
                         autocomplete="off"
                     >
 
                 </div>
 
 
-                <!-- BACK -->
+                <!-- ADD SKILL -->
 
-                <a href="{% url 'admin_dashboard' %}">
-                    ← Dashboard
+                <a href="{% url 'add_skill' %}"
+                   class="add-skill-btn">
+
+                    <i class="fas fa-plus"></i>
+
+                    Add Skill
+
                 </a>
 
+
+                <!-- DASHBOARD -->
+
+                <a href="{% url 'admin_dashboard' %}"
+                   class="skill-dashboard-link">
+
+                    ← Dashboard
+
+                </a>
 
             </div>
 
         </div>
 
 
-        <!-- ================= STUDENT TABLE ================= -->
+        <!-- ================= SKILLS TABLE ================= -->
 
-        {% if students %}
+        {% if skills %}
 
-        <div class="table-wrapper">
+        <div class="skill-table-wrapper">
 
-            <table id="studentsTable">
+            <table id="skillsTable">
 
                 <thead>
 
@@ -176,23 +191,15 @@ Students | DevPath AI
                         </th>
 
                         <th>
-                            Username
+                            Skill
                         </th>
 
                         <th>
-                            First Name
+                            Description
                         </th>
 
                         <th>
-                            Last Name
-                        </th>
-
-                        <th>
-                            Email
-                        </th>
-
-                        <th>
-                            Date Joined
+                            Created
                         </th>
 
                         <th>
@@ -210,7 +217,7 @@ Students | DevPath AI
 
                 <tbody>
 
-                    {% for student in students %}
+                    {% for skill in skills %}
 
                     <tr>
 
@@ -221,23 +228,20 @@ Students | DevPath AI
                         </td>
 
 
-                        <!-- USERNAME -->
+                        <!-- SKILL -->
 
                         <td>
 
-                            <div class="student-name">
+                            <div class="skill-name">
 
-                                <div class="student-avatar">
+                                <div class="skill-icon">
 
-                                    {{ student.username|first|upper }}
+                                    <i class="fas fa-code"></i>
 
                                 </div>
 
-
                                 <strong>
-
-                                    {{ student.username }}
-
+                                    {{ skill.name }}
                                 </strong>
 
                             </div>
@@ -245,38 +249,30 @@ Students | DevPath AI
                         </td>
 
 
-                        <!-- FIRST NAME -->
+                        <!-- DESCRIPTION -->
 
                         <td>
 
-                            {{ student.first_name|default:"—" }}
+                            {% if skill.description %}
+
+                                {{ skill.description }}
+
+                            {% else %}
+
+                                <span class="no-description">
+                                    No description
+                                </span>
+
+                            {% endif %}
 
                         </td>
 
 
-                        <!-- LAST NAME -->
+                        <!-- CREATED -->
 
                         <td>
 
-                            {{ student.last_name|default:"—" }}
-
-                        </td>
-
-
-                        <!-- EMAIL -->
-
-                        <td>
-
-                            {{ student.email|default:"—" }}
-
-                        </td>
-
-
-                        <!-- DATE -->
-
-                        <td>
-
-                            {{ student.date_joined|date:"d M Y" }}
+                            {{ skill.created_at|date:"d M Y" }}
 
                         </td>
 
@@ -285,11 +281,11 @@ Students | DevPath AI
 
                         <td>
 
-                            {% if student.is_active %}
+                            {% if skill.is_active %}
 
-                                <span class="status-badge active-status">
+                                <span class="skill-status active-skill-status">
 
-                                    <span class="status-dot"></span>
+                                    <span class="skill-status-dot"></span>
 
                                     Active
 
@@ -297,9 +293,9 @@ Students | DevPath AI
 
                             {% else %}
 
-                                <span class="status-badge inactive-status">
+                                <span class="skill-status inactive-skill-status">
 
-                                    <span class="status-dot"></span>
+                                    <span class="skill-status-dot"></span>
 
                                     Inactive
 
@@ -308,43 +304,54 @@ Students | DevPath AI
                             {% endif %}
 
                         </td>
-                        
 
-                        <!-- ACTION -->
+
+                        <!-- ACTIONS -->
 
                         <td>
 
-                            <div class="student-actions">
+                            <div class="skill-actions">
 
-                                <a href="{% url 'student_detail' student.id %}"
-                                class="view-student-btn">
 
-                                    <i class="fas fa-eye"></i>
-                                    View
+                                <!-- EDIT -->
+
+                                <a href="{% url 'edit_skill' skill.id %}"
+                                   class="edit-skill-btn">
+
+                                    <i class="fas fa-edit"></i>
+
+                                    Edit
 
                                 </a>
 
-                                {% if student.is_active %}
 
-                                    <a href="{% url 'delete_student' student.id %}"
-                                    class="delete-btn">
+                                {% if skill.is_active %}
 
-                                        <i class="fas fa-user-times"></i>
+                                    <!-- DEACTIVATE -->
+
+                                    <a href="{% url 'delete_skill' skill.id %}"
+                                       class="delete-skill-btn">
+
+                                        <i class="fas fa-ban"></i>
+
                                         Deactivate
 
                                     </a>
 
                                 {% else %}
 
+                                    <!-- RESTORE -->
+
                                     <form method="POST"
-                                        action="{% url 'restore_student' student.id %}">
+                                          action="{% url 'restore_skill' skill.id %}">
 
                                         {% csrf_token %}
 
                                         <button type="submit"
-                                                class="restore-btn">
+                                                class="restore-skill-btn">
 
-                                            <i class="fas fa-user-check"></i>
+                                            <i class="fas fa-check"></i>
+
                                             Restore
 
                                         </button>
@@ -368,20 +375,20 @@ Students | DevPath AI
         </div>
 
 
-        <!-- ================= NO SEARCH RESULTS ================= -->
+        <!-- NO SEARCH RESULTS -->
 
-        <div id="noSearchResults"
-             class="no-search-results"
+        <div id="noSkillResults"
+             class="no-skill-results"
              style="display: none;">
 
             <i class="fas fa-search"></i>
 
             <h3>
-                No students found
+                No skills found
             </h3>
 
             <p>
-                Try searching with a different name or email.
+                Try searching with a different skill name.
             </p>
 
         </div>
@@ -390,42 +397,50 @@ Students | DevPath AI
         {% else %}
 
 
-        <!-- ================= EMPTY LIST ================= -->
+        <!-- ================= EMPTY ================= -->
 
-        <div class="no-students">
+        <div class="no-skills">
 
             {% if current_status == 'active' %}
 
-                <div class="empty-icon">
+                <div class="empty-skill-icon">
 
-                    <i class="fas fa-user-graduate"></i>
+                    <i class="fas fa-code"></i>
 
                 </div>
 
                 <h3>
-                    No active students
+                    No active skills
                 </h3>
 
                 <p>
-                    Students who create an account
-                    will appear here.
+                    Add a skill to make it available
+                    to the DevPath AI system.
                 </p>
+
+                <a href="{% url 'add_skill' %}"
+                   class="empty-add-skill-btn">
+
+                    <i class="fas fa-plus"></i>
+
+                    Add First Skill
+
+                </a>
 
             {% else %}
 
-                <div class="empty-icon inactive-empty-icon">
+                <div class="empty-skill-icon inactive">
 
-                    <i class="fas fa-user-slash"></i>
+                    <i class="fas fa-ban"></i>
 
                 </div>
 
                 <h3>
-                    No inactive students
+                    No inactive skills
                 </h3>
 
                 <p>
-                    Deactivated student accounts
-                    will appear here.
+                    Deactivated skills will appear here.
                 </p>
 
             {% endif %}
@@ -433,7 +448,6 @@ Students | DevPath AI
         </div>
 
         {% endif %}
-
 
     </div>
 
@@ -447,13 +461,13 @@ Students | DevPath AI
 document.addEventListener("DOMContentLoaded", function () {
 
     const searchInput =
-        document.getElementById("studentSearch");
+        document.getElementById("skillSearch");
 
     const table =
-        document.getElementById("studentsTable");
+        document.getElementById("skillsTable");
 
     const noResults =
-        document.getElementById("noSearchResults");
+        document.getElementById("noSkillResults");
 
 
     if (!searchInput || !table) {

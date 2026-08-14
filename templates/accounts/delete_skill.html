@@ -1,0 +1,142 @@
+{% extends 'admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+Deactivate Skill | DevPath AI
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/skills.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="skills-page">
+
+    <div class="skill-confirm-page">
+
+        <div class="skill-confirm-card">
+
+            <!-- ICON -->
+
+            <div class="skill-confirm-icon">
+
+                <i class="fas fa-ban"></i>
+
+            </div>
+
+
+            <!-- TITLE -->
+
+            <span class="page-label">
+                SKILL MANAGEMENT
+            </span>
+
+            <h1>
+                Deactivate Skill?
+            </h1>
+
+
+            <p class="confirm-message">
+
+                Are you sure you want to deactivate
+                <strong>{{ skill.name }}</strong>?
+
+            </p>
+
+
+            <p class="confirm-description">
+
+                This skill will no longer be available as an
+                active skill in the DevPath AI recommendation
+                system.
+
+                You can restore it later from the
+                <strong>Inactive Skills</strong> section.
+
+            </p>
+
+
+            <!-- SKILL PREVIEW -->
+
+            <div class="skill-confirm-preview">
+
+                <div class="skill-confirm-preview-icon">
+
+                    <i class="fas fa-code"></i>
+
+                </div>
+
+                <div>
+
+                    <strong>
+                        {{ skill.name }}
+                    </strong>
+
+                    {% if skill.description %}
+
+                        <p>
+                            {{ skill.description }}
+                        </p>
+
+                    {% else %}
+
+                        <p>
+                            No description provided.
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="skill-confirm-actions">
+
+                    <a href="{% url 'skills_list' %}"
+                       class="skill-cancel-btn">
+
+                        <i class="fas fa-arrow-left"></i>
+
+                        Cancel
+
+                    </a>
+
+
+                    <button type="submit"
+                            class="skill-deactivate-btn">
+
+                        <i class="fas fa-ban"></i>
+
+                        Yes, Deactivate
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

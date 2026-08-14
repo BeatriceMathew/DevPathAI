@@ -1,141 +1,411 @@
+/* =========================================================
+   STUDENTS MANAGEMENT PAGE
+========================================================= */
+
 .students-page {
     min-height: 100vh;
     background: #f8f7f0;
-    padding: 45px 50px;
-    margin-left: 250px;
+    padding: 32px 45px 60px;
+    box-sizing: border-box;
 }
 
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
 
 .students-header {
+    max-width: 1100px;
+    margin: 0 auto 28px;
+
     display: flex;
+    align-items: flex-start;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
+
+    gap: 30px;
 }
 
+.students-header .page-label {
+    display: block;
+    margin-bottom: 7px;
 
-.page-label {
     color: #0b4d3b;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-}
 
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
 
 .students-header h1 {
-    color: #073f32;
-    font-size: 38px;
-    margin: 8px 0;
-}
+    margin: 0;
 
+    color: #073f32;
+
+    font-size: 40px;
+    font-weight: 700;
+
+    line-height: 1.15;
+}
 
 .students-header p {
+    margin: 8px 0 0;
+
     color: #66746f;
-    margin: 0;
+
+    font-size: 16px;
 }
 
 
+/* =========================================================
+   TOTAL STUDENTS
+========================================================= */
+
 .student-count {
-    background: white;
-    border: 1px solid #e1e8e4;
+    min-width: 135px;
+    min-height: 105px;
+
+    padding: 18px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe8e3;
     border-radius: 16px;
-    padding: 18px 25px;
+
+    box-shadow: 0 5px 18px rgba(7, 63, 50, 0.05);
+}
+
+.student-count strong {
+    margin-bottom: 9px;
+
+    color: #073f32;
+
+    font-size: 30px;
+    line-height: 1;
+}
+
+.student-count span {
+    color: #66746f;
+
+    font-size: 13px;
+    font-weight: 500;
+
     text-align: center;
 }
 
 
-.student-count strong {
-    display: block;
-    color: #0b4d3b;
-    font-size: 30px;
-}
-
-
-.student-count span {
-    color: #66746f;
-    font-size: 13px;
-}
-
+/* =========================================================
+   MAIN STUDENTS CARD
+========================================================= */
 
 .students-card {
-    background: white;
-    border: 1px solid #e1e8e4;
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe8e3;
     border-radius: 18px;
+
     overflow: hidden;
+
+    box-shadow:
+        0 6px 22px rgba(7, 63, 50, 0.05);
 }
 
+
+/* =========================================================
+   STUDENT TABS
+========================================================= */
+
+.student-tabs {
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 10px 24px 0;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e1e8e4;
+}
+
+.student-tabs a {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 14px 18px;
+
+    color: #66746f;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    border-bottom: 3px solid transparent;
+
+    transition: 0.2s ease;
+}
+
+.student-tabs a:hover {
+    color: #0b4d3b;
+}
+
+.student-tabs a.active {
+    color: #0b4d3b;
+
+    border-bottom-color: #0b4d3b;
+}
+
+.tab-count {
+    min-width: 22px;
+    height: 22px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 6px;
+
+    border-radius: 20px;
+
+    background: #e2efe8;
+
+    color: #0b4d3b;
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+========================================================= */
 
 .table-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 28px;
-    border-bottom: 1px solid #e8eeeb;
-}
+    min-height: 72px;
 
+    padding: 22px 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    box-sizing: border-box;
+}
 
 .table-header h2 {
     margin: 0;
+
     color: #073f32;
+
     font-size: 21px;
-}
-
-
-.table-header a {
-    color: #0b4d3b;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-
-.table-wrapper {
-    overflow-x: auto;
-}
-
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-
-thead {
-    background: #f3f7f4;
-}
-
-
-th {
-    padding: 16px 20px;
-    text-align: left;
-    color: #31544a;
-    font-size: 13px;
     font-weight: 700;
 }
 
+.table-header p {
+    margin: 5px 0 0;
 
-td {
-    padding: 17px 20px;
-    border-top: 1px solid #edf1ef;
-    color: #4d5d57;
+    color: #66746f;
+
+    font-size: 13px;
+}
+
+.table-header > a {
+    color: #0b4d3b;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    transition: 0.2s ease;
+}
+
+.table-header > a:hover {
+    color: #073f32;
+
+    transform: translateX(-2px);
+}
+
+
+/* =========================================================
+   HEADER ACTIONS
+========================================================= */
+
+.student-header-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.student-search {
+    width: 260px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 0 13px;
+
+    box-sizing: border-box;
+
+    background: #f8faf9;
+
+    border: 1px solid #d7e2dd;
+    border-radius: 9px;
+
+    transition: 0.2s ease;
+}
+
+.student-search i {
+    color: #66746f;
+
     font-size: 14px;
 }
 
+.student-search input {
+    width: 100%;
+    height: 100%;
 
-tbody tr:hover {
+    padding: 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #073f32;
+
+    font-size: 14px;
+}
+
+.student-search input::placeholder {
+    color: #8a9792;
+}
+
+.student-search:focus-within {
+    background: #ffffff;
+
+    border-color: #0b4d3b;
+
+    box-shadow:
+        0 0 0 3px rgba(11, 77, 59, 0.08);
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+.students-card table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    table-layout: auto;
+}
+
+.students-card thead {
+    background: #f2f6f4;
+}
+
+.students-card th {
+    padding: 15px 16px;
+
+    color: #31544a;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    text-align: left;
+    white-space: nowrap;
+
+    border-top: 1px solid #e1e8e4;
+    border-bottom: 1px solid #e1e8e4;
+}
+
+.students-card td {
+    padding: 16px;
+
+    color: #52645e;
+
+    font-size: 14px;
+
+    border-bottom: 1px solid #edf1ef;
+
+    vertical-align: middle;
+}
+
+.students-card tbody tr {
+    transition: background 0.2s ease;
+}
+
+.students-card tbody tr:hover {
     background: #fafcfb;
 }
 
+.students-card tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   STUDENT NAME
+========================================================= */
 
 .student-name {
     display: flex;
     align-items: center;
+
     gap: 10px;
 }
 
+.student-name strong {
+    color: #073f32;
+
+    font-size: 14px;
+    font-weight: 700;
+}
 
 .student-avatar {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
 
     display: flex;
     align-items: center;
@@ -144,148 +414,683 @@ tbody tr:hover {
     border-radius: 50%;
 
     background: #e2efe8;
+
     color: #0b4d3b;
 
+    font-size: 14px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   STUDENT ACTIONS
+========================================================= */
+
+.student-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+}
+
+.student-actions form {
+    margin: 0;
+}
+
+
+/* =========================================================
+   VIEW BUTTON
+========================================================= */
+
+.view-student-btn {
+    min-height: 36px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 0 13px;
+
+    border-radius: 8px;
+
+    background: #e2efe8;
+
+    color: #0b4d3b;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.view-student-btn:hover {
+    background: #d3e5dc;
+
+    color: #073f32;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   DEACTIVATE BUTTON
+========================================================= */
+
+.delete-btn {
+    min-height: 36px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 0 13px;
+
+    background: #fff0f0;
+
+    color: #c62828;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+    background: #ffe0e0;
+
+    color: #a91f1f;
+
+    transform: translateY(-1px);
+}
+
+.delete-btn i {
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   STATUS BADGES
+========================================================= */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
     font-weight: 700;
 }
 
+.status-dot {
+    width: 7px;
+    height: 7px;
 
-.student-name strong {
-    color: #073f32;
+    border-radius: 50%;
 }
 
+.active-status {
+    background: #e6f4ec;
+
+    color: #17633f;
+}
+
+.active-status .status-dot {
+    background: #2e9d63;
+}
+
+.inactive-status {
+    background: #f3eeee;
+
+    color: #8b4545;
+}
+
+.inactive-status .status-dot {
+    background: #b85c5c;
+}
+
+
+/* =========================================================
+   RESTORE
+========================================================= */
+
+.restore-form {
+    margin: 0;
+}
+
+.restore-btn {
+    min-height: 36px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 0 13px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #e2efe8;
+
+    color: #0b4d3b;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.restore-btn:hover {
+    background: #d3e5dc;
+
+    color: #073f32;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   EMPTY STUDENTS
+========================================================= */
 
 .no-students {
-    text-align: center;
-    padding: 70px 20px;
-}
+    padding: 65px 30px;
 
+    text-align: center;
+}
 
 .empty-icon {
     width: 65px;
     height: 65px;
 
-    margin: 0 auto 20px;
+    margin: 0 auto 18px;
 
     display: flex;
     align-items: center;
     justify-content: center;
+
+    border-radius: 50%;
 
     background: #e2efe8;
+
     color: #0b4d3b;
 
-    border-radius: 50%;
-
     font-size: 25px;
 }
 
+.inactive-empty-icon {
+    background: #f3eeee;
+
+    color: #8b4545;
+}
 
 .no-students h3 {
-    color: #073f32;
-}
+    margin: 0 0 7px;
 
+    color: #073f32;
+
+    font-size: 20px;
+}
 
 .no-students p {
-    color: #68756f;
+    margin: 0;
+
+    color: #66746f;
+
+    font-size: 14px;
 }
 
-/* =========================
-   DELETE STUDENTS
-========================= */
 
-.delete-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px 12px;
-    border-radius: 8px;
-    background: #fff0f0;
-    color: #b42318;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 600;
-    transition: 0.2s;
-}
+/* =========================================================
+   SEARCH EMPTY
+========================================================= */
 
-.delete-btn:hover {
-    background: #ffe0e0;
-    color: #9f1c12;
-}
+.no-search-results {
+    padding: 50px 25px;
 
-/* DELETE PAGE */
-
-.delete-page {
-    min-height: 75vh;
-    margin-left: 250px;
-    background: #f8f7f0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 50px;
-}
-
-.delete-card {
-    width: 450px;
-    background: white;
-    border: 1px solid #e1e8e4;
-    border-radius: 20px;
-    padding: 40px;
     text-align: center;
-    box-shadow: 0 15px 40px rgba(11,77,59,0.08);
 }
 
-.delete-icon {
-    width: 65px;
-    height: 65px;
-    margin: 0 auto 20px;
+.no-search-results i {
+    margin-bottom: 12px;
+
+    color: #0b4d3b;
+
+    font-size: 28px;
+}
+
+.no-search-results h3 {
+    margin: 0 0 6px;
+
+    color: #073f32;
+
+    font-size: 19px;
+}
+
+.no-search-results p {
+    margin: 0;
+
+    color: #66746f;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   DEACTIVATE CONFIRMATION
+========================================================= */
+
+.delete-confirm-card {
+    width: 100%;
+    max-width: 620px;
+
+    margin: 35px auto 0;
+
+    padding: 38px 42px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe8e3;
+    border-radius: 22px;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 35px rgba(7, 63, 50, 0.08);
+}
+
+.delete-confirm-icon {
+    width: 78px;
+    height: 78px;
+
+    margin: 0 auto 22px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     border-radius: 50%;
-    background: #ffe8e8;
-    color: #b42318;
-    font-size: 25px;
+
+    background: #fff0f0;
+
+    color: #c62828;
+
+    font-size: 30px;
+
+    box-shadow:
+        0 6px 18px rgba(198, 40, 40, 0.10);
 }
 
-.delete-card h1 {
+.delete-confirm-card .page-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #0b4d3b;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.delete-confirm-card h1 {
+    margin: 0 0 12px;
+
     color: #073f32;
-    font-size: 25px;
-    margin-bottom: 12px;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    line-height: 1.2;
 }
 
-.delete-card p {
-    color: #68756f;
+.delete-confirm-card > p {
+    max-width: 500px;
+
+    margin: 0 auto;
+
+    color: #66746f;
+
+    font-size: 15px;
+
     line-height: 1.6;
 }
 
-.warning-text {
-    color: #b42318 !important;
-    font-size: 13px;
+.delete-confirm-card > p strong {
+    color: #073f32;
+
+    font-weight: 700;
 }
 
-.confirm-delete {
-    width: 100%;
-    padding: 13px;
-    margin-top: 15px;
-    border: none;
+.delete-warning {
+    margin-top: 14px !important;
+
+    padding: 14px 18px;
+
+    background: #fff8f8;
+
+    border: 1px solid #f3d8d8;
+
+    border-radius: 11px;
+
+    color: #7a5555 !important;
+
+    font-size: 13px !important;
+
+    line-height: 1.6 !important;
+}
+
+.delete-warning strong {
+    color: #a52828 !important;
+}
+
+
+/* =========================================================
+   CONFIRMATION ACTIONS
+========================================================= */
+
+.delete-confirm-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 28px;
+    padding-top: 22px;
+
+    border-top: 1px solid #e5ebe8;
+}
+
+.cancel-delete-btn,
+.confirm-delete-btn {
+    min-height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 19px;
+
+    box-sizing: border-box;
+
     border-radius: 10px;
-    background: #b42318;
-    color: white;
+
+    font-size: 14px;
     font-weight: 700;
+
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+}
+
+
+/* CANCEL */
+
+.cancel-delete-btn {
+    background: #eef3f0;
+
+    color: #31544a;
+
+    border: 1px solid #dce6e1;
+}
+
+.cancel-delete-btn:hover {
+    background: #e2ebe7;
+
+    color: #073f32;
+
+    transform: translateY(-1px);
+}
+
+
+/* CONFIRM */
+
+.confirm-delete-btn {
+    border: 1px solid #c62828;
+
+    background: #c62828;
+
+    color: #ffffff;
+
     cursor: pointer;
 }
 
-.confirm-delete:hover {
-    background: #921b13;
+.confirm-delete-btn:hover {
+    background: #a91f1f;
+
+    border-color: #a91f1f;
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 15px rgba(198, 40, 40, 0.18);
 }
 
-.cancel-delete {
-    display: block;
-    margin-top: 12px;
-    padding: 12px;
-    border-radius: 10px;
-    background: #f0f3f1;
-    color: #31544a;
-    text-decoration: none;
-    font-weight: 600;
+.cancel-delete-btn i,
+.confirm-delete-btn i {
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   SECURITY MESSAGE
+========================================================= */
+
+.delete-security-note {
+    margin-top: 20px;
+
+    color: #8a9792;
+
+    font-size: 12px;
+}
+
+.delete-security-note i {
+    margin-right: 5px;
+
+    color: #0b4d3b;
+}
+
+
+/* =========================================================
+   RESPONSIVE - 1100px
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .students-page {
+        padding: 28px 30px 50px;
+    }
+
+    .students-header,
+    .students-card {
+        max-width: 100%;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 900px
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .table-header {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .student-header-actions {
+        width: 100%;
+
+        justify-content: space-between;
+    }
+
+    .student-search {
+        flex: 1;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 800px
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .students-header {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .student-count {
+        width: 150px;
+    }
+
+    .student-header-actions {
+        width: 100%;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 10px;
+    }
+
+    .student-search {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 700px
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .delete-confirm-card {
+        margin-top: 20px;
+
+        padding: 30px 24px;
+
+        border-radius: 18px;
+    }
+
+    .delete-confirm-icon {
+        width: 70px;
+        height: 70px;
+
+        font-size: 27px;
+    }
+
+    .delete-confirm-card h1 {
+        font-size: 27px;
+    }
+
+    .delete-confirm-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .cancel-delete-btn,
+    .confirm-delete-btn {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 600px
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .students-page {
+        padding: 22px 15px 40px;
+    }
+
+    .students-header h1 {
+        font-size: 32px;
+    }
+
+    .students-header p {
+        font-size: 14px;
+    }
+
+    .student-count {
+        width: 100%;
+
+        min-height: 80px;
+    }
+
+    .student-tabs {
+        overflow-x: auto;
+
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .student-tabs a {
+        white-space: nowrap;
+
+        padding: 12px 14px;
+    }
+
+    .table-header {
+        padding: 18px;
+    }
+
+    .table-header h2 {
+        font-size: 19px;
+    }
+
+    .students-card th,
+    .students-card td {
+        padding: 13px 12px;
+
+        font-size: 13px;
+    }
+
+    .student-header-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 10px;
+    }
+
+    .student-search {
+        width: 100%;
+    }
 }

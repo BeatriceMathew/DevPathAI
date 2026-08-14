@@ -73,8 +73,8 @@
 
         <!-- Skills -->
 
-        <a href="#"
-           class="">
+        <a href="{% url 'skills_list' %}"
+           class="{% if request.resolver_match.url_name == 'skills_list' %}active{% endif %}">
 
             <i class="fas fa-code"></i>
 
@@ -85,25 +85,17 @@
 
         <!-- Career Paths -->
 
-        <a href="#"
-           class="">
-
+        <a href="{% url 'career_paths_list' %}" class="sidebar-link">
             <i class="fas fa-route"></i>
-
             <span>Career Paths</span>
-
         </a>
 
 
         <!-- Roadmaps -->
 
-        <a href="#"
-           class="">
-
+        <a href="{% url 'learning_roadmaps_list' %}" class="sidebar-link">
             <i class="fas fa-map"></i>
-
-            <span>Roadmaps</span>
-
+            <span>Learning Roadmaps</span>
         </a>
 
 

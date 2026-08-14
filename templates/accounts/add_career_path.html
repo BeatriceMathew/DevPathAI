@@ -1,0 +1,230 @@
+{% extends 'admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+Add Career Path | DevPath AI
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/career_paths.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="career-paths-page">
+
+    <div class="career-form-page">
+
+        <!-- HEADER -->
+
+        <div class="career-form-header">
+
+            <span class="page-label">
+                CAREER PATH MANAGEMENT
+            </span>
+
+            <h1>
+                Add Career Path
+            </h1>
+
+            <p>
+                Create a developer career path and select
+                the skills required for it.
+            </p>
+
+        </div>
+
+
+        <!-- FORM CARD -->
+
+        <div class="career-form-card">
+
+            <div class="career-form-icon">
+
+                <i class="fas fa-route"></i>
+
+            </div>
+
+
+            {% if error %}
+
+                <div class="career-form-error">
+
+                    <i class="fas fa-exclamation-circle"></i>
+
+                    {{ error }}
+
+                </div>
+
+            {% endif %}
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <!-- NAME -->
+
+                <div class="career-form-group">
+
+                    <label for="careerName">
+
+                        Career Path Name
+
+                        <span>*</span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="careerName"
+                        name="name"
+                        value="{{ name|default:'' }}"
+                        maxlength="150"
+                        placeholder="Example: Frontend Developer"
+                        required
+                    >
+
+                    <small>
+                        Enter the name of the developer career path.
+                    </small>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="career-form-group">
+
+                    <label for="careerDescription">
+
+                        Description
+
+                        <span class="optional">
+                            Optional
+                        </span>
+
+                    </label>
+
+                    <textarea
+                        id="careerDescription"
+                        name="description"
+                        rows="5"
+                        placeholder="Describe this career path..."
+                    >{{ description|default:'' }}</textarea>
+
+                </div>
+
+
+                <!-- REQUIRED SKILLS -->
+
+                <div class="career-form-group">
+
+                    <label>
+
+                        Required Skills
+
+                        <span>*</span>
+
+                    </label>
+
+                    <p class="skill-selection-help">
+                        Select the technical skills required
+                        for this career path.
+                    </p>
+
+
+                    {% if skills %}
+
+                        <div class="career-skills-list">
+
+                            {% for skill in skills %}
+
+                                <label class="career-skill-option">
+
+                                    <input
+                                        type="checkbox"
+                                        name="skills"
+                                        value="{{ skill.id }}"
+                                        {% if skill.id|stringformat:"s" in selected_skill_ids %}
+                                            checked
+                                        {% endif %}
+                                    >
+
+                                    <span class="career-skill-check">
+                                        <i class="fas fa-check"></i>
+                                    </span>
+
+                                    <span class="career-skill-name">
+                                        {{ skill.name }}
+                                    </span>
+
+                                </label>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% else %}
+
+                        <div class="no-career-skills">
+
+                            <i class="fas fa-code"></i>
+
+                            <p>
+                                No active skills are available.
+                                Please add skills first.
+                            </p>
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="career-form-actions">
+
+                    <a href="{% url 'career_paths_list' %}"
+                       class="career-cancel-btn">
+
+                        <i class="fas fa-times"></i>
+
+                        Cancel
+
+                    </a>
+
+
+                    <button type="submit"
+                            class="career-save-btn">
+
+                        <i class="fas fa-plus"></i>
+
+                        Add Career Path
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

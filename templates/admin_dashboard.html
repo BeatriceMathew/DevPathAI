@@ -105,7 +105,7 @@ Admin Dashboard | DevPath AI
                 </span>
 
                 <h2>
-                    0
+                    {{ skills_count }}
                 </h2>
 
             </div>
@@ -246,7 +246,7 @@ Admin Dashboard | DevPath AI
             </p>
 
 
-            <a href="#">
+            <a href="{% url 'skills_list' %}">
                 Manage Skills →
             </a>
 

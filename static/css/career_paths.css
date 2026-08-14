@@ -1,0 +1,1356 @@
+.career-paths-page {
+    min-height: 100vh;
+    background: #f8f7f0;
+    padding: 32px 45px 60px;
+    box-sizing: border-box;
+}
+
+.career-paths-header {
+    max-width: 1100px;
+    margin: 0 auto 28px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.career-paths-header .page-label {
+    display: block;
+    margin-bottom: 7px;
+
+    color: #0b4d3b;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.career-paths-header h1 {
+    margin: 0;
+
+    color: #073f32;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.career-paths-header p {
+    margin: 8px 0 0;
+
+    color: #66746f;
+    font-size: 16px;
+}
+
+.career-path-count {
+    min-width: 150px;
+    min-height: 105px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe8e3;
+    border-radius: 16px;
+
+    box-shadow: 0 5px 18px rgba(7, 63, 50, 0.05);
+}
+
+.career-path-count strong {
+    color: #073f32;
+    font-size: 30px;
+}
+
+.career-path-count span {
+    color: #66746f;
+    font-size: 13px;
+}
+
+.career-paths-card {
+    max-width: 1100px;
+    margin: 0 auto;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe8e3;
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow: 0 6px 22px rgba(7, 63, 50, 0.05);
+}
+
+.career-path-tabs {
+    display: flex;
+
+    gap: 5px;
+
+    padding: 10px 24px 0;
+
+    border-bottom: 1px solid #e1e8e4;
+}
+
+.career-path-tabs a {
+    padding: 14px 18px;
+
+    color: #66746f;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    border-bottom: 3px solid transparent;
+}
+
+.career-path-tabs a.active {
+    color: #0b4d3b;
+    border-bottom-color: #0b4d3b;
+}
+
+.career-path-tabs span {
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    background: #e2efe8;
+
+    color: #0b4d3b;
+
+    font-size: 11px;
+}
+
+.career-path-table-header {
+    padding: 22px 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.career-path-table-header h2 {
+    margin: 0;
+
+    color: #073f32;
+    font-size: 21px;
+}
+
+.career-path-table-header p {
+    margin: 5px 0 0;
+
+    color: #66746f;
+    font-size: 13px;
+}
+
+.add-career-path-btn {
+    min-height: 42px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 0 16px;
+
+    background: #0b4d3b;
+    color: #ffffff;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+.career-path-table-wrapper {
+    overflow-x: auto;
+}
+
+.career-paths-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.career-paths-card th {
+    padding: 15px 16px;
+
+    background: #f2f6f4;
+
+    color: #31544a;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    text-align: left;
+}
+
+.career-paths-card td {
+    padding: 16px;
+
+    color: #52645e;
+
+    font-size: 14px;
+
+    border-bottom: 1px solid #edf1ef;
+}
+
+.career-paths-card td strong {
+    color: #073f32;
+}
+
+/* =========================================================
+   EMPTY CAREER PATH STATE
+========================================================= */
+
+.no-career-paths {
+    min-height: 330px;
+
+    padding: 55px 30px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+
+.empty-career-icon {
+    width: 70px;
+    height: 70px;
+
+    margin-bottom: 18px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e2efe8;
+
+    color: #0b4d3b;
+
+    font-size: 28px;
+}
+
+
+.no-career-paths h3 {
+    margin: 0 0 8px;
+
+    color: #073f32;
+
+    font-size: 24px;
+
+    font-weight: 700;
+}
+
+
+.no-career-paths p {
+    margin: 0 0 22px;
+
+    color: #66746f;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   EMPTY STATE ADD BUTTON
+========================================================= */
+
+.empty-add-career-btn {
+    min-height: 44px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 19px;
+
+    background: #0b4d3b;
+
+    color: #ffffff !important;
+
+    border: 1px solid #0b4d3b;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    text-decoration: none !important;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 4px 10px rgba(7, 63, 50, 0.12);
+
+    transition: all 0.2s ease;
+}
+
+
+.empty-add-career-btn i {
+    font-size: 13px;
+}
+
+
+.empty-add-career-btn:hover {
+    background: #083b2e;
+
+    color: #ffffff !important;
+
+    border-color: #083b2e;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px rgba(7, 63, 50, 0.18);
+}
+
+/* =========================================================
+   ADD CAREER PATH FORM
+========================================================= */
+
+.career-form-page {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+
+.career-form-header {
+    margin-bottom: 22px;
+}
+
+
+.career-form-header .page-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #0b4d3b;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.career-form-header h1 {
+    margin: 0;
+
+    color: #073f32;
+
+    font-size: 34px;
+    font-weight: 700;
+}
+
+
+.career-form-header p {
+    margin: 6px 0 0;
+
+    color: #66746f;
+
+    font-size: 15px;
+}
+
+
+.career-form-card {
+    padding: 30px 35px;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe8e3;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 7px 24px rgba(7, 63, 50, 0.06);
+
+    box-sizing: border-box;
+}
+
+
+.career-form-icon {
+    width: 65px;
+    height: 65px;
+
+    margin-bottom: 25px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e2efe8;
+
+    color: #0b4d3b;
+
+    font-size: 25px;
+}
+
+
+/* ERROR */
+
+.career-form-error {
+    margin-bottom: 22px;
+
+    padding: 12px 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    background: #fff0f0;
+
+    border: 1px solid #f3d0d0;
+
+    border-radius: 9px;
+
+    color: #b42318;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+/* FORM GROUP */
+
+.career-form-group {
+    margin-bottom: 22px;
+}
+
+
+.career-form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #073f32;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+.career-form-group label > span {
+    color: #c62828;
+}
+
+
+.career-form-group label .optional {
+    margin-left: 6px;
+
+    color: #8a9792;
+
+    font-size: 11px;
+
+    font-weight: 500;
+}
+
+
+.career-form-group input,
+.career-form-group textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #d7e2dd;
+
+    border-radius: 10px;
+
+    color: #073f32;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+
+.career-form-group input {
+    height: 50px;
+
+    padding: 0 14px;
+}
+
+
+.career-form-group textarea {
+    min-height: 120px;
+
+    padding: 13px 14px;
+
+    resize: vertical;
+}
+
+
+.career-form-group input:focus,
+.career-form-group textarea:focus {
+    border-color: #0b4d3b;
+
+    box-shadow:
+        0 0 0 3px rgba(11, 77, 59, 0.08);
+}
+
+
+.career-form-group input::placeholder,
+.career-form-group textarea::placeholder {
+    color: #9aa59f;
+}
+
+
+/* SKILL HELP */
+
+.skill-selection-help {
+    margin: -2px 0 12px;
+
+    color: #66746f;
+
+    font-size: 13px;
+}
+
+
+/* SKILLS */
+
+.career-skills-list {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 10px;
+}
+
+
+.career-skill-option {
+    min-height: 52px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 0 14px;
+
+    margin: 0 !important;
+
+    background: #f8faf9;
+
+    border: 1px solid #dfe8e3;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.career-skill-option:hover {
+    background: #f1f7f4;
+
+    border-color: #b9d2c7;
+}
+
+
+.career-skill-option input {
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+.career-skill-check {
+    width: 20px;
+    height: 20px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1.5px solid #c8d6d0;
+
+    border-radius: 5px;
+
+    background: #ffffff;
+
+    color: #ffffff;
+
+    font-size: 10px;
+
+    transition: 0.2s ease;
+}
+
+
+.career-skill-option input:checked + .career-skill-check {
+    background: #0b4d3b;
+
+    border-color: #0b4d3b;
+}
+
+
+.career-skill-name {
+    color: #073f32;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.career-skill-option:has(input:checked) {
+    background: #eaf4ef;
+
+    border-color: #a9cbbb;
+}
+
+
+/* NO SKILLS */
+
+.no-career-skills {
+    padding: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    background: #f8faf9;
+
+    border: 1px solid #e1e8e4;
+
+    border-radius: 10px;
+
+    color: #66746f;
+}
+
+
+.no-career-skills i {
+    color: #0b4d3b;
+
+    font-size: 20px;
+}
+
+
+.no-career-skills p {
+    margin: 0;
+
+    font-size: 13px;
+}
+
+
+/* ACTIONS */
+
+.career-form-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 28px;
+
+    padding-top: 22px;
+
+    border-top: 1px solid #e5ebe8;
+}
+
+
+.career-cancel-btn,
+.career-save-btn {
+    min-height: 44px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 19px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    box-sizing: border-box;
+
+    transition: 0.2s ease;
+}
+
+
+.career-cancel-btn {
+    background: #eef3f0;
+
+    color: #31544a;
+
+    border: 1px solid #dce6e1;
+}
+
+
+.career-cancel-btn:hover {
+    background: #e2ebe7;
+
+    color: #073f32;
+
+    transform: translateY(-1px);
+}
+
+
+.career-save-btn {
+    background: #0b4d3b;
+
+    color: #ffffff;
+
+    border: 1px solid #0b4d3b;
+
+    cursor: pointer;
+}
+
+
+.career-save-btn:hover {
+    background: #083b2e;
+
+    border-color: #083b2e;
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+
+    .career-form-card {
+        padding: 25px 20px;
+    }
+
+    .career-form-header h1 {
+        font-size: 30px;
+    }
+
+    .career-skills-list {
+        grid-template-columns: 1fr;
+    }
+
+    .career-form-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .career-cancel-btn,
+    .career-save-btn {
+        width: 100%;
+    }
+
+}
+
+/* =========================================================
+   CAREER PATH ACTIONS
+========================================================= */
+
+.career-path-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   COMMON ACTION BUTTON
+========================================================= */
+
+.edit-career-path-btn,
+.delete-career-path-btn,
+.restore-career-path-btn {
+    min-height: 36px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 0 13px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    border: 1px solid transparent;
+
+    box-sizing: border-box;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   EDIT BUTTON
+========================================================= */
+
+.edit-career-path-btn {
+    background: #edf5f1;
+
+    color: #0b4d3b;
+
+    border-color: #d5e5dd;
+}
+
+.edit-career-path-btn i {
+    font-size: 11px;
+}
+
+.edit-career-path-btn:hover {
+    background: #dcece4;
+
+    color: #073f32;
+
+    border-color: #c4dbd0;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 4px 10px rgba(11, 77, 59, 0.10);
+}
+
+
+/* =========================================================
+   DEACTIVATE BUTTON
+========================================================= */
+
+.delete-career-path-btn {
+    background: #fff5f4;
+
+    color: #b42318;
+
+    border-color: #f0d5d2;
+}
+
+.delete-career-path-btn i {
+    font-size: 11px;
+}
+
+.delete-career-path-btn:hover {
+    background: #fee9e7;
+
+    color: #9f1c13;
+
+    border-color: #e8c2bd;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 4px 10px rgba(180, 35, 24, 0.10);
+}
+
+
+/* =========================================================
+   RESTORE BUTTON
+========================================================= */
+
+.restore-career-path-btn {
+    background: #edf7f1;
+
+    color: #087443;
+
+    border-color: #d1e7da;
+}
+
+.restore-career-path-btn i {
+    font-size: 11px;
+}
+
+.restore-career-path-btn:hover {
+    background: #dcefe4;
+
+    color: #056237;
+
+    border-color: #bddbc8;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 4px 10px rgba(8, 116, 67, 0.10);
+}
+
+/* =========================================================
+   ACTION BUTTON ICON CIRCLE
+========================================================= */
+
+.edit-career-path-btn i,
+.delete-career-path-btn i,
+.restore-career-path-btn i {
+    width: 20px;
+    height: 20px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 6px;
+}
+
+
+/* EDIT ICON */
+
+.edit-career-path-btn i {
+    background: #dcece4;
+}
+
+
+/* DEACTIVATE ICON */
+
+.delete-career-path-btn i {
+    background: #fbe2df;
+}
+
+
+/* RESTORE ICON */
+
+.restore-career-path-btn i {
+    background: #d9eee1;
+}
+
+/* =========================================================
+   DEACTIVATION CONFIRMATION PAGE
+========================================================= */
+
+.career-confirm-page {
+    max-width: 760px;
+
+    margin: 0 auto;
+
+    padding: 15px 0 40px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CONFIRMATION CARD
+========================================================= */
+
+.career-confirm-card {
+    background: #ffffff;
+
+    border: 1px solid #dfe8e3;
+
+    border-radius: 20px;
+
+    padding: 42px 45px 35px;
+
+    box-shadow:
+        0 8px 28px rgba(7, 63, 50, 0.07);
+
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   WARNING ICON
+========================================================= */
+
+.career-confirm-icon {
+    width: 78px;
+    height: 78px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff3f1;
+
+    color: #c0392b;
+
+    font-size: 29px;
+
+    box-shadow:
+        0 0 0 8px #fff9f8;
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.career-confirm-card .page-label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #0b4d3b;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.career-confirm-card h1 {
+    margin: 0;
+
+    color: #073f32;
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================================
+   CONFIRM MESSAGE
+========================================================= */
+
+.career-confirm-message {
+    max-width: 600px;
+
+    margin: 15px auto 7px;
+
+    color: #425b52;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+
+.career-confirm-message strong {
+    color: #073f32;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.career-confirm-description {
+    max-width: 570px;
+
+    margin: 0 auto 28px;
+
+    color: #71807a;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   CAREER PREVIEW
+========================================================= */
+
+.career-confirm-preview {
+    max-width: 540px;
+
+    margin: 0 auto;
+
+    padding: 17px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    background: #f7faf8;
+
+    border: 1px solid #dfe8e3;
+
+    border-radius: 13px;
+
+    text-align: left;
+
+    box-sizing: border-box;
+
+    transition: 0.2s ease;
+}
+
+
+.career-confirm-preview:hover {
+    background: #f3f8f5;
+
+    border-color: #cfded7;
+}
+
+
+/* =========================================================
+   PREVIEW ICON
+========================================================= */
+
+.career-confirm-preview-icon {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: #e2efe8;
+
+    color: #0b4d3b;
+
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   PREVIEW TEXT
+========================================================= */
+
+.career-confirm-preview strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #073f32;
+
+    font-size: 15px;
+
+    font-weight: 700;
+}
+
+
+.career-confirm-preview p {
+    margin: 0;
+
+    color: #74827c;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   CONFIRM ACTIONS
+========================================================= */
+
+.career-confirm-actions {
+    margin-top: 30px;
+
+    padding-top: 23px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    border-top: 1px solid #e5ebe8;
+}
+
+
+/* =========================================================
+   CANCEL BUTTON
+========================================================= */
+
+.career-confirm-actions .career-cancel-btn {
+    min-height: 45px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 20px;
+
+    background: #eef3f0;
+
+    color: #31544a;
+
+    border: 1px solid #d7e3dd;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+
+.career-confirm-actions .career-cancel-btn:hover {
+    background: #e1ebe6;
+
+    color: #073f32;
+
+    border-color: #c8d9d1;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   DEACTIVATE CONFIRM BUTTON
+========================================================= */
+
+.career-deactivate-btn {
+    min-height: 45px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 20px;
+
+    background: #c0392b;
+
+    color: #ffffff;
+
+    border: 1px solid #c0392b;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+    box-shadow:
+        0 4px 10px rgba(192, 57, 43, 0.12);
+}
+
+
+.career-deactivate-btn:hover {
+    background: #a93226;
+
+    border-color: #a93226;
+
+    color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 14px rgba(192, 57, 43, 0.18);
+}
+
+
+/* =========================================================
+   RESPONSIVE CONFIRMATION
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .career-confirm-page {
+        padding: 5px 0 30px;
+    }
+
+    .career-confirm-card {
+        padding: 32px 22px 27px;
+
+        border-radius: 16px;
+    }
+
+    .career-confirm-icon {
+        width: 68px;
+        height: 68px;
+
+        font-size: 25px;
+    }
+
+    .career-confirm-card h1 {
+        font-size: 25px;
+    }
+
+    .career-confirm-message {
+        font-size: 14px;
+    }
+
+    .career-confirm-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .career-confirm-actions .career-cancel-btn,
+    .career-deactivate-btn {
+        width: 100%;
+    }
+
+}

@@ -1,0 +1,125 @@
+{% extends 'admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+Deactivate Roadmap | DevPath AI
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/learning_roadmaps.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="learning-roadmaps-page">
+
+    <div class="roadmap-confirm-page">
+
+        <div class="roadmap-confirm-card">
+
+
+            <!-- ICON -->
+
+            <div class="roadmap-confirm-icon">
+
+                <i class="fas fa-ban"></i>
+
+            </div>
+
+
+            <!-- TITLE -->
+
+            <h1>
+                Deactivate Learning Roadmap?
+            </h1>
+
+
+            <p class="roadmap-confirm-message">
+
+                Are you sure you want to deactivate this
+                learning roadmap?
+
+            </p>
+
+
+            <!-- ROADMAP INFO -->
+
+            <div class="roadmap-confirm-info">
+
+                <div class="confirm-info-icon">
+
+                    <i class="fas fa-map"></i>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        {{ roadmap.title }}
+                    </strong>
+
+                    <span>
+                        {{ roadmap.career_path.name }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <p class="roadmap-confirm-warning">
+
+                <i class="fas fa-info-circle"></i>
+
+                This roadmap will no longer appear in the
+                active roadmap list. You can restore it later
+                from the Inactive section.
+
+            </p>
+
+
+            <!-- ACTIONS -->
+
+            <form method="POST"
+                  class="roadmap-confirm-actions">
+
+                {% csrf_token %}
+
+
+                <a href="{% url 'learning_roadmaps_list' %}"
+                   class="roadmap-confirm-cancel">
+
+                    <i class="fas fa-arrow-left"></i>
+
+                    Cancel
+
+                </a>
+
+
+                <button type="submit"
+                        class="roadmap-confirm-deactivate">
+
+                    <i class="fas fa-ban"></i>
+
+                    Yes, Deactivate
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

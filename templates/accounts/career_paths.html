@@ -1,0 +1,413 @@
+{% extends 'admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+Career Paths | DevPath AI
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/career_paths.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="career-paths-page">
+
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="career-paths-header">
+
+        <div>
+
+            <span class="page-label">
+                ADMINISTRATION
+            </span>
+
+            <h1>
+                Career Paths
+            </h1>
+
+            <p>
+                Manage developer career paths and their
+                required technical skills.
+            </p>
+
+        </div>
+
+
+        <div class="career-path-count">
+
+            <strong>
+                {{ active_career_paths_count }}
+            </strong>
+
+            <span>
+                Active Career Paths
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= MAIN CARD ================= -->
+
+    <div class="career-paths-card">
+
+
+        <!-- ================= TABS ================= -->
+
+        <div class="career-path-tabs">
+
+            <a href="{% url 'career_paths_list' %}?status=active"
+               class="{% if current_status == 'active' %}active{% endif %}">
+
+                <i class="fas fa-check-circle"></i>
+
+                Active
+
+                <span>
+                    {{ active_career_paths_count }}
+                </span>
+
+            </a>
+
+
+            <a href="{% url 'career_paths_list' %}?status=inactive"
+               class="{% if current_status == 'inactive' %}active{% endif %}">
+
+                <i class="fas fa-ban"></i>
+
+                Inactive
+
+                <span>
+                    {{ inactive_career_paths_count }}
+                </span>
+
+            </a>
+
+        </div>
+
+
+
+        <!-- ================= TABLE HEADER ================= -->
+
+        <div class="career-path-table-header">
+
+            <div>
+
+                <h2>
+
+                    {% if current_status == 'active' %}
+
+                        Active Career Paths
+
+                    {% else %}
+
+                        Inactive Career Paths
+
+                    {% endif %}
+
+                </h2>
+
+                <p>
+                    Manage career goals and required skills.
+                </p>
+
+            </div>
+
+
+            <div class="career-path-header-actions">
+
+                {% if current_status == 'active' %}
+
+                    <a href="{% url 'add_career_path' %}"
+                       class="add-career-path-btn">
+
+                        <i class="fas fa-plus"></i>
+
+                        Add Career Path
+
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= TABLE ================= -->
+
+        {% if career_paths %}
+
+            <div class="career-path-table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>Career Path</th>
+
+                            <th>Description</th>
+
+                            <th>Skills</th>
+
+                            <th>Status</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for career_path in career_paths %}
+
+                        <tr>
+
+
+                            <!-- NUMBER -->
+
+                            <td>
+                                {{ forloop.counter }}
+                            </td>
+
+
+
+                            <!-- CAREER PATH -->
+
+                            <td>
+
+                                <div class="career-path-name">
+
+                                    <div class="career-path-icon">
+
+                                        <i class="fas fa-route"></i>
+
+                                    </div>
+
+                                    <strong>
+                                        {{ career_path.name }}
+                                    </strong>
+
+                                </div>
+
+                            </td>
+
+
+
+                            <!-- DESCRIPTION -->
+
+                            <td>
+
+                                {% if career_path.description %}
+
+                                    {{ career_path.description }}
+
+                                {% else %}
+
+                                    <span class="no-description">
+                                        No description
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+
+                            <!-- SKILLS -->
+
+                            <td>
+
+                                <span class="skill-count-badge">
+
+                                    <i class="fas fa-code"></i>
+
+                                    {{ career_path.skills.count }}
+
+                                </span>
+
+                            </td>
+
+
+
+                            <!-- STATUS -->
+
+                            <td>
+
+                                {% if career_path.is_active %}
+
+                                    <span class="career-status active-career-status">
+
+                                        <span class="career-status-dot"></span>
+
+                                        Active
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="career-status inactive-career-status">
+
+                                        <span class="career-status-dot"></span>
+
+                                        Inactive
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+
+                            <!-- ACTIONS -->
+
+                            <td>
+
+                                <div class="career-path-actions">
+
+
+                                    <!-- EDIT -->
+
+                                    <a href="{% url 'edit_career_path' career_path.id %}"
+                                       class="edit-career-path-btn">
+
+                                        <i class="fas fa-edit"></i>
+
+                                        Edit
+
+                                    </a>
+
+
+
+                                    <!-- ACTIVE -->
+
+                                    {% if career_path.is_active %}
+
+                                        <a href="{% url 'delete_career_path' career_path.id %}"
+                                           class="delete-career-path-btn">
+
+                                            <i class="fas fa-ban"></i>
+
+                                            Deactivate
+
+                                        </a>
+
+
+                                    <!-- INACTIVE -->
+
+                                    {% else %}
+
+                                        <a href="{% url 'restore_career_path' career_path.id %}"
+                                           class="restore-career-path-btn">
+
+                                            <i class="fas fa-undo"></i>
+
+                                            Restore
+
+                                        </a>
+
+                                    {% endif %}
+
+
+                                </div>
+
+                            </td>
+
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        {% else %}
+
+
+            <!-- ================= EMPTY ================= -->
+
+            <div class="no-career-paths">
+
+                {% if current_status == 'active' %}
+
+                    <div class="empty-career-icon">
+
+                        <i class="fas fa-route"></i>
+
+                    </div>
+
+                    <h3>
+                        No active career paths
+                    </h3>
+
+                    <p>
+                        Add a career path to start building
+                        developer learning routes.
+                    </p>
+
+
+                    <a href="{% url 'add_career_path' %}"
+                       class="empty-add-career-btn">
+
+                        <i class="fas fa-plus"></i>
+
+                        Add Career Path
+
+                    </a>
+
+
+                {% else %}
+
+                    <div class="empty-career-icon inactive">
+
+                        <i class="fas fa-ban"></i>
+
+                    </div>
+
+                    <h3>
+                        No inactive career paths
+                    </h3>
+
+                    <p>
+                        Deactivated career paths will appear here.
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        {% endif %}
+
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}
