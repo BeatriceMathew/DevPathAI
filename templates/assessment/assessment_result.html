@@ -1,0 +1,270 @@
+{% extends 'dashboard/student_base.html' %}
+
+{% load static %}
+
+{% block title %}
+Assessment Result | DevPath AI
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/assessment_result.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="result-page">
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="result-header">
+
+        <span class="result-label">
+            ASSESSMENT COMPLETE
+        </span>
+
+        <h1>
+            Your Assessment Result
+        </h1>
+
+        <p>
+            Here's a summary of your current technical knowledge.
+            DevPath AI will use this result to understand your strengths
+            and identify areas for improvement.
+        </p>
+
+    </div>
+
+
+    <!-- ================= MAIN RESULT CARD ================= -->
+
+    <div class="result-main-card">
+
+        <!-- RESULT ICON -->
+
+        <div class="result-success-icon">
+            <i class="fas fa-check"></i>
+        </div>
+
+
+        <span class="result-completed">
+            ASSESSMENT COMPLETED
+        </span>
+
+
+        <h2>
+            Great job, {{ request.user.first_name|default:request.user.username }}!
+        </h2>
+
+
+        <p class="result-message">
+            You have successfully completed your technical skill assessment.
+        </p>
+
+
+        <!-- ================= SCORE ================= -->
+
+        <div class="score-circle">
+
+            <div class="score-value">
+                {{ result.percentage|floatformat:0 }}%
+            </div>
+
+            <div class="score-text">
+                Overall Score
+            </div>
+
+        </div>
+
+
+        <!-- ================= SCORE DETAILS ================= -->
+
+        <div class="result-stats">
+
+            <div class="result-stat">
+
+                <div class="stat-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <strong>
+                        {{ result.score }}
+                    </strong>
+
+                    <span>
+                        Correct Answers
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="result-stat">
+
+                <div class="stat-icon">
+                    <i class="fas fa-list-ol"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <strong>
+                        {{ result.total_questions }}
+                    </strong>
+
+                    <span>
+                        Total Questions
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="result-stat">
+
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <strong>
+                        {{ result.percentage|floatformat:0 }}%
+                    </strong>
+
+                    <span>
+                        Accuracy
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= PERFORMANCE MESSAGE ================= -->
+
+    <div class="performance-card">
+
+        <div class="performance-icon">
+            <i class="fas fa-lightbulb"></i>
+        </div>
+
+        <div class="performance-content">
+
+            {% if result.percentage >= 80 %}
+
+                <span class="performance-label">
+                    EXCELLENT PERFORMANCE
+                </span>
+
+                <h3>
+                    You have a strong technical foundation.
+                </h3>
+
+                <p>
+                    Your assessment score shows that you have a good
+                    understanding of the topics covered. Keep building
+                    your skills and explore more advanced concepts.
+                </p>
+
+            {% elif result.percentage >= 50 %}
+
+                <span class="performance-label">
+                    GOOD PROGRESS
+                </span>
+
+                <h3>
+                    You have a solid foundation to build on.
+                </h3>
+
+                <p>
+                    You have demonstrated knowledge in several areas.
+                    Continue practicing and strengthen the concepts
+                    where you need more confidence.
+                </p>
+
+            {% else %}
+
+                <span class="performance-label">
+                    LEARNING OPPORTUNITY
+                </span>
+
+                <h3>
+                    Every assessment is a starting point.
+                </h3>
+
+                <p>
+                    Your results help identify the areas where you can
+                    improve. Keep learning, practicing, and building
+                    your technical foundation step by step.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= NEXT STEP ================= -->
+
+    <div class="next-step-card">
+
+        <div class="next-step-content">
+
+            <span class="next-step-label">
+                WHAT'S NEXT?
+            </span>
+
+            <h2>
+                Build Your Personalized Learning Path
+            </h2>
+
+            <p>
+                DevPath AI can use your assessment performance to
+                understand your current skill level and help guide
+                your learning journey.
+            </p>
+
+        </div>
+
+
+        <div class="next-step-actions">
+
+            <a href="{% url 'dashboard' %}"
+               class="secondary-btn">
+
+                <i class="fas fa-home"></i>
+
+                Dashboard
+
+            </a>
+
+
+            <a href="{% url 'assessment' %}"
+               class="primary-btn">
+
+                <i class="fas fa-redo"></i>
+
+                Retake Assessment
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

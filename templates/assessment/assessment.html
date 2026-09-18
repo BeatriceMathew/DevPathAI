@@ -1,0 +1,516 @@
+{% extends 'dashboard/student_base.html' %}
+
+{% load static %}
+
+{% block title %}
+Skill Assessment | DevPath AI
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/assessment.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="assessment-page">
+
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="assessment-header">
+
+        <div class="assessment-header-content">
+
+            <span class="assessment-label">
+                SKILL ASSESSMENT
+            </span>
+
+            <h1>
+                Discover Your Technical Skills
+            </h1>
+
+            <p>
+                Assess your current knowledge to help DevPath AI
+                understand your strengths and learning needs.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= INTRODUCTION ================= -->
+
+    <div class="assessment-intro-card">
+
+        <div class="assessment-intro-icon">
+            <i class="fas fa-clipboard-check"></i>
+        </div>
+
+        <div class="assessment-intro-content">
+
+            <h2>
+                Before You Begin
+            </h2>
+
+            <p>
+                Answer each question based on your current knowledge.
+                There are no penalties for incorrect answers.
+            </p>
+
+            <div class="assessment-tips">
+
+                <span>
+                    <i class="fas fa-check"></i>
+                    Answer honestly
+                </span>
+
+                <span>
+                    <i class="fas fa-check"></i>
+                    Attempt every question
+                </span>
+
+                <span>
+                    <i class="fas fa-check"></i>
+                    Take your time
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= CAREER SELECTION ================= -->
+
+    <div class="career-selection-card">
+
+        <div class="career-selection-header">
+
+            <div class="career-selection-icon">
+                <i class="fas fa-bullseye"></i>
+            </div>
+
+            <div>
+
+                <span class="assessment-card-label">
+                    CAREER GOAL
+                </span>
+
+                <h2>
+                    Choose Your Career Path
+                </h2>
+
+                <p>
+                    Your assessment questions will be personalized
+                    according to the career you want to pursue.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form method="GET" id="careerSelectionForm">
+
+            <div class="career-select-wrapper">
+
+                <select
+                    name="career"
+                    id="career"
+                    onchange="this.form.submit()"
+                >
+
+                    <option value="">
+                        Select your career path
+                    </option>
+
+                    {% for career in career_paths %}
+
+                        <option
+                            value="{{ career.id }}"
+                            {% if selected_career and selected_career.id == career.id %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ career.name }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- ================= SELECTED CAREER ================= -->
+
+    {% if selected_career %}
+
+    <div class="selected-career-card">
+
+        <div class="selected-career-icon">
+            <i class="fas fa-route"></i>
+        </div>
+
+        <div>
+
+            <span>
+                YOUR SELECTED CAREER
+            </span>
+
+            <strong>
+                {{ selected_career.name }}
+            </strong>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ================= QUESTIONS ================= -->
+
+    {% if selected_career %}
+
+        {% if questions %}
+
+        <form method="POST" id="assessmentForm">
+
+            {% csrf_token %}
+
+            <input
+                type="hidden"
+                name="career_path"
+                value="{{ selected_career.id }}"
+            >
+
+
+            <!-- ================= QUESTIONS CARD ================= -->
+
+            <div class="assessment-questions-card">
+
+
+                <!-- CARD HEADER -->
+
+                <div class="assessment-card-header">
+
+                    <div>
+
+                        <span class="assessment-card-label">
+                            TECHNICAL ASSESSMENT
+                        </span>
+
+                        <h2>
+                            Test Your Knowledge
+                        </h2>
+
+                        <p>
+                            Select the best answer for each question.
+                        </p>
+
+                    </div>
+
+
+                    <div class="question-count">
+
+                        <strong>
+                            {{ questions|length }}
+                        </strong>
+
+                        <small>
+                            Questions
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="assessment-divider"></div>
+
+
+                <!-- ================= QUESTIONS ================= -->
+
+                {% for question in questions %}
+
+                <div class="assessment-question">
+
+
+                    <!-- QUESTION TOP -->
+
+                    <div class="question-top">
+
+                        <div class="question-number-wrapper">
+
+                            <span class="question-number">
+                                {{ forloop.counter }}
+                            </span>
+
+                            <span class="question-label">
+                                QUESTION {{ forloop.counter }}
+                            </span>
+
+                        </div>
+
+
+                        <span class="question-category">
+                            {{ question.get_category_display }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- QUESTION -->
+
+                    <h3>
+                        {{ question.question }}
+                    </h3>
+
+
+                    <!-- SKILL -->
+
+                    {% if question.skill %}
+
+                    <div class="question-skill">
+
+                        <i class="fas fa-code"></i>
+
+                        Skill:
+                        <strong>
+                            {{ question.skill.name }}
+                        </strong>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- DIFFICULTY -->
+
+                    <div class="question-difficulty">
+
+                        <i class="fas fa-layer-group"></i>
+
+                        {{ question.get_difficulty_display }}
+
+                    </div>
+
+
+                    <!-- ANSWERS -->
+
+                    <div class="answer-options">
+
+
+                        <!-- OPTION A -->
+
+                        <label class="answer-option">
+
+                            <input
+                                type="radio"
+                                name="question_{{ question.id }}"
+                                value="A"
+                                required
+                            >
+
+                            <span class="option-letter">
+                                A
+                            </span>
+
+                            <span class="option-text">
+                                {{ question.option_a }}
+                            </span>
+
+                        </label>
+
+
+                        <!-- OPTION B -->
+
+                        <label class="answer-option">
+
+                            <input
+                                type="radio"
+                                name="question_{{ question.id }}"
+                                value="B"
+                            >
+
+                            <span class="option-letter">
+                                B
+                            </span>
+
+                            <span class="option-text">
+                                {{ question.option_b }}
+                            </span>
+
+                        </label>
+
+
+                        <!-- OPTION C -->
+
+                        <label class="answer-option">
+
+                            <input
+                                type="radio"
+                                name="question_{{ question.id }}"
+                                value="C"
+                            >
+
+                            <span class="option-letter">
+                                C
+                            </span>
+
+                            <span class="option-text">
+                                {{ question.option_c }}
+                            </span>
+
+                        </label>
+
+
+                        <!-- OPTION D -->
+
+                        <label class="answer-option">
+
+                            <input
+                                type="radio"
+                                name="question_{{ question.id }}"
+                                value="D"
+                            >
+
+                            <span class="option-letter">
+                                D
+                            </span>
+
+                            <span class="option-text">
+                                {{ question.option_d }}
+                            </span>
+
+                        </label>
+
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- ================= SUBMIT SECTION ================= -->
+
+            <div class="assessment-submit-section">
+
+                <div class="submit-information">
+
+                    <div class="submit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Ready to complete your assessment?
+                        </strong>
+
+                        <p>
+                            Your answers will be evaluated to determine
+                            your current technical skill level.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="assessment-submit-btn"
+                    id="submitAssessmentBtn"
+                >
+
+                    <i class="fas fa-check-circle"></i>
+
+                    Submit Assessment
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+        {% else %}
+
+
+        <!-- ================= NO QUESTIONS ================= -->
+
+        <div class="assessment-empty">
+
+            <div class="assessment-empty-icon">
+
+                <i class="fas fa-clipboard-list"></i>
+
+            </div>
+
+            <h2>
+                Assessment Coming Soon
+            </h2>
+
+            <p>
+                There are currently no questions available
+                for this career path.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    {% endif %}
+
+
+</div>
+
+
+<!-- ================= SUBMIT CONFIRMATION ================= -->
+
+<script>
+
+const assessmentForm =
+    document.getElementById("assessmentForm");
+
+if (assessmentForm) {
+
+    assessmentForm.addEventListener(
+        "submit",
+        function(event) {
+
+            const confirmed = confirm(
+                "Are you sure you want to submit your assessment? You will not be able to change your answers after submission."
+            );
+
+            if (!confirmed) {
+
+                event.preventDefault();
+
+            }
+
+        }
+    );
+
+}
+
+</script>
+
+
+{% endblock %}

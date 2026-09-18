@@ -42,4 +42,10 @@ urlpatterns = [
         name="password_changed"
     ),
 
+
+    path(
+        "assessment/",
+        include("assessment.urls")
+    ),
+
 ]

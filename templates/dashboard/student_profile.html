@@ -1,0 +1,369 @@
+{% extends 'dashboard/student_base.html' %}
+
+{% load static %}
+
+{% block title %}
+My Profile | DevPath AI
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/student_profile.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="student-profile-page">
+
+    <!-- HEADER -->
+
+    <div class="profile-page-header">
+
+        <div>
+
+            <span class="profile-label">
+                STUDENT PROFILE
+            </span>
+
+            <h1>
+                My Profile
+            </h1>
+
+            <p>
+                Manage your personal information and build your developer profile.
+            </p>
+
+        </div>
+
+
+        <a href="{% url 'dashboard' %}"
+           class="profile-dashboard-btn">
+
+            <i class="fas fa-arrow-left"></i>
+
+            Dashboard
+
+        </a>
+
+    </div>
+
+
+    <!-- SUCCESS MESSAGE -->
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div class="profile-message success">
+
+                <i class="fas fa-check-circle"></i>
+
+                {{ message }}
+
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <!-- ERROR -->
+
+    {% if error %}
+
+        <div class="profile-message error">
+
+            <i class="fas fa-exclamation-circle"></i>
+
+            {{ error }}
+
+        </div>
+
+    {% endif %}
+
+
+    <!-- PROFILE CARD -->
+
+    <div class="student-profile-card">
+
+
+        <!-- PROFILE HEADER -->
+
+        <div class="profile-card-header">
+
+            <div class="profile-avatar">
+
+                {{ request.user.first_name|first|default:request.user.username|first|upper }}
+
+            </div>
+
+
+            <div class="profile-user-info">
+
+                <h2>
+
+                    {{ request.user.get_full_name|default:request.user.username }}
+
+                </h2>
+
+                <p>
+                    @{{ request.user.username }}
+                </p>
+
+                <span class="student-badge">
+                    STUDENT
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-divider"></div>
+
+
+        <!-- FORM -->
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <!-- PERSONAL INFORMATION -->
+
+            <div class="profile-section">
+
+                <span class="profile-section-label">
+                    PERSONAL INFORMATION
+                </span>
+
+                <h2>
+                    Basic Details
+                </h2>
+
+
+                <div class="profile-form-grid">
+
+
+                    <!-- FIRST NAME -->
+
+                    <div class="profile-form-group">
+
+                        <label for="first_name">
+
+                            First Name
+                            <span>*</span>
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="first_name"
+                            name="first_name"
+                            value="{{ request.user.first_name }}"
+                            placeholder="Enter your first name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- LAST NAME -->
+
+                    <div class="profile-form-group">
+
+                        <label for="last_name">
+
+                            Last Name
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="last_name"
+                            name="last_name"
+                            value="{{ request.user.last_name }}"
+                            placeholder="Enter your last name"
+                        >
+
+                    </div>
+
+
+                    <!-- USERNAME -->
+
+                    <div class="profile-form-group full-width">
+
+                        <label for="username">
+                            Username
+                        </label>
+
+                        <input
+                            type="text"
+                            id="username"
+                            value="{{ request.user.username }}"
+                            disabled
+                        >
+
+                        <small>
+                            Your username cannot be changed here.
+                        </small>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="profile-form-group full-width">
+
+                        <label for="email">
+
+                            Email Address
+                            <span>*</span>
+
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value="{{ request.user.email }}"
+                            placeholder="Enter your email address"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DEVELOPER PROFILE -->
+
+            <div class="profile-section developer-section">
+
+                <span class="profile-section-label">
+                    DEVELOPER PROFILE
+                </span>
+
+                <h2>
+                    Tell Us About Your Developer Journey
+                </h2>
+
+                <p class="section-description">
+
+                    This information will help DevPath AI understand
+                    your background and provide better personalized
+                    learning recommendations.
+
+                </p>
+
+
+                <div class="developer-info-box">
+
+                    <div class="developer-info-item">
+
+                        <div class="developer-info-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Skill Assessment
+                            </strong>
+
+                            <span>
+                                Your technical skills will be collected
+                                through the skill assessment.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="developer-info-item">
+
+                        <div class="developer-info-icon career-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Career Goal
+                            </strong>
+
+                            <span>
+                                Your career goal will be used by DevPath AI
+                                to generate a personalized learning path.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="developer-info-item">
+
+                        <div class="developer-info-icon ai-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                AI Personalization
+                            </strong>
+
+                            <span>
+                                Your profile and assessment information
+                                will help generate relevant recommendations.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="profile-form-actions">
+
+                <a href="{% url 'dashboard' %}"
+                   class="profile-cancel-btn">
+
+                    Cancel
+
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="profile-save-btn">
+
+                    <i class="fas fa-save"></i>
+
+                    Save Profile
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

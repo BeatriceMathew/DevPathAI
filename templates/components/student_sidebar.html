@@ -1,0 +1,159 @@
+{% load static %}
+
+<aside class="student-sidebar">
+
+    <!-- LOGO -->
+
+    <div class="student-sidebar-logo">
+
+        <div class="student-logo-icon">
+            <i class="fas fa-route"></i>
+        </div>
+
+        <div>
+            <strong>DevPath AI</strong>
+            <span>Student Portal</span>
+        </div>
+
+    </div>
+
+
+    <!-- STUDENT -->
+
+    <div class="student-sidebar-user">
+
+        <div class="student-sidebar-avatar">
+
+            {{ request.user.username|first|upper }}
+
+        </div>
+
+        <div>
+
+            <strong>
+                {{ request.user.first_name|default:request.user.username }}
+            </strong>
+
+            <span>
+                Student
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="student-sidebar-nav">
+
+        <span class="student-nav-label">
+            LEARNING
+        </span>
+
+
+        <a href="{% url 'dashboard' %}"
+           class="student-nav-link">
+
+            <i class="fas fa-home"></i>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="{% url 'student_profile' %}"
+            class="student-nav-link active">
+
+            <i class="fas fa-user"></i>
+
+            <span>My Profile</span>
+
+        </a>
+
+
+        <a href="{% url 'assessment' %}"
+            class="student-nav-link">
+
+            <i class="fas fa-clipboard-check"></i>
+
+            <span>Skill Assessment</span>
+
+        </a>
+
+        <a href="#"
+           class="student-nav-link">
+
+            <i class="fas fa-bullseye"></i>
+
+            <span>Career Goal</span>
+
+        </a>
+
+
+        <a href="#"
+           class="student-nav-link">
+
+            <i class="fas fa-brain"></i>
+
+            <span>AI Analysis</span>
+
+        </a>
+
+
+        <a href="#"
+           class="student-nav-link">
+
+            <i class="fas fa-map-marked-alt"></i>
+
+            <span>My Roadmap</span>
+
+        </a>
+
+
+        <a href="#"
+           class="student-nav-link">
+
+            <i class="fas fa-chart-line"></i>
+
+            <span>My Progress</span>
+
+        </a>
+
+
+        <span class="student-nav-label student-nav-bottom-label">
+            ACCOUNT
+        </span>
+
+
+        <a href="#"
+           class="student-nav-link">
+
+            <i class="fas fa-cog"></i>
+
+            <span>Settings</span>
+
+        </a>
+
+        <a href="{% url 'change_password' %}"
+            class="student-nav-link">
+
+            <i class="fas fa-key"></i>
+
+            <span>Change Password</span>
+
+        </a>
+
+
+        <a href="{% url 'logout' %}"
+           class="student-nav-link student-logout-link">
+
+            <i class="fas fa-sign-out-alt"></i>
+
+            <span>Logout</span>
+
+        </a>
+
+    </nav>
+
+</aside>

@@ -101,12 +101,12 @@
 
         <!-- Assessments -->
 
-        <a href="#"
-           class="">
+        <a href="{% url 'admin_assessment_questions' %}"
+            class="{% if request.resolver_match.url_name == 'admin_assessment_questions' or request.resolver_match.url_name == 'add_assessment_question' %}active{% endif %}">
 
             <i class="fas fa-clipboard-check"></i>
 
-            <span>Assessments</span>
+            <span>Assessment</span>
 
         </a>
 

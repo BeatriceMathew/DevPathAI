@@ -1,58 +1,600 @@
-{% extends 'base.html' %}
+{% extends 'dashboard/student_base.html' %}
+{% load static %}
 
 {% block title %}
 Dashboard | DevPath AI
 {% endblock %}
 
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/student_dashboard.css' %}">
+
+{% endblock %}
+
+
 {% block content %}
 
-<section class="py-5">
-    <div class="container">
-        <a href="{% url 'logout' %}" class="logout-btn">
-            <i class="fas fa-sign-out-alt"></i>
-            Logout
+<div class="student-dashboard">
+
+
+    <!-- =====================================================
+         DASHBOARD HEADER
+    ====================================================== -->
+
+    <header class="student-dashboard-header">
+
+        <div>
+
+            <span class="dashboard-label">
+                STUDENT DASHBOARD
+            </span>
+
+            <h1>
+                Good morning, {{ request.user.first_name|default:request.user.username }} 👋
+            </h1>
+
+            <p>
+                Ready to continue your developer journey?
+            </p>
+
+        </div>
+
+
+        <div class="dashboard-header-actions">
+
+            <button type="button"
+                    class="dashboard-notification-btn">
+
+                <i class="fas fa-bell"></i>
+
+            </button>
+
+
+            <a href="{% url 'student_profile' %}"
+               class="dashboard-profile-btn">
+
+                <div class="dashboard-avatar">
+
+                    {{ request.user.username|first|upper }}
+
+                </div>
+
+                <span>
+                    Profile
+                </span>
+
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         CAREER GOAL
+    ====================================================== -->
+
+    <section class="career-goal-card">
+
+
+        <div class="career-goal-icon">
+
+            <i class="fas fa-bullseye"></i>
+
+        </div>
+
+
+        <div class="career-goal-content">
+
+            <span class="card-label">
+                YOUR CAREER GOAL
+            </span>
+
+            <h2>
+                Career Goal Not Set
+            </h2>
+
+            <p>
+                Choose a career goal so DevPath AI can understand
+                where you want to go.
+            </p>
+
+        </div>
+
+
+        <a href="#"
+           class="career-goal-btn">
+
+            Set Career Goal
+
+            <i class="fas fa-arrow-right"></i>
+
         </a>
 
-        <div class="text-center mb-5">
-            <h1>Welcome to DevPath AI 👋</h1>
+    </section>
 
-            <p class="text-muted">
-                Your personalized developer journey starts here.
+
+
+    <!-- =====================================================
+         DEVPATH JOURNEY
+    ====================================================== -->
+
+    <section class="dashboard-section">
+
+        <div class="section-heading">
+
+            <span>
+                YOUR JOURNEY
+            </span>
+
+            <h2>
+                Build Your Developer Path
+            </h2>
+
+        </div>
+
+
+        <div class="journey-card">
+
+
+            <div class="journey-line"></div>
+
+
+            <!-- PROFILE -->
+
+            <div class="journey-step completed">
+
+                <div class="journey-number">
+
+                    <i class="fas fa-check"></i>
+
+                </div>
+
+                <h3>
+                    Profile
+                </h3>
+
+                <p>
+                    Get started
+                </p>
+
+            </div>
+
+
+            <!-- ASSESSMENT -->
+
+            <div class="journey-step current">
+
+                <div class="journey-number">
+                    2
+                </div>
+
+                <h3>
+                    Assessment
+                </h3>
+
+                <p>
+                    Discover your skills
+                </p>
+
+            </div>
+
+
+            <!-- AI ANALYSIS -->
+
+            <div class="journey-step">
+
+                <div class="journey-number">
+                    3
+                </div>
+
+                <h3>
+                    AI Analysis
+                </h3>
+
+                <p>
+                    Analyze your skills
+                </p>
+
+            </div>
+
+
+            <!-- ROADMAP -->
+
+            <div class="journey-step">
+
+                <div class="journey-number">
+                    4
+                </div>
+
+                <h3>
+                    Roadmap
+                </h3>
+
+                <p>
+                    Start learning
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SKILLS + AI
+    ====================================================== -->
+
+    <section class="dashboard-section">
+
+        <div class="dashboard-two-column">
+
+
+            <!-- ================= SKILLS ================= -->
+
+            <div class="dashboard-content-card">
+
+                <div class="content-card-header">
+
+                    <div>
+
+                        <span class="card-label">
+                            YOUR SKILLS
+                        </span>
+
+                        <h2>
+                            Skills Overview
+                        </h2>
+
+                    </div>
+
+
+                    <div class="content-card-icon skills-card-icon">
+
+                        <i class="fas fa-code"></i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="skills-empty-state">
+
+                    <div class="empty-small-icon">
+
+                        <i class="fas fa-code"></i>
+
+                    </div>
+
+                    <h3>
+                        No skills assessed yet
+                    </h3>
+
+                    <p>
+                        Complete your skill assessment to discover
+                        your strengths and areas to improve.
+                    </p>
+
+                    <a href="#"
+                       class="secondary-action-btn">
+
+                        Take Assessment
+
+                        <i class="fas fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= AI ================= -->
+
+            <div class="dashboard-content-card ai-card">
+
+                <div class="content-card-header">
+
+                    <div>
+
+                        <span class="card-label">
+                            DEVPATH AI
+                        </span>
+
+                        <h2>
+                            AI Skill Analysis
+                        </h2>
+
+                    </div>
+
+
+                    <div class="content-card-icon ai-card-icon">
+
+                        <i class="fas fa-brain"></i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ai-empty-state">
+
+                    <div class="ai-status-icon">
+
+                        <i class="fas fa-robot"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Analysis not available yet
+                    </h3>
+
+
+                    <p>
+                        Complete your assessment to unlock
+                        personalized AI skill analysis.
+                    </p>
+
+
+                    <a href="#"
+                       class="ai-action-btn">
+
+                        Start Assessment
+
+                        <i class="fas fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PERSONALIZED ROADMAP
+    ====================================================== -->
+
+    <section class="dashboard-section">
+
+        <div class="section-heading">
+
+            <span>
+                YOUR PERSONALIZED ROADMAP
+            </span>
+
+            <h2>
+                Learning Roadmap
+            </h2>
+
+        </div>
+
+
+        <div class="roadmap-dashboard-card">
+
+
+            <div class="roadmap-dashboard-icon">
+
+                <i class="fas fa-map-marked-alt"></i>
+
+            </div>
+
+
+            <div class="roadmap-dashboard-content">
+
+                <span class="roadmap-status-label">
+                    NOT GENERATED
+                </span>
+
+                <h2>
+                    Your personalized roadmap is waiting
+                </h2>
+
+                <p>
+                    Complete your skill assessment and AI analysis
+                    to generate a learning roadmap tailored to
+                    your career goal and current skill level.
+                </p>
+
+
+                <div class="roadmap-progress-area">
+
+                    <div class="roadmap-progress-header">
+
+                        <span>
+                            Roadmap Progress
+                        </span>
+
+                        <strong>
+                            0%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="roadmap-progress-bar">
+
+                        <div class="roadmap-progress-fill"
+                             style="width: 0%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <a href="#"
+                   class="roadmap-dashboard-btn">
+
+                    View My Roadmap
+
+                    <i class="fas fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         QUICK ACTIONS
+    ====================================================== -->
+
+    <section class="dashboard-section">
+
+        <div class="section-heading">
+
+            <span>
+                QUICK ACTIONS
+            </span>
+
+            <h2>
+                Continue Your Journey
+            </h2>
+
+        </div>
+
+
+        <div class="quick-actions">
+
+
+            <a href="#"
+               class="quick-action">
+
+                <div class="quick-action-icon">
+
+                    <i class="fas fa-user-edit"></i>
+
+                </div>
+
+                <div>
+
+                    <strong>
+                        Complete Profile
+                    </strong>
+
+                    <span>
+                        Update your information
+                    </span>
+
+                </div>
+
+                <i class="fas fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="#"
+               class="quick-action">
+
+                <div class="quick-action-icon assessment">
+
+                    <i class="fas fa-clipboard-check"></i>
+
+                </div>
+
+                <div>
+
+                    <strong>
+                        Take Assessment
+                    </strong>
+
+                    <span>
+                        Discover your skills
+                    </span>
+
+                </div>
+
+                <i class="fas fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="#"
+               class="quick-action">
+
+                <div class="quick-action-icon roadmap">
+
+                    <i class="fas fa-route"></i>
+
+                </div>
+
+                <div>
+
+                    <strong>
+                        Explore Roadmap
+                    </strong>
+
+                    <span>
+                        View your learning path
+                    </span>
+
+                </div>
+
+                <i class="fas fa-chevron-right"></i>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DEVPATH AI MESSAGE
+    ====================================================== -->
+
+    <section class="devpath-ai-message">
+
+        <div class="devpath-ai-icon">
+
+            <i class="fas fa-robot"></i>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                DEVPATH AI
+            </span>
+
+            <h2>
+                Your developer journey starts with understanding you.
+            </h2>
+
+            <p>
+                Complete your profile and skill assessment.
+                DevPath AI will use your interests, abilities,
+                career goal and skill gaps to create a personalized
+                learning experience.
             </p>
-        </div>
-
-        <div class="row g-4">
-
-            <div class="col-md-4">
-                <div class="p-4 bg-white rounded-4 shadow-sm">
-                    <h4>🎯 Skill Assessment</h4>
-                    <p>
-                        Tell us about your current technical skills.
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="p-4 bg-white rounded-4 shadow-sm">
-                    <h4>🧠 AI Skill Analysis</h4>
-                    <p>
-                        Identify the skills you need for your career goal.
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="p-4 bg-white rounded-4 shadow-sm">
-                    <h4>🗺️ My Roadmap</h4>
-                    <p>
-                        Follow your personalized learning roadmap.
-                    </p>
-                </div>
-            </div>
 
         </div>
 
-    </div>
-</section>
+    </section>
 
+
+</div>
+
+{% endblock %}
+
+
+{% block footer %}
 {% endblock %}

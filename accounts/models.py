@@ -41,8 +41,8 @@ class CareerPath(models.Model):
 
     skills = models.ManyToManyField(
         Skill,
-        blank=True,
-        related_name="career_paths"
+        related_name="career_paths",
+        blank=True
     )
 
     is_active = models.BooleanField(
@@ -60,6 +60,62 @@ class CareerPath(models.Model):
     def __str__(self):
         return self.name
 
+
+class CareerSkill(models.Model):
+
+    LEVEL_CHOICES = [
+        ("Beginner", "Beginner"),
+        ("Intermediate", "Intermediate"),
+        ("Advanced", "Advanced"),
+        ("Expert", "Expert"),
+    ]
+
+    career_path = models.ForeignKey(
+        CareerPath,
+        on_delete=models.CASCADE,
+        related_name="career_skills"
+    )
+
+    skill = models.ForeignKey(
+        Skill,
+        on_delete=models.CASCADE,
+        related_name="career_requirements"
+    )
+
+    required_level = models.CharField(
+        max_length=20,
+        choices=LEVEL_CHOICES,
+        default="Beginner"
+    )
+
+    priority = models.PositiveIntegerField(
+        default=1
+    )
+
+    is_required = models.BooleanField(
+        default=True
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+
+    class Meta:
+        unique_together = ("career_path", "skill")
+        ordering = ["priority", "skill__name"]
+
+    def __str__(self):
+        return (
+            f"{self.career_path.name} - "
+            f"{self.skill.name} - "
+            f"{self.required_level}"
+        )
+
+
 class LearningRoadmap(models.Model):
 
     title = models.CharField(
@@ -71,9 +127,9 @@ class LearningRoadmap(models.Model):
     )
 
     career_path = models.ForeignKey(
-        'CareerPath',
+        CareerPath,
         on_delete=models.CASCADE,
-        related_name='roadmaps'
+        related_name="roadmaps"
     )
 
     duration = models.CharField(
@@ -84,11 +140,11 @@ class LearningRoadmap(models.Model):
     difficulty = models.CharField(
         max_length=50,
         choices=[
-            ('Beginner', 'Beginner'),
-            ('Intermediate', 'Intermediate'),
-            ('Advanced', 'Advanced'),
+            ("Beginner", "Beginner"),
+            ("Intermediate", "Intermediate"),
+            ("Advanced", "Advanced"),
         ],
-        default='Beginner'
+        default="Beginner"
     )
 
     is_active = models.BooleanField(

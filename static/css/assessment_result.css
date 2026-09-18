@@ -1,0 +1,537 @@
+/* =========================================================
+   DEVPATH AI
+   STUDENT ASSESSMENT RESULT
+   ========================================================= */
+
+
+/* ================= PAGE ================= */
+
+.result-page {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 35px 30px 60px;
+
+    box-sizing: border-box;
+}
+
+
+/* ================= HEADER ================= */
+
+.result-header {
+    margin-bottom: 28px;
+}
+
+.result-label {
+    display: inline-block;
+
+    margin-bottom: 9px;
+
+    color: #08705b;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+}
+
+.result-header h1 {
+    margin: 0 0 9px;
+
+    color: #073f38;
+
+    font-size: 32px;
+    font-weight: 800;
+
+    line-height: 1.25;
+}
+
+.result-header p {
+    max-width: 720px;
+
+    margin: 0;
+
+    color: #6c7874;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* ================= MAIN RESULT CARD ================= */
+
+.result-main-card {
+    padding: 38px 35px 35px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5ebe8;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 30px rgba(7, 63, 56, 0.07);
+
+    text-align: center;
+}
+
+
+/* ================= SUCCESS ICON ================= */
+
+.result-success-icon {
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 14px;
+
+    background: #edf8f4;
+
+    color: #08705b;
+
+    border: 1px solid #d5ebe3;
+
+    border-radius: 50%;
+
+    font-size: 23px;
+}
+
+.result-completed {
+    display: inline-block;
+
+    color: #08705b;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+}
+
+.result-main-card h2 {
+    margin: 9px 0 6px;
+
+    color: #073f38;
+
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.result-message {
+    margin: 0;
+
+    color: #74807d;
+
+    font-size: 13px;
+}
+
+
+/* ================= SCORE CIRCLE ================= */
+
+.score-circle {
+    width: 170px;
+    height: 170px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin: 30px auto;
+
+    background: #f2f8f5;
+
+    border: 9px solid #dceee7;
+
+    border-radius: 50%;
+
+    box-sizing: border-box;
+}
+
+.score-value {
+    color: #073f38;
+
+    font-size: 38px;
+    font-weight: 850;
+
+    line-height: 1;
+}
+
+.score-text {
+    margin-top: 8px;
+
+    color: #6e7a76;
+
+    font-size: 11px;
+    font-weight: 650;
+}
+
+
+/* ================= RESULT STATS ================= */
+
+.result-stats {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 14px;
+
+    max-width: 720px;
+
+    margin: 0 auto;
+}
+
+.result-stat {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 16px;
+
+    background: #f8faf9;
+
+    border: 1px solid #e7ece9;
+
+    border-radius: 12px;
+
+    text-align: left;
+}
+
+.stat-icon {
+    flex-shrink: 0;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #edf8f4;
+
+    color: #08705b;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+}
+
+.stat-content strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #073f38;
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.stat-content span {
+    display: block;
+
+    color: #78837f;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+/* ================= PERFORMANCE CARD ================= */
+
+.performance-card {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 16px;
+
+    margin-top: 20px;
+
+    padding: 22px 24px;
+
+    background: #f1f8f5;
+
+    border: 1px solid #dceee7;
+
+    border-radius: 15px;
+}
+
+.performance-icon {
+    flex-shrink: 0;
+
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #073f38;
+
+    color: #ffffff;
+
+    border-radius: 10px;
+
+    font-size: 17px;
+}
+
+.performance-content {
+    flex: 1;
+}
+
+.performance-label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #08705b;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.performance-content h3 {
+    margin: 0 0 6px;
+
+    color: #073f38;
+
+    font-size: 16px;
+    font-weight: 750;
+}
+
+.performance-content p {
+    max-width: 800px;
+
+    margin: 0;
+
+    color: #64716d;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* ================= NEXT STEP ================= */
+
+.next-step-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-top: 20px;
+
+    padding: 25px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5ebe8;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 20px rgba(7, 63, 56, 0.05);
+}
+
+.next-step-content {
+    flex: 1;
+}
+
+.next-step-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #08705b;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.next-step-content h2 {
+    margin: 0 0 7px;
+
+    color: #073f38;
+
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.next-step-content p {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: #71807b;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+
+/* ================= ACTIONS ================= */
+
+.next-step-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-shrink: 0;
+}
+
+.primary-btn,
+.secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 12px 17px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+    font-weight: 750;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* ================= PRIMARY BUTTON ================= */
+
+.primary-btn {
+    background: #073f38;
+
+    color: #ffffff;
+}
+
+.primary-btn:hover {
+    background: #08705b;
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 15px rgba(7, 63, 56, 0.16);
+}
+
+
+/* ================= SECONDARY BUTTON ================= */
+
+.secondary-btn {
+    background: #f3f6f4;
+
+    color: #073f38;
+
+    border: 1px solid #e0e7e4;
+}
+
+.secondary-btn:hover {
+    background: #e8f1ed;
+
+    color: #073f38;
+
+    transform: translateY(-1px);
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 850px) {
+
+    .result-page {
+        padding: 28px 20px 50px;
+    }
+
+    .result-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .next-step-card {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+    .next-step-actions {
+        width: 100%;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+        flex: 1;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .result-page {
+        padding: 22px 15px 40px;
+    }
+
+    .result-header h1 {
+        font-size: 27px;
+    }
+
+    .result-header p {
+        font-size: 13px;
+    }
+
+    .result-main-card {
+        padding: 30px 18px;
+    }
+
+    .score-circle {
+        width: 145px;
+        height: 145px;
+
+        border-width: 7px;
+    }
+
+    .score-value {
+        font-size: 32px;
+    }
+
+    .performance-card {
+        padding: 18px;
+    }
+
+    .next-step-card {
+        padding: 20px;
+    }
+
+    .next-step-actions {
+        flex-direction: column;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+        width: 100%;
+
+        box-sizing: border-box;
+    }
+}

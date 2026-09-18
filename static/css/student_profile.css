@@ -1,0 +1,600 @@
+/* =========================================================
+   STUDENT PROFILE
+========================================================= */
+
+.student-profile-page {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 42px 46px 60px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.profile-page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 28px;
+}
+
+
+.profile-label {
+    display: block;
+    margin-bottom: 8px;
+
+    color: #0b5a47;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+
+.profile-page-header h1 {
+    margin: 0;
+
+    color: #073f32;
+
+    font-size: 34px;
+    font-weight: 800;
+}
+
+
+.profile-page-header p {
+    margin: 9px 0 0;
+
+    color: #70817a;
+
+    font-size: 14px;
+}
+
+
+.profile-dashboard-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 11px 17px;
+
+    border: 1px solid #dce7e2;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #07513e;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+
+.profile-dashboard-btn:hover {
+    background: #edf5f1;
+    border-color: #c9ddd4;
+
+    color: #07513e;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+.profile-message {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 13px 16px;
+
+    margin-bottom: 18px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+.profile-message.success {
+    background: #eaf6ef;
+
+    border: 1px solid #cce7d7;
+
+    color: #17643f;
+}
+
+
+.profile-message.error {
+    background: #fff1ef;
+
+    border: 1px solid #f1d0cc;
+
+    color: #a23e35;
+}
+
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
+
+.student-profile-card {
+    background: #ffffff;
+
+    border: 1px solid #dfe8e3;
+
+    border-radius: 18px;
+
+    box-shadow: 0 8px 25px rgba(7, 63, 50, 0.04);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   PROFILE HEADER
+========================================================= */
+
+.profile-card-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 32px 36px;
+}
+
+
+.profile-avatar {
+    width: 72px;
+    height: 72px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #dfeee8;
+
+    color: #07513e;
+
+    font-size: 27px;
+
+    font-weight: 800;
+}
+
+
+.profile-user-info h2 {
+    margin: 0;
+
+    color: #073f32;
+
+    font-size: 21px;
+
+    font-weight: 700;
+}
+
+
+.profile-user-info p {
+    margin: 5px 0 8px;
+
+    color: #7c8b85;
+
+    font-size: 12px;
+}
+
+
+.student-badge {
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    background: #eaf4ef;
+
+    color: #07513e;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+}
+
+
+.profile-divider {
+    height: 1px;
+
+    margin: 0 36px;
+
+    background: #edf1ef;
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.profile-section {
+    padding: 32px 36px;
+}
+
+
+.profile-section + .profile-section {
+    border-top: 1px solid #edf1ef;
+}
+
+
+.profile-section-label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #0b5a47;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.7px;
+}
+
+
+.profile-section h2 {
+    margin: 0;
+
+    color: #073f32;
+
+    font-size: 20px;
+
+    font-weight: 700;
+}
+
+
+.section-description {
+    max-width: 750px;
+
+    margin: 8px 0 24px;
+
+    color: #718079;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   FORM GRID
+========================================================= */
+
+.profile-form-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 21px 20px;
+
+    margin-top: 24px;
+}
+
+
+.profile-form-group {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.profile-form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+
+.profile-form-group label {
+    margin-bottom: 8px;
+
+    color: #29483e;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+.profile-form-group label span {
+    color: #d44b42;
+}
+
+
+.profile-form-group input {
+    width: 100%;
+
+    height: 47px;
+
+    padding: 0 14px;
+
+    border: 1px solid #d7e3de;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #183f34;
+
+    font-size: 13px;
+
+    transition: 0.2s ease;
+}
+
+
+.profile-form-group input:focus {
+    border-color: #0b5a47;
+
+    box-shadow: 0 0 0 3px rgba(11, 90, 71, 0.08);
+}
+
+
+.profile-form-group input:disabled {
+    background: #f1f5f3;
+
+    color: #82908a;
+
+    cursor: not-allowed;
+}
+
+
+.profile-form-group small {
+    margin-top: 6px;
+
+    color: #8a9792;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   DEVELOPER INFO
+========================================================= */
+
+.developer-info-box {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-top: 22px;
+}
+
+
+.developer-info-item {
+    display: flex;
+
+    gap: 12px;
+
+    padding: 18px;
+
+    border: 1px solid #e1ebe6;
+
+    border-radius: 12px;
+
+    background: #f9fbfa;
+}
+
+
+.developer-info-icon {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #e3f1eb;
+
+    color: #07513e;
+
+    font-size: 14px;
+}
+
+
+.developer-info-icon.career-icon {
+    background: #f5eedf;
+
+    color: #92702c;
+}
+
+
+.developer-info-icon.ai-icon {
+    background: #eef0f8;
+
+    color: #586b9b;
+}
+
+
+.developer-info-item strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #24453b;
+
+    font-size: 12px;
+}
+
+
+.developer-info-item span {
+    display: block;
+
+    color: #7b8983;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.profile-form-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 11px;
+
+    padding: 20px 36px;
+
+    border-top: 1px solid #edf1ef;
+
+    background: #fbfcfb;
+}
+
+
+.profile-cancel-btn,
+.profile-save-btn {
+    min-width: 105px;
+
+    height: 42px;
+
+    padding: 0 18px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    border-radius: 9px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.profile-cancel-btn {
+    border: 1px solid #dbe5e0;
+
+    background: #ffffff;
+
+    color: #64736d;
+}
+
+
+.profile-cancel-btn:hover {
+    background: #f1f5f3;
+
+    color: #29483e;
+}
+
+
+.profile-save-btn {
+    border: 1px solid #07513e;
+
+    background: #07513e;
+
+    color: #ffffff;
+}
+
+
+.profile-save-btn:hover {
+    background: #083f32;
+
+    border-color: #083f32;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 5px 14px rgba(7, 63, 50, 0.15);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .student-profile-page {
+        padding: 30px 25px 50px;
+    }
+
+
+    .developer-info-box {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .profile-page-header {
+        flex-direction: column;
+    }
+
+
+    .profile-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .profile-form-group.full-width {
+        grid-column: auto;
+    }
+
+
+    .profile-card-header,
+    .profile-section {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+
+
+    .profile-divider {
+        margin-left: 22px;
+        margin-right: 22px;
+    }
+
+
+    .profile-form-actions {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+
+}

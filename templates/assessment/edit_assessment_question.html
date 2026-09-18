@@ -1,0 +1,1106 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Assessment Question | DevPath AI</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f6ee;
+            color: #073f38;
+        }
+
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .admin-main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .page {
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding: 40px 25px;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        .heading-small {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #0b6657;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #667c78;
+            font-size: 15px;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            padding: 12px 18px;
+            border: 1px solid #d9e4df;
+            border-radius: 10px;
+            background: white;
+            color: #07584c;
+            font-weight: 600;
+        }
+
+        .form-card {
+            background: white;
+            border: 1px solid #dce7e2;
+            border-radius: 18px;
+            padding: 35px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background: #fff;
+            font-size: 14px;
+        }
+
+        .form-group select[multiple] {
+            min-height: 130px;
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 6px;
+            color: #6b7280;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #c84a42;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #d5e2dd;
+            border-radius: 9px;
+            font-size: 14px;
+            font-family: inherit;
+            color: #073f38;
+            background: white;
+            outline: none;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #0b6657;
+            box-shadow: 0 0 0 3px rgba(11, 102, 87, 0.08);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .answer-category {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+        .help-text {
+            margin-top: 6px;
+            font-size: 12px;
+            color: #7a8b87;
+        }
+
+        .error {
+            background: #fff1f0;
+            border: 1px solid #f0c7c3;
+            color: #a53b35;
+            padding: 13px 15px;
+            border-radius: 9px;
+            margin-bottom: 25px;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid #e6ece9;
+        }
+
+        .cancel-btn {
+            text-decoration: none;
+            padding: 12px 20px;
+            border: 1px solid #d9e4df;
+            border-radius: 9px;
+            color: #526a65;
+            background: white;
+            font-weight: 600;
+        }
+
+        .save-btn {
+            border: none;
+            padding: 12px 22px;
+            border-radius: 9px;
+            background: #075b4d;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .save-btn:hover {
+            background: #06483e;
+        }
+
+        @media (max-width: 700px) {
+
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .options-grid,
+            .answer-category {
+                grid-template-columns: 1fr;
+            }
+
+            .form-card {
+                padding: 22px;
+            }
+
+        }
+        /* =====================================================
+   ADMIN SIDEBAR
+   ===================================================== */
+
+.admin-sidebar {
+    width: 280px;
+    min-width: 280px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    background: #064c42;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 28px 16px;
+
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+
+/* Logo */
+
+.admin-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 8px 12px 28px;
+}
+
+.logo-icon {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 14px;
+
+    background: #e8f3ee;
+    color: #064c42;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+}
+
+.logo-text span {
+    font-size: 23px;
+    font-weight: 700;
+}
+
+
+/* Admin profile */
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    background: rgba(255,255,255,0.08);
+
+    border-radius: 18px;
+
+    padding: 18px;
+
+    margin-bottom: 28px;
+}
+
+.profile-icon {
+    width: 52px;
+    height: 52px;
+
+    border-radius: 50%;
+
+    background: #e8f3ee;
+    color: #064c42;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.profile-details strong {
+    font-size: 16px;
+}
+
+.profile-details small {
+    color: #b8d8d0;
+    font-size: 13px;
+}
+
+
+/* Main navigation */
+
+.admin-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+
+/* All sidebar links */
+
+.admin-sidebar a {
+    text-decoration: none;
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 14px 16px;
+
+    border-radius: 13px;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    transition: 0.2s ease;
+}
+
+.admin-sidebar a i {
+    width: 22px;
+    text-align: center;
+    font-size: 16px;
+}
+
+
+/* Hover */
+
+.admin-sidebar a:hover {
+    background: rgba(255,255,255,0.10);
+}
+
+
+/* Active */
+
+.admin-sidebar a.active,
+.admin-sidebar .admin-nav-link {
+    background: #e8f3ee;
+    color: #064c42;
+    font-weight: 700;
+}
+
+
+/* Bottom section */
+
+.sidebar-bottom {
+    margin-top: auto;
+
+    padding-top: 18px;
+
+    border-top: 1px solid rgba(255,255,255,0.15);
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.admin-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.admin-sidebar::-webkit-scrollbar-track {
+    background: #06372c;
+}
+
+.admin-sidebar::-webkit-scrollbar-thumb {
+    background: #5c8879;
+    border-radius: 10px;
+}
+
+.admin-sidebar::-webkit-scrollbar-thumb:hover {
+    background: #7aa497;
+}
+
+
+/* Main content */
+
+.admin-main {
+    margin-left: 280px;
+
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* Mobile */
+
+@media (max-width: 900px) {
+
+    .admin-sidebar {
+        width: 230px;
+        min-width: 230px;
+    }
+
+    .admin-main {
+        margin-left: 230px;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .admin-sidebar {
+        position: relative;
+
+        width: 100%;
+        min-width: 100%;
+
+        height: auto;
+    }
+
+    .admin-main {
+        margin-left: 0;
+    }
+
+}
+/* ================= MULTI SELECT DROPDOWN ================= */
+
+.multi-select-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.multi-select-button {
+    width: 100%;
+    min-height: 52px;
+    padding: 13px 16px;
+
+    background: #ffffff;
+
+    border: 1px solid #d1dedd;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #145c50;
+
+    font-size: 15px;
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.multi-select-button:hover {
+    border-color: #145c50;
+}
+
+.multi-select-button i {
+    font-size: 12px;
+    transition: transform 0.2s ease;
+}
+
+.multi-select-dropdown.open
+.multi-select-button i {
+    transform: rotate(180deg);
+}
+
+
+/* OPTIONS CONTAINER */
+
+.multi-select-options {
+    display: none;
+
+    position: absolute;
+
+    top: calc(100% + 6px);
+    left: 0;
+
+    width: 100%;
+
+    max-height: 230px;
+
+    overflow-y: auto;
+
+    background: #ffffff;
+
+    border: 1px solid #d8e2e0;
+    border-radius: 10px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
+
+    z-index: 1000;
+
+    padding: 8px;
+}
+
+.multi-select-dropdown.open
+.multi-select-options {
+    display: block;
+}
+
+
+/* CAREER OPTION */
+
+.career-checkbox {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 11px 10px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    color: #243534;
+
+    font-size: 14px;
+
+    transition: 0.15s ease;
+}
+
+.career-checkbox:hover {
+    background: #eef7f4;
+}
+
+
+/* HIDE ORIGINAL CHECKBOX */
+
+.career-checkbox input {
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+/* CUSTOM CHECKBOX */
+
+.checkmark {
+    width: 18px;
+    height: 18px;
+
+    border: 1.5px solid #b9c9c6;
+
+    border-radius: 5px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    transition: 0.2s ease;
+}
+
+
+/* CHECKED STATE */
+
+.career-checkbox input:checked + .checkmark {
+    background: #145c50;
+
+    border-color: #145c50;
+}
+
+
+/* CHECK ICON */
+
+.career-checkbox input:checked + .checkmark::after {
+    content: "✓";
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+/* CAREER NAME */
+
+.career-name {
+    flex: 1;
+
+    line-height: 1.4;
+}
+
+
+/* SELECTED TEXT */
+
+#careerDropdownText {
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    text-align: left;
+}
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="admin-layout">
+
+
+    {% include "components/sidebar.html" %}
+
+
+    <main class="admin-main">
+
+        <div class="page">
+
+
+            <div class="top-bar">
+
+                <div>
+
+                    <div class="heading-small">
+                        DEVPATH AI · ADMIN
+                    </div>
+
+                    <h1>
+                        Edit Assessment Question
+                    </h1>
+
+                    <p class="subtitle">
+                        Update the question and assessment settings.
+                    </p>
+
+                </div>
+
+
+                <a href="{% url 'admin_assessment_questions' %}"
+                   class="back-btn">
+
+                    <i class="fas fa-arrow-left"></i>
+                    Question Bank
+
+                </a>
+
+            </div>
+
+
+            <div class="form-card">
+
+                <h2 class="section-title">
+                    Question Details
+                </h2>
+
+
+                {% if error %}
+
+                    <div class="error">
+                        <i class="fas fa-circle-exclamation"></i>
+                        {{ error }}
+                    </div>
+
+                {% endif %}
+
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Question
+                            <span class="required">*</span>
+                        </label>
+
+                        <textarea
+                            name="question"
+                            required>{{ question.question }}</textarea>
+
+                    </div>
+
+
+                    <h2 class="section-title">
+                        Answer Options
+                    </h2>
+
+
+                    <div class="options-grid">
+
+                        <div class="form-group">
+
+                            <label>Option A</label>
+
+                            <input
+                                type="text"
+                                name="option_a"
+                                value="{{ question.option_a }}"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Option B</label>
+
+                            <input
+                                type="text"
+                                name="option_b"
+                                value="{{ question.option_b }}"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Option C</label>
+
+                            <input
+                                type="text"
+                                name="option_c"
+                                value="{{ question.option_c }}"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Option D</label>
+
+                            <input
+                                type="text"
+                                name="option_d"
+                                value="{{ question.option_d }}"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <h2 class="section-title">
+                        Assessment Settings
+                    </h2>
+
+
+                    <div class="answer-category">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Correct Answer
+                            </label>
+
+                            <select name="correct_answer" required>
+
+                                <option value="A"
+                                    {% if question.correct_answer == "A" %}selected{% endif %}>
+                                    Option A
+                                </option>
+
+                                <option value="B"
+                                    {% if question.correct_answer == "B" %}selected{% endif %}>
+                                    Option B
+                                </option>
+
+                                <option value="C"
+                                    {% if question.correct_answer == "C" %}selected{% endif %}>
+                                    Option C
+                                </option>
+
+                                <option value="D"
+                                    {% if question.correct_answer == "D" %}selected{% endif %}>
+                                    Option D
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Category
+                            </label>
+
+                            <select name="category" required>
+
+                                <option value="programming"
+                                    {% if question.category == "programming" %}selected{% endif %}>
+                                    Programming
+                                </option>
+
+                                <option value="frameworks"
+                                    {% if question.category == "frameworks" %}selected{% endif %}>
+                                    Frameworks
+                                </option>
+
+                                <option value="databases"
+                                    {% if question.category == "databases" %}selected{% endif %}>
+                                    Databases
+                                </option>
+
+                                <option value="tools"
+                                    {% if question.category == "tools" %}selected{% endif %}>
+                                    Tools
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Difficulty Level
+                            </label>
+
+                            <select name="difficulty" required>
+
+                                <option value="easy"
+                                    {% if question.difficulty == "easy" %}selected{% endif %}>
+                                    Easy
+                                </option>
+
+                                <option value="medium"
+                                    {% if question.difficulty == "medium" %}selected{% endif %}>
+                                    Medium
+                                </option>
+
+                                <option value="hard"
+                                    {% if question.difficulty == "hard" %}selected{% endif %}>
+                                    Hard
+                                </option>
+
+                            </select>
+
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="skill">Skill</label>
+
+                            <select name="skill" id="skill">
+                                <option value="">Select Skill</option>
+
+                                {% for skill in skills %}
+                                    <option value="{{ skill.id }}"
+                                        {% if question.skill_id == skill.id %}
+                                            selected
+                                        {% endif %}
+                                    >
+                                        {{ skill.name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Career Paths</label>
+
+                            <div class="multi-select-dropdown">
+
+                                <button
+                                    type="button"
+                                    class="multi-select-button"
+                                    id="careerDropdownButton"
+                                >
+                                    <span id="careerDropdownText">
+                                        Select Career Paths
+                                    </span>
+
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+
+
+                                <div
+                                    class="multi-select-options"
+                                    id="careerDropdownOptions"
+                                >
+
+                                    {% for career in career_paths %}
+
+                                        <label class="career-checkbox">
+
+                                            <input
+                                                type="checkbox"
+                                                name="career_paths"
+                                                value="{{ career.id }}"
+
+                                                {% if career in question.career_paths.all %}
+                                                    checked
+                                                {% endif %}
+                                            >
+
+                                            <span class="checkmark"></span>
+
+                                            <span class="career-name">
+                                                {{ career.name }}
+                                            </span>
+
+                                        </label>
+
+                                    {% endfor %}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="actions">
+
+                        <a href="{% url 'admin_assessment_questions' %}"
+                           class="cancel-btn">
+                            Cancel
+                        </a>
+
+                        <button
+                            type="submit"
+                            class="save-btn">
+
+                            <i class="fas fa-save"></i>
+                            Save Changes
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const dropdown =
+        document.querySelector(".multi-select-dropdown");
+
+    const button =
+        document.getElementById("careerDropdownButton");
+
+    const text =
+        document.getElementById("careerDropdownText");
+
+    const options =
+        document.getElementById("careerDropdownOptions");
+
+    const checkboxes =
+        document.querySelectorAll(
+            'input[name="career_paths"]'
+        );
+
+
+    // Open / close dropdown
+    button.addEventListener("click", function (event) {
+
+        event.stopPropagation();
+
+        dropdown.classList.toggle("open");
+
+    });
+
+
+    // Update selected career text
+    function updateSelectedText() {
+
+        const selected = [];
+
+        checkboxes.forEach(function (checkbox) {
+
+            if (checkbox.checked) {
+
+                const label =
+                    checkbox.closest(".career-checkbox");
+
+                const careerName =
+                    label.querySelector(".career-name").textContent.trim();
+
+                selected.push(careerName);
+
+            }
+
+        });
+
+
+        if (selected.length === 0) {
+
+            text.textContent = "Select Career Paths";
+
+        } else if (selected.length === 1) {
+
+            text.textContent = selected[0];
+
+        } else {
+
+            text.textContent =
+                selected.length + " Career Paths Selected";
+
+        }
+
+    }
+
+
+    // Listen for checkbox changes
+    checkboxes.forEach(function (checkbox) {
+
+        checkbox.addEventListener(
+            "change",
+            updateSelectedText
+        );
+
+    });
+
+
+    // Close when clicking outside
+    document.addEventListener("click", function (event) {
+
+        if (!dropdown.contains(event.target)) {
+
+            dropdown.classList.remove("open");
+
+        }
+
+    });
+
+
+    // Display already selected careers
+    updateSelectedText();
+
+});
+
+</script>
