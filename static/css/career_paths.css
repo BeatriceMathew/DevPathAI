@@ -1354,3 +1354,573 @@
     }
 
 }
+/* =========================================================
+   CAREER SKILLS
+========================================================= */
+
+.career-skills {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    max-width: 330px;
+
+}
+
+
+.career-skill-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 5px 9px;
+
+    border-radius: 7px;
+
+    background: #f1f7f4;
+
+    border: 1px solid #dcebe4;
+
+    color: #174b3e;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+}
+
+
+.career-more-skills {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 5px 9px;
+
+    border-radius: 7px;
+
+    background: #073f32;
+
+    color: white;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+}
+/* =========================================================
+   VIEW SKILLS BUTTON
+========================================================= */
+
+.view-skills-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    height: 38px;
+
+    padding: 0 10px;
+
+    border: 1px solid #d7e8e0;
+
+    border-radius: 10px;
+
+    background: #f4f9f6;
+
+    color: #073f32;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    transition: all 0.2s ease;
+
+}
+
+
+.view-skills-btn:hover {
+
+    background: #e7f3ed;
+
+    border-color: #bcd8cb;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 12px rgba(7, 63, 50, 0.08);
+
+}
+
+
+.skills-btn-icon {
+
+    width: 24px;
+
+    height: 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 7px;
+
+    background: #073f32;
+
+    color: white;
+
+    font-size: 10px;
+
+}
+
+
+.skills-btn-count {
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: #073f32;
+
+}
+
+
+.skills-btn-text {
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    color: #45665c;
+
+}
+
+
+.skills-btn-arrow {
+
+    margin-left: 2px;
+
+    color: #789188;
+
+    font-size: 9px;
+
+    transition: transform 0.2s ease;
+
+}
+
+
+.view-skills-btn:hover .skills-btn-arrow {
+
+    transform: translateX(2px);
+
+}
+
+
+/* =========================================================
+   SKILLS MODAL
+========================================================= */
+
+.skills-modal-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 5000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(7, 63, 50, 0.42);
+
+    backdrop-filter: blur(4px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 0.2s ease,
+        visibility 0.2s ease;
+
+}
+
+
+.skills-modal-overlay.show {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+
+.skills-modal {
+
+    width: min(520px, 100%);
+
+    max-height: 80vh;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    border: 1px solid #e2ebe7;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.18);
+
+    transform: translateY(15px) scale(0.98);
+
+    transition: transform 0.25s ease;
+
+}
+
+
+.skills-modal-overlay.show .skills-modal {
+
+    transform:
+        translateY(0)
+        scale(1);
+
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+.skills-modal-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 20px 22px;
+
+    border-bottom: 1px solid #edf1ef;
+
+}
+
+
+.skills-modal-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.skills-modal-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #edf6f1;
+
+    color: #073f32;
+
+    font-size: 16px;
+
+}
+
+
+.skills-modal-title span {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #8a9993;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+
+}
+
+
+.skills-modal-title h2 {
+
+    margin: 0;
+
+    color: #18352d;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+}
+
+
+.skills-modal-close {
+
+    width: 34px;
+
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #f3f6f4;
+
+    color: #71827b;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.skills-modal-close:hover {
+
+    background: #e7eeeb;
+
+    color: #073f32;
+
+}
+
+
+/* =========================================================
+   MODAL BODY
+========================================================= */
+
+.skills-modal-body {
+
+    padding: 22px;
+
+}
+
+
+.skills-modal-label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 14px;
+
+    color: #425b53;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+.skills-modal-label i {
+
+    color: #0b4d3b;
+
+}
+
+
+/* =========================================================
+   SKILL LIST
+========================================================= */
+
+.skills-modal-list {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 9px;
+
+    max-height: 330px;
+
+    overflow-y: auto;
+
+    padding-right: 4px;
+
+}
+
+
+.skills-modal-list::-webkit-scrollbar {
+
+    width: 5px;
+
+}
+
+
+.skills-modal-list::-webkit-scrollbar-thumb {
+
+    background: #cbdad3;
+
+    border-radius: 10px;
+
+}
+
+
+.modal-skill-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    min-height: 43px;
+
+    padding: 9px 11px;
+
+    border: 1px solid #e3ebe7;
+
+    border-radius: 10px;
+
+    background: #f8fbf9;
+
+    color: #29483f;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+}
+
+
+.modal-skill-icon {
+
+    width: 23px;
+
+    height: 23px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 7px;
+
+    background: #e2efe8;
+
+    color: #0b4d3b;
+
+    font-size: 8px;
+
+}
+
+
+/* =========================================================
+   MODAL FOOTER
+========================================================= */
+
+.skills-modal-footer {
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 14px 22px;
+
+    background: #f8faf9;
+
+    border-top: 1px solid #edf1ef;
+
+}
+
+
+.skills-modal-footer span {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    color: #7c8d85;
+
+    font-size: 10px;
+
+}
+
+
+.skills-modal-footer i {
+
+    color: #0b4d3b;
+
+}
+
+
+.skills-modal-footer strong {
+
+    color: #073f32;
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   MODAL MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .skills-modal-list {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .skills-modal {
+
+        border-radius: 16px;
+
+    }
+
+}

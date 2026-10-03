@@ -234,17 +234,33 @@ Career Paths | DevPath AI
 
                             <!-- SKILLS -->
 
-                            <td>
+                           <td>
 
-                                <span class="skill-count-badge">
+                            <button
+                                type="button"
+                                class="view-skills-btn"
+                                data-career="{{ career_path.name|escapejs }}"
+                                data-skills="{% for skill in career_path.skills.all %}{{ skill.name|escapejs }}{% if not forloop.last %}|||{% endif %}{% endfor %}"
+                                onclick="openSkillsModal(this)"
+                            >
 
+                                <span class="skills-btn-icon">
                                     <i class="fas fa-code"></i>
-
-                                    {{ career_path.skills.count }}
-
                                 </span>
 
-                            </td>
+                                <span class="skills-btn-count">
+                                    {{ career_path.skills.count }}
+                                </span>
+
+                                <span class="skills-btn-text">
+                                    Skills
+                                </span>
+
+                                <i class="fas fa-chevron-right skills-btn-arrow"></i>
+
+                            </button>
+
+                        </td>
 
 
 
@@ -405,6 +421,209 @@ Career Paths | DevPath AI
     </div>
 
 </div>
+
+<!-- =====================================================
+     VIEW SKILLS MODAL
+====================================================== -->
+
+<div
+    class="skills-modal-overlay"
+    id="skillsModal"
+    onclick="closeSkillsModal(event)"
+>
+
+    <div
+        class="skills-modal"
+        onclick="event.stopPropagation()"
+    >
+
+        <div class="skills-modal-header">
+
+            <div class="skills-modal-title">
+
+                <div class="skills-modal-icon">
+
+                    <i class="fas fa-route"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        CAREER PATH
+                    </span>
+
+                    <h2 id="skillsModalCareer">
+                        Career Path
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="skills-modal-close"
+                onclick="closeSkillsModal()"
+            >
+
+                <i class="fas fa-times"></i>
+
+            </button>
+
+        </div>
+
+
+        <div class="skills-modal-body">
+
+            <div class="skills-modal-label">
+
+                <i class="fas fa-code"></i>
+
+                Required Skills
+
+            </div>
+
+
+            <div
+                class="skills-modal-list"
+                id="skillsModalList"
+            >
+            </div>
+
+        </div>
+
+
+        <div class="skills-modal-footer">
+
+            <span>
+
+                <i class="fas fa-layer-group"></i>
+
+                <strong id="skillsModalCount">
+                    0
+                </strong>
+
+                skills required
+
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function openSkillsModal(button) {
+
+    const career =
+        button.getAttribute("data-career");
+
+    const skillsData =
+        button.getAttribute("data-skills");
+
+    const skills =
+        skillsData
+            ? skillsData.split("|||")
+            : [];
+
+
+    document.getElementById(
+        "skillsModalCareer"
+    ).textContent = career;
+
+
+    document.getElementById(
+        "skillsModalCount"
+    ).textContent = skills.length;
+
+
+    const skillsList =
+        document.getElementById(
+            "skillsModalList"
+        );
+
+
+    skillsList.innerHTML = "";
+
+
+    skills.forEach(function(skill) {
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "modal-skill-item";
+
+
+        item.innerHTML = `
+            <span class="modal-skill-icon">
+                <i class="fas fa-check"></i>
+            </span>
+
+            <span>
+                ${skill}
+            </span>
+        `;
+
+
+        skillsList.appendChild(item);
+
+    });
+
+
+    document
+        .getElementById("skillsModal")
+        .classList.add("show");
+
+
+    document.body.classList.add(
+        "skills-modal-open"
+    );
+
+}
+
+
+function closeSkillsModal(event) {
+
+    if (
+        event &&
+        event.target !== event.currentTarget
+    ) {
+        return;
+    }
+
+
+    document
+        .getElementById("skillsModal")
+        .classList.remove("show");
+
+
+    document.body.classList.remove(
+        "skills-modal-open"
+    );
+
+}
+
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+
+            closeSkillsModal();
+
+        }
+
+    }
+);
+
+</script>
 
 {% endblock %}
 
