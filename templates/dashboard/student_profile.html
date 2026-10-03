@@ -220,10 +220,8 @@ My Profile | DevPath AI
                     <div class="profile-form-group full-width">
 
                         <label for="email">
-
                             Email Address
                             <span>*</span>
-
                         </label>
 
                         <input
@@ -233,7 +231,15 @@ My Profile | DevPath AI
                             value="{{ request.user.email }}"
                             placeholder="Enter your email address"
                             required
+                            maxlength="254"
+                            pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
+                            title="Enter a valid email address, for example: example@gmail.com"
                         >
+
+                        <div id="email-error" class="field-error" style="display:none;">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>Please enter a valid email address.</span>
+                        </div>
 
                     </div>
 
@@ -365,5 +371,72 @@ My Profile | DevPath AI
     </div>
 
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const emailInput = document.getElementById("email");
+    const emailError = document.getElementById("email-error");
+
+    emailInput.addEventListener("input", function () {
+
+        const email = emailInput.value.trim();
+
+        const emailPattern =
+            /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+        if (email === "") {
+            emailError.style.display = "flex";
+            emailError.querySelector("span").textContent =
+                "Email address is required.";
+            emailInput.classList.add("input-error");
+
+        } else if (!emailPattern.test(email)) {
+            emailError.style.display = "flex";
+            emailError.querySelector("span").textContent =
+                "Please enter a valid email address.";
+            emailInput.classList.add("input-error");
+
+        } else {
+            emailError.style.display = "none";
+            emailInput.classList.remove("input-error");
+        }
+    });
+
+
+    // Prevent form submission if email is invalid
+    emailInput.closest("form").addEventListener("submit", function (event) {
+
+        const email = emailInput.value.trim();
+
+        const emailPattern =
+            /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+        if (email === "") {
+
+            event.preventDefault();
+
+            emailError.style.display = "flex";
+            emailError.querySelector("span").textContent =
+                "Email address is required.";
+
+            emailInput.classList.add("input-error");
+            emailInput.focus();
+
+        } else if (!emailPattern.test(email)) {
+
+            event.preventDefault();
+
+            emailError.style.display = "flex";
+            emailError.querySelector("span").textContent =
+                "Please enter a valid email address.";
+
+            emailInput.classList.add("input-error");
+            emailInput.focus();
+        }
+    });
+
+});
+</script>
 
 {% endblock %}

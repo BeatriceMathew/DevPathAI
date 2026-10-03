@@ -1,0 +1,195 @@
+{% extends 'dashboard/student_base.html' %}
+{% load static %}
+
+{% block title %}Skill Gap Analysis | DevPath AI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{% static 'css/skill_gap_analysis.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="skill-gap-page">
+
+    <div class="skill-gap-header">
+
+        <span class="result-label">
+            SKILL GAP ANALYSIS
+        </span>
+
+        <h1>{{ career_path.name }}</h1>
+
+        <p>
+            Compare your current skill levels with the
+            requirements for your selected career path.
+        </p>
+
+    </div>
+
+
+    <div class="skill-gap-grid">
+
+        {% for item in skill_gaps %}
+
+        <div class="skill-gap-card">
+
+            <div class="skill-gap-card-header">
+
+                <div class="skill-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+
+                <div>
+                    <h3>{{ item.skill.name }}</h3>
+
+                    {% if item.status == "Gap" %}
+                        <span class="gap-status gap">
+                            Skill Gap
+                        </span>
+                    {% else %}
+                        <span class="gap-status achieved">
+                            Requirement Met
+                        </span>
+                    {% endif %}
+                </div>
+
+            </div>
+
+
+            <div class="skill-level-comparison">
+
+                <div class="level-box">
+
+                    <span>
+                        Your Level
+                    </span>
+
+                    <strong>
+                        {{ item.student_level }}
+                    </strong>
+
+                </div>
+
+
+                <div class="level-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+
+
+                <div class="level-box">
+
+                    <span>
+                        Required Level
+                    </span>
+
+                    <strong>
+                        {{ item.required_level }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="skill-score">
+
+                <div class="score-header">
+
+                    <span>
+                        Assessment Score
+                    </span>
+
+                    <strong>
+                        {{ item.percentage|floatformat:0 }}%
+                    </strong>
+
+                </div>
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        style="width: {{ item.percentage|floatformat:0 }}%;">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {% if item.status == "Gap" %}
+
+                <div class="gap-message">
+
+                    <i class="fas fa-lightbulb"></i>
+
+                    <span>
+                        You need to improve your
+                        <strong>{{ item.skill.name }}</strong>
+                        skills to reach the required
+                        {{ item.required_level }} level.
+                    </span>
+
+                </div>
+
+            {% else %}
+
+                <div class="achieved-message">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    <span>
+                        Your current level meets the
+                        required career level.
+                    </span>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-state">
+
+            <i class="fas fa-chart-bar"></i>
+
+            <h3>No skill analysis available</h3>
+
+            <p>
+                Complete an assessment to see your
+                skill gap analysis.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <div class="skill-gap-actions">
+
+        <a href="{% url 'assessment_result' %}"
+           class="secondary-btn">
+
+            <i class="fas fa-arrow-left"></i>
+            Back to Result
+
+        </a>
+
+        <a href="{% url 'dashboard' %}"
+           class="primary-btn">
+
+            <i class="fas fa-home"></i>
+            Dashboard
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

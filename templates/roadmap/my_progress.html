@@ -1,0 +1,387 @@
+{% extends "dashboard/student_base.html" %}
+{% load static %}
+
+{% block title %}My Progress | DevPath AI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{% static 'css/my_progress.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="progress-page">
+
+    <!-- Header -->
+    <div class="progress-header">
+
+        <div>
+            <span class="page-eyebrow">
+                <i class="fa-solid fa-chart-line"></i>
+                LEARNING PROGRESS
+            </span>
+
+            <h1>My Progress</h1>
+
+            <p>
+                Track your progress through your personalized
+                {{ roadmap.career }} roadmap.
+            </p>
+        </div>
+
+        <a
+            href="{% url 'my_roadmap' %}"
+            class="roadmap-btn"
+        >
+            <i class="fa-solid fa-map"></i>
+            View Roadmap
+        </a>
+
+    </div>
+
+
+    <!-- Overall Progress -->
+    <div class="overall-card">
+
+        <div class="overall-top">
+
+            <div>
+                <span class="card-label">
+                    OVERALL LEARNING PROGRESS
+                </span>
+
+                <h2>
+                    {{ completed_phases }}
+                    <span>/ {{ total_phases }}</span>
+                </h2>
+
+                <p>Roadmap phases completed</p>
+            </div>
+
+            <div class="overall-percentage">
+                {{ overall_progress }}%
+            </div>
+
+        </div>
+
+        <div class="overall-bar">
+
+            <div
+                class="overall-fill"
+                data-progress="{{ overall_progress }}">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Statistics -->
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-icon green">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+
+            <div>
+                <strong>{{ completed_phases }}</strong>
+                <span>Completed Phases</span>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon blue">
+                <i class="fa-solid fa-book-open"></i>
+            </div>
+
+            <div>
+                <strong>
+                    {% if current_phase %}
+                        Phase {{ current_phase.phase_number }}
+                    {% else %}
+                        Complete
+                    {% endif %}
+                </strong>
+
+                <span>Current Phase</span>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon purple">
+                <i class="fa-solid fa-clipboard-check"></i>
+            </div>
+
+            <div>
+                <strong>
+                    {{ passed_assessments }}/{{ total_assessments }}
+                </strong>
+
+                <span>Assessments Passed</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Current Learning -->
+    {% if current_phase %}
+
+    <div class="current-card">
+
+        <div class="current-icon">
+            <i class="fa-solid fa-play"></i>
+        </div>
+
+        <div class="current-info">
+
+            <span>CONTINUE LEARNING</span>
+
+            <h3>
+                Phase {{ current_phase.phase_number }} —
+                {{ current_phase.phase.title }}
+            </h3>
+
+            <p>
+                {{ current_phase.phase.reason }}
+            </p>
+
+        </div>
+
+        <a
+            href="{% url 'roadmap:start_roadmap_assessment' current_phase.phase_number %}"
+            class="continue-btn"
+        >
+            Continue
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- Phase Progress -->
+    <div class="section-heading">
+
+        <div>
+            <span>ROADMAP</span>
+            <h2>Phase Progress</h2>
+        </div>
+
+    </div>
+
+
+    <div class="phase-list">
+
+        {% for item in phase_progress %}
+
+        <div class="phase-card {{ item.status }}">
+
+            <!-- Phase Number -->
+            <div class="phase-number">
+
+                {% if item.status == "completed" %}
+
+                    <i class="fa-solid fa-check"></i>
+
+                {% elif item.status == "locked" %}
+
+                    <i class="fa-solid fa-lock"></i>
+
+                {% else %}
+
+                    {{ item.phase_number }}
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- Phase Information -->
+            <div class="phase-info">
+
+                <div class="phase-top">
+
+                    <div>
+
+                        <span class="phase-label">
+                            PHASE {{ item.phase_number }}
+                        </span>
+
+                        <h3>
+                            {{ item.phase.title }}
+                        </h3>
+
+                    </div>
+
+
+                    {% if item.status == "completed" %}
+
+                        <span class="status completed">
+                            <i class="fa-solid fa-check"></i>
+                            Completed
+                        </span>
+
+                    {% elif item.status == "available" %}
+
+                        <span class="status available">
+                            <i class="fa-solid fa-play"></i>
+                            Available
+                        </span>
+
+                    {% else %}
+
+                        <span class="status locked">
+                            <i class="fa-solid fa-lock"></i>
+                            Locked
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <p class="phase-description">
+                    {{ item.phase.reason }}
+                </p>
+
+
+                <!-- Phase Progress Bar -->
+                <div class="phase-progress">
+
+                    <div class="phase-progress-top">
+
+                        <span>Progress</span>
+
+                        <strong>
+                            {{ item.progress }}%
+                        </strong>
+
+                    </div>
+
+                    <div class="phase-bar">
+
+                        <div
+                            class="phase-fill"
+                            data-progress="{{ item.progress }}">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Assessment Score -->
+                {% if item.latest_attempt %}
+
+                <div class="attempt-info">
+
+                    <span>
+                        <i class="fa-solid fa-chart-simple"></i>
+                        Latest Score
+                    </span>
+
+                    <strong>
+                        {{ item.latest_attempt.percentage|floatformat:0 }}%
+                    </strong>
+
+                </div>
+
+                {% endif %}
+
+
+                <!-- Action -->
+                <div class="phase-action">
+
+                    {% if item.status == "completed" %}
+
+                        <span class="completed-text">
+                            <i class="fa-solid fa-circle-check"></i>
+                            Phase completed
+                        </span>
+
+                    {% elif item.status == "available" %}
+
+                        <a
+                            href="{% url 'roadmap:start_roadmap_assessment' item.phase_number %}"
+                            class="phase-btn"
+                        >
+                            Start Assessment
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                    {% else %}
+
+                        <span class="locked-text">
+                            <i class="fa-solid fa-lock"></i>
+                            Complete the previous phase first
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-state">
+
+            <i class="fa-solid fa-road"></i>
+
+            <h3>No roadmap available</h3>
+
+            <p>
+                Generate your personalized roadmap to start
+                tracking your progress.
+            </p>
+
+            <a href="{% url 'generate_roadmap_page' %}">
+                Generate Roadmap
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    document.querySelectorAll(
+        ".overall-fill, .phase-fill"
+    ).forEach(function (bar) {
+
+        const progress =
+            parseFloat(bar.dataset.progress) || 0;
+
+        const safeProgress =
+            Math.min(Math.max(progress, 0), 100);
+
+        bar.style.width =
+            safeProgress + "%";
+
+    });
+
+});
+
+</script>
+
+{% endblock %}

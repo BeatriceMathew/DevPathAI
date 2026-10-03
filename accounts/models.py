@@ -161,3 +161,38 @@ class LearningRoadmap(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+class RoadmapTopic(models.Model):
+
+    roadmap = models.ForeignKey(
+        LearningRoadmap,
+        on_delete=models.CASCADE,
+        related_name="topics"
+    )
+
+    skill = models.ForeignKey(
+        Skill,
+        on_delete=models.CASCADE,
+        related_name="roadmap_topics"
+    )
+
+    title = models.CharField(max_length=200)
+
+    description = models.TextField(blank=True)
+
+    order = models.PositiveIntegerField(default=1)
+
+    estimated_hours = models.PositiveIntegerField(default=1)
+
+    is_active = models.BooleanField(default=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["order", "title"]
+
+    def __str__(self):
+        return f"{self.roadmap.title} - {self.title}"

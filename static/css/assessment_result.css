@@ -535,3 +535,230 @@
         box-sizing: border-box;
     }
 }
+/* ================= SKILL ANALYSIS ================= */
+
+.skill-analysis-card {
+    background: #ffffff;
+    border: 1px solid #e3ebe9;
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 25px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.04);
+}
+
+.skill-analysis-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.skill-analysis-icon {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    border-radius: 14px;
+    background: #e8f5f1;
+    color: #145c50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+}
+
+.result-section-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #145c50;
+}
+
+.skill-analysis-header h2 {
+    margin: 5px 0;
+    color: #172b2a;
+    font-size: 23px;
+}
+
+.skill-analysis-header p {
+    margin: 0;
+    color: #718080;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* ================= SKILL GRID ================= */
+
+.skill-results-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+
+/* ================= SKILL CARD ================= */
+
+.skill-result-card {
+    border: 1px solid #e4ebe9;
+    border-radius: 15px;
+    padding: 20px;
+    background: #fcfefd;
+}
+
+.skill-result-top {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.skill-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    background: #e8f5f1;
+    color: #145c50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.skill-info h3 {
+    margin: 0 0 4px;
+    color: #17302d;
+    font-size: 17px;
+}
+
+.skill-info span {
+    color: #758582;
+    font-size: 13px;
+}
+
+
+/* ================= PROGRESS ================= */
+
+.skill-progress-section {
+    margin-top: 22px;
+}
+
+.skill-progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.skill-progress-info span {
+    color: #718080;
+    font-size: 13px;
+}
+
+.skill-progress-info strong {
+    color: #145c50;
+    font-size: 13px;
+}
+
+.skill-progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e9efed;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.skill-progress-fill {
+    height: 100%;
+    background: #145c50;
+    border-radius: 20px;
+    transition: width 0.5s ease;
+}
+
+
+/* ================= LEVEL ================= */
+
+.skill-level {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 18px;
+    padding-top: 15px;
+    border-top: 1px solid #edf1f0;
+}
+
+.skill-level span {
+    color: #718080;
+    font-size: 13px;
+}
+
+.skill-level strong {
+    font-size: 13px;
+    padding: 6px 11px;
+    border-radius: 20px;
+}
+
+.level-beginner {
+    background: #fff3e6;
+    color: #a85b00;
+}
+
+.level-intermediate {
+    background: #eef3ff;
+    color: #3d5fa8;
+}
+
+.level-advanced {
+    background: #e8f5f1;
+    color: #145c50;
+}
+
+.level-expert {
+    background: #eeeafa;
+    color: #6654a8;
+}
+
+
+/* ================= EMPTY ================= */
+
+.no-skill-results {
+    text-align: center;
+    padding: 35px;
+    color: #718080;
+}
+
+.no-skill-results i {
+    display: block;
+    font-size: 30px;
+    margin-bottom: 12px;
+    color: #145c50;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 700px) {
+
+    .skill-results-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skill-analysis-card {
+        padding: 20px;
+    }
+
+}
+.result-action.ai-roadmap {
+    background: linear-gradient(
+        135deg,
+        #073b3a,
+        #0b6b63
+    );
+
+    color: #ffffff;
+    border: none;
+}
+
+.result-action.ai-roadmap:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(7, 59, 58, 0.25);
+}

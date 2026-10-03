@@ -89,186 +89,481 @@ Dashboard | DevPath AI
 
         <div class="career-goal-content">
 
-            <span class="card-label">
+            <span class="career-label">
                 YOUR CAREER GOAL
             </span>
 
-            <h2>
-                Career Goal Not Set
-            </h2>
+            {% if career_goal %}
 
-            <p>
-                Choose a career goal so DevPath AI can understand
-                where you want to go.
-            </p>
+                <h3>
+                    {{ career_goal.name }}
+                </h3>
+
+                <p>
+                    Your DevPath AI roadmap is personalized
+                    for this career goal.
+                </p>
+
+            {% else %}
+
+                <h3>
+                    Career Goal Not Set
+                </h3>
+
+                <p>
+                    Choose a career goal so DevPath AI can
+                    understand where you want to go.
+                </p>
+
+            {% endif %}
 
         </div>
 
 
-        <a href="#"
+        <!-- <a href="#"
            class="career-goal-btn">
 
             Set Career Goal
 
             <i class="fas fa-arrow-right"></i>
 
-        </a>
+        </a> -->
 
     </section>
 
 
 
-    <!-- =====================================================
-         DEVPATH JOURNEY
-    ====================================================== -->
+    <!-- ================= JOURNEY ================= -->
 
-    <section class="dashboard-section">
+<!-- ================= JOURNEY ================= -->
 
-        <div class="section-heading">
+<section class="dashboard-section">
 
-            <span>
-                YOUR JOURNEY
-            </span>
+    <div class="section-heading">
+        <span>YOUR JOURNEY</span>
+        <h2>Build Your Developer Path</h2>
+    </div>
 
-            <h2>
-                Build Your Developer Path
-            </h2>
+
+    <div class="journey-card">
+
+        <div class="journey-line"></div>
+
+
+        <!-- ================= PROFILE ================= -->
+
+        <div class="
+            journey-step
+            {% if profile_completed %}
+                completed
+            {% else %}
+                current
+            {% endif %}
+        ">
+
+            <div class="journey-number">
+
+                {% if profile_completed %}
+                    <i class="fas fa-check"></i>
+                {% else %}
+                    01
+                {% endif %}
+
+            </div>
+
+            <h3>Profile</h3>
+
+            {% if profile_completed %}
+
+                <p>
+                    Your profile is complete.
+                </p>
+
+            {% else %}
+
+                <p>
+                    Complete your student profile.
+                </p>
+
+                <a href="{% url 'student_profile' %}"
+                   class="journey-action">
+                    Complete Profile
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+            {% endif %}
 
         </div>
 
 
-        <div class="journey-card">
+        <!-- ================= ASSESSMENT ================= -->
 
+        <div class="
+            journey-step
+            {% if assessment_completed %}
+                completed
+            {% elif profile_completed %}
+                current
+            {% else %}
+                locked
+            {% endif %}
+        ">
 
-            <div class="journey-line"></div>
+            <div class="journey-number">
 
-
-            <!-- PROFILE -->
-
-            <div class="journey-step completed">
-
-                <div class="journey-number">
-
+                {% if assessment_completed %}
                     <i class="fas fa-check"></i>
 
-                </div>
+                {% elif profile_completed %}
+                    02
 
-                <h3>
-                    Profile
-                </h3>
-
-                <p>
-                    Get started
-                </p>
+                {% else %}
+                    <i class="fas fa-lock"></i>
+                {% endif %}
 
             </div>
 
+            <h3>Assessment</h3>
 
-            <!-- ASSESSMENT -->
 
-            <div class="journey-step current">
-
-                <div class="journey-number">
-                    2
-                </div>
-
-                <h3>
-                    Assessment
-                </h3>
+            {% if assessment_completed %}
 
                 <p>
-                    Discover your skills
+                    Technical assessment completed.
                 </p>
 
-            </div>
+                <span class="journey-status completed-status">
+                    <i class="fas fa-check-circle"></i>
+                    {{ assessment_result.percentage|floatformat:0 }}% Completed
+                </span>
 
-
-            <!-- AI ANALYSIS -->
-
-            <div class="journey-step">
-
-                <div class="journey-number">
-                    3
-                </div>
-
-                <h3>
-                    AI Analysis
-                </h3>
+            {% elif profile_completed %}
 
                 <p>
-                    Analyze your skills
+                    Test your current technical skills.
                 </p>
 
-            </div>
+                <a href="{% url 'assessment:assessment' %}"
+                   class="journey-action">
+                    Take Assessment
+                    <i class="fas fa-arrow-right"></i>
+                </a>
 
-
-            <!-- ROADMAP -->
-
-            <div class="journey-step">
-
-                <div class="journey-number">
-                    4
-                </div>
-
-                <h3>
-                    Roadmap
-                </h3>
+            {% else %}
 
                 <p>
-                    Start learning
+                    Complete your profile first.
                 </p>
 
-            </div>
+                <span class="journey-status locked-status">
+                    <i class="fas fa-lock"></i>
+                    Locked
+                </span>
+
+            {% endif %}
 
         </div>
 
-    </section>
+
+        <!-- ================= AI ANALYSIS ================= -->
+
+        <div class="
+            journey-step
+            {% if ai_analysis_completed %}
+                completed
+            {% elif assessment_completed %}
+                current
+            {% else %}
+                locked
+            {% endif %}
+        ">
+
+            <div class="journey-number">
+
+                {% if ai_analysis_completed %}
+                    <i class="fas fa-check"></i>
+
+                {% elif assessment_completed %}
+                    03
+
+                {% else %}
+                    <i class="fas fa-lock"></i>
+                {% endif %}
+
+            </div>
+
+            <h3>AI Analysis</h3>
+
+
+            {% if ai_analysis_completed %}
+
+                <p>
+                    Your skills have been analyzed.
+                </p>
+
+                <span class="journey-status completed-status">
+                    <i class="fas fa-check-circle"></i>
+                    Analysis Ready
+                </span>
+
+            {% elif assessment_completed %}
+
+                <p>
+                    Your assessment is ready for AI analysis.
+                </p>
+
+                <a href="{% url 'assessment:skill_gap_analysis' %}"
+                   class="journey-action">
+                    View Analysis
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+            {% else %}
+
+                <p>
+                    Complete the assessment first.
+                </p>
+
+                <span class="journey-status locked-status">
+                    <i class="fas fa-lock"></i>
+                    Locked
+                </span>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- ================= AI ROADMAP ================= -->
+
+        <div class="
+            journey-step
+            {% if roadmap_generated %}
+                completed
+            {% elif ai_analysis_completed %}
+                current
+            {% else %}
+                locked
+            {% endif %}
+        ">
+
+            <div class="journey-number">
+
+                {% if roadmap_generated %}
+                    <i class="fas fa-check"></i>
+
+                {% elif ai_analysis_completed %}
+                    04
+
+                {% else %}
+                    <i class="fas fa-lock"></i>
+                {% endif %}
+
+            </div>
+
+            <h3>AI Roadmap</h3>
+
+
+            {% if roadmap_generated %}
+
+                <p>
+                    Your personalized roadmap is ready.
+                </p>
+
+                <a href="{% url 'my_roadmap' %}"
+                   class="journey-action">
+                    Continue Roadmap
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+            {% elif ai_analysis_completed %}
+
+                <p>
+                    Generate your personalized roadmap.
+                </p>
+
+                <a href="{% url 'generate_roadmap_page' %}"
+                   class="journey-action">
+                    Generate Roadmap
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+            {% else %}
+
+                <p>
+                    Complete AI analysis first.
+                </p>
+
+                <span class="journey-status locked-status">
+                    <i class="fas fa-lock"></i>
+                    Locked
+                </span>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
 
 
 
     <!-- =====================================================
-         SKILLS + AI
-    ====================================================== -->
+     SKILLS + AI
+====================================================== -->
 
-    <section class="dashboard-section">
+<section class="dashboard-section">
 
-        <div class="dashboard-two-column">
-
-
-            <!-- ================= SKILLS ================= -->
-
-            <div class="dashboard-content-card">
-
-                <div class="content-card-header">
-
-                    <div>
-
-                        <span class="card-label">
-                            YOUR SKILLS
-                        </span>
-
-                        <h2>
-                            Skills Overview
-                        </h2>
-
-                    </div>
+    <div class="dashboard-two-column">
 
 
-                    <div class="content-card-icon skills-card-icon">
+        <!-- ================= SKILLS ================= -->
 
-                        <i class="fas fa-code"></i>
+        <div class="dashboard-content-card skills-card">
 
-                    </div>
+            <div class="content-card-header">
+
+                <div>
+                    <span class="card-label">
+                        YOUR SKILLS
+                    </span>
+
+                    <h2>
+                        Skills Overview
+                    </h2>
+                </div>
+
+                <div class="content-card-icon skills-card-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+
+            </div>
+
+
+            {% if skill_gaps %}
+
+                <div class="skills-list">
+
+                    {% for item in skill_gaps %}
+
+                        <div class="skill-item">
+
+                            <!-- Skill information -->
+
+                            <div class="skill-item-top">
+
+                                <div class="skill-name-area">
+
+                                    <div class="skill-mini-icon">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+
+                                    <div>
+                                        <strong>
+                                            {{ item.skill.name }}
+                                        </strong>
+
+                                        <span>
+                                            Current:
+                                            {{ item.current_level }}
+                                        </span>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="skill-level-area">
+
+                                    <span class="skill-percentage">
+                                        {{ item.percentage|floatformat:0 }}%
+                                    </span>
+
+                                    {% if item.gap > 0 %}
+                                        <span class="skill-gap-badge">
+                                            Gap
+                                        </span>
+                                    {% else %}
+                                        <span class="skill-ready-badge">
+                                            On Track
+                                        </span>
+                                    {% endif %}
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Progress -->
+
+                            <div class="skill-progress">
+
+                                <div class="skill-progress-track">
+
+                                    <div
+                                        class="skill-progress-fill"
+                                        data-progress="{{ item.percentage }}">
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Target -->
+
+                            <div class="skill-item-bottom">
+
+                                <span>
+                                    Target:
+                                    <strong>
+                                        {{ item.required_level }}
+                                    </strong>
+                                </span>
+
+                                {% if item.is_required %}
+                                    <span class="required-label">
+                                        <i class="fas fa-star"></i>
+                                        Required
+                                    </span>
+                                {% else %}
+                                    <span class="optional-label">
+                                        Optional
+                                    </span>
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
 
                 </div>
 
+
+                <div class="skills-card-footer">
+
+                    <span>
+                        <i class="fas fa-chart-line"></i>
+                        {{ skill_gaps|length }} skills analyzed
+                    </span>
+
+                    <a href="{% url 'skill_gap_analysis' %}">
+                        View Skill Gaps
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+
+            {% else %}
+
+                <!-- EMPTY STATE -->
 
                 <div class="skills-empty-state">
 
                     <div class="empty-small-icon">
-
                         <i class="fas fa-code"></i>
-
                     </div>
 
                     <h3>
@@ -280,10 +575,307 @@ Dashboard | DevPath AI
                         your strengths and areas to improve.
                     </p>
 
-                    <a href="#"
-                       class="secondary-action-btn">
-
+                    <a
+                        href="{% url 'assessment' %}"
+                        class="secondary-action-btn"
+                    >
                         Take Assessment
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+
+        <!-- ================= AI ANALYSIS ================= -->
+
+        <div class="dashboard-content-card ai-card">
+
+            <div class="ai-card-header">
+
+                <div class="ai-title-area">
+
+                    <div class="ai-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+
+                    <div>
+
+                        <span class="ai-eyebrow">
+                            DEVPATH AI
+                        </span>
+
+                        <h2>
+                            Skill Analysis
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <span class="ai-live-status">
+
+                    <span class="status-dot"></span>
+
+                    AI INSIGHT
+
+                </span>
+
+            </div>
+
+
+            {% if assessment_result %}
+
+                <!-- MAIN AI INSIGHT -->
+
+                <div class="ai-insight">
+
+                    <div class="ai-insight-left">
+
+                        <span class="ai-insight-label">
+                            CURRENT ASSESSMENT
+                        </span>
+
+                        <div class="ai-score">
+
+                            {{ assessment_result.percentage|floatformat:0 }}
+
+                            <span>%</span>
+
+                        </div>
+
+                        <p>
+
+                            Your current technical skill level has been
+                            analyzed against your
+
+                            {% if career_goal %}
+                                <strong>{{ career_goal.name }}</strong>
+                            {% else %}
+                                selected career goal
+                            {% endif %}.
+
+                        </p>
+
+                    </div>
+
+
+                    <div class="ai-insight-graphic">
+
+                        <div class="score-ring">
+
+                            <div class="score-ring-inner">
+                                <i class="fas fa-robot"></i>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SUMMARY -->
+
+                <div class="ai-summary">
+
+                    <div class="summary-item">
+
+                        <span>
+                            SKILL GAPS
+                        </span>
+
+                        <strong>
+                            {{ skill_gaps|length }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-divider"></div>
+
+
+                    <div class="summary-item">
+
+                        <span>
+                            FOCUS AREA
+                        </span>
+
+                        <strong>
+
+                            {% if priority_skill %}
+                                {{ priority_skill.skill.name }}
+                            {% else %}
+                                None
+                            {% endif %}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-divider"></div>
+
+
+                    <div class="summary-item">
+
+                        <span>
+                            CAREER TARGET
+                        </span>
+
+                        <strong>
+
+                            {% if career_goal %}
+                                {{ career_goal.name }}
+                            {% else %}
+                                Not Set
+                            {% endif %}
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PRIORITY -->
+
+                {% if priority_skill %}
+
+                    <div class="ai-priority">
+
+                        <div class="priority-top">
+
+                            <div>
+
+                                <span class="priority-eyebrow">
+                                    AI PRIORITY
+                                </span>
+
+                                <h3>
+                                    {{ priority_skill.skill.name }}
+                                </h3>
+
+                            </div>
+
+
+                            <div class="priority-score">
+
+                                <strong>
+                                    {{ priority_skill.percentage|floatformat:0 }}%
+                                </strong>
+
+                                <span>
+                                    current level
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="priority-progress">
+
+                            <div class="progress-track">
+
+                                <div
+                                    class="progress-fill"
+                                    data-progress="{{ priority_skill.percentage }}"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="level-comparison">
+
+                            <span>
+                                Current
+
+                                <strong>
+                                    {{ priority_skill.current_level }}
+                                </strong>
+                            </span>
+
+                            <i class="fas fa-long-arrow-alt-right"></i>
+
+                            <span>
+                                Target
+
+                                <strong>
+                                    {{ priority_skill.required_level }}
+                                </strong>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                {% else %}
+
+                    <div class="ai-no-gap">
+
+                        <i class="fas fa-check-circle"></i>
+
+                        <div>
+
+                            <strong>
+                                You're on track
+                            </strong>
+
+                            <p>
+                                No major skill-level gaps were identified.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+
+
+                <!-- FOOTER -->
+
+                <div class="ai-card-footer">
+
+                    <p>
+
+                        <i class="fas fa-sparkles"></i>
+
+                        {% if priority_skill %}
+
+                            DevPath AI identified
+
+                            <strong>
+                                {{ priority_skill.skill.name }}
+                            </strong>
+
+                            as your current priority area.
+
+                        {% else %}
+
+                            DevPath AI found no major skill gaps.
+
+                        {% endif %}
+
+                    </p>
+
+
+                    <a
+                        href="{% url 'skill_gap_analysis' %}"
+                        class="ai-view-btn"
+                    >
+
+                        Explore Analysis
 
                         <i class="fas fa-arrow-right"></i>
 
@@ -291,60 +883,34 @@ Dashboard | DevPath AI
 
                 </div>
 
-            </div>
 
+            {% else %}
 
-
-            <!-- ================= AI ================= -->
-
-            <div class="dashboard-content-card ai-card">
-
-                <div class="content-card-header">
-
-                    <div>
-
-                        <span class="card-label">
-                            DEVPATH AI
-                        </span>
-
-                        <h2>
-                            AI Skill Analysis
-                        </h2>
-
-                    </div>
-
-
-                    <div class="content-card-icon ai-card-icon">
-
-                        <i class="fas fa-brain"></i>
-
-                    </div>
-
-                </div>
-
+                <!-- EMPTY STATE -->
 
                 <div class="ai-empty-state">
 
-                    <div class="ai-status-icon">
-
+                    <div class="empty-ai-icon">
                         <i class="fas fa-robot"></i>
-
                     </div>
 
+                    <span class="ai-eyebrow">
+                        DEVPATH AI
+                    </span>
 
                     <h3>
-                        Analysis not available yet
+                        Discover your skill profile
                     </h3>
 
-
                     <p>
-                        Complete your assessment to unlock
-                        personalized AI skill analysis.
+                        Complete your assessment and let DevPath AI
+                        identify your strengths, gaps and learning priorities.
                     </p>
 
-
-                    <a href="#"
-                       class="ai-action-btn">
+                    <a
+                        href="{% url 'assessment' %}"
+                        class="ai-view-btn"
+                    >
 
                         Start Assessment
 
@@ -354,32 +920,188 @@ Dashboard | DevPath AI
 
                 </div>
 
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+   <!-- =====================================================
+     PERSONALIZED ROADMAP
+====================================================== -->
+
+<section class="dashboard-section">
+
+    <div class="section-heading">
+
+        <span>
+            YOUR PERSONALIZED ROADMAP
+        </span>
+
+        <h2>
+            Learning Roadmap
+        </h2>
+
+    </div>
+
+
+    {% if roadmap %}
+
+        <!-- ================= ROADMAP EXISTS ================= -->
+
+        <div class="roadmap-dashboard-card">
+
+
+            <!-- ICON -->
+
+            <div class="roadmap-dashboard-icon">
+
+                <i class="fas fa-map-marked-alt"></i>
+
+            </div>
+
+
+            <!-- CONTENT -->
+
+            <div class="roadmap-dashboard-content">
+
+                <span class="roadmap-status-label">
+                    AI PERSONALIZED ROADMAP
+                </span>
+
+
+                <h2>
+                    {{ roadmap.career }}
+                </h2>
+
+
+                {% if current_phase %}
+
+                    <p>
+                        Continue with
+
+                        <strong>
+                            Phase {{ current_phase.phase }}
+                            — {{ current_phase.title }}
+                        </strong>
+                    </p>
+
+                {% else %}
+
+                    <p>
+                        Your personalized developer roadmap
+                        has been generated successfully.
+                    </p>
+
+                {% endif %}
+
+
+                <!-- ================= PROGRESS ================= -->
+
+                <div class="roadmap-progress-area">
+
+                    <div class="roadmap-progress-header">
+
+                        <span>
+                            Roadmap Progress
+                        </span>
+
+                        <strong>
+                            {{ roadmap_progress }}%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="roadmap-progress-bar">
+
+                        <div
+                            class="roadmap-progress-fill"
+                            data-progress="{{ roadmap_progress }}"
+                        ></div>
+
+                    </div>
+
+
+                    <div class="roadmap-progress-meta">
+
+                        <span>
+                            <strong>
+                                {{ completed_phases }}
+                            </strong>
+
+                            of
+
+                            <strong>
+                                {{ total_phases }}
+                            </strong>
+
+                            phases completed
+                        </span>
+
+
+                        {% if latest_roadmap_attempt %}
+
+                            <span>
+
+                                Latest assessment:
+
+                                <strong>
+                                    {{ latest_roadmap_attempt.percentage|floatformat:0 }}%
+                                </strong>
+
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= ACTIONS ================= -->
+
+                <div class="roadmap-dashboard-actions">
+
+                    <a
+                        href="{% url 'my_roadmap' %}"
+                        class="roadmap-dashboard-btn"
+                    >
+
+                        <i class="fas fa-route"></i>
+
+                        Continue Learning
+
+                        <i class="fas fa-arrow-right"></i>
+
+                    </a>
+
+
+                    <a
+                        href="{% url 'roadmap:my_progress' %}"
+                        class="roadmap-progress-btn"
+                    >
+
+                        <i class="fas fa-chart-line"></i>
+
+                        View Progress
+
+                    </a>
+
+                </div>
+
             </div>
 
         </div>
 
-    </section>
 
+    {% else %}
 
-
-    <!-- =====================================================
-         PERSONALIZED ROADMAP
-    ====================================================== -->
-
-    <section class="dashboard-section">
-
-        <div class="section-heading">
-
-            <span>
-                YOUR PERSONALIZED ROADMAP
-            </span>
-
-            <h2>
-                Learning Roadmap
-            </h2>
-
-        </div>
-
+        <!-- ================= ROADMAP NOT GENERATED ================= -->
 
         <div class="roadmap-dashboard-card">
 
@@ -397,15 +1119,29 @@ Dashboard | DevPath AI
                     NOT GENERATED
                 </span>
 
+
                 <h2>
                     Your personalized roadmap is waiting
                 </h2>
 
-                <p>
-                    Complete your skill assessment and AI analysis
-                    to generate a learning roadmap tailored to
-                    your career goal and current skill level.
-                </p>
+
+                {% if assessment_completed %}
+
+                    <p>
+                        Your assessment is complete.
+                        Generate your AI-powered learning roadmap
+                        based on your current skills and career goal.
+                    </p>
+
+                {% else %}
+
+                    <p>
+                        Complete your skill assessment first to generate
+                        a learning roadmap tailored to your career goal
+                        and current skill level.
+                    </p>
+
+                {% endif %}
 
 
                 <div class="roadmap-progress-area">
@@ -425,29 +1161,63 @@ Dashboard | DevPath AI
 
                     <div class="roadmap-progress-bar">
 
-                        <div class="roadmap-progress-fill"
-                             style="width: 0%;">
-                        </div>
+                        <div
+                            class="roadmap-progress-fill"
+                            data-progress="0"
+                        ></div>
 
                     </div>
 
                 </div>
 
 
-                <a href="#"
-                   class="roadmap-dashboard-btn">
+                {% if assessment_completed %}
 
-                    View My Roadmap
+                    <div class="roadmap-dashboard-actions">
 
-                    <i class="fas fa-arrow-right"></i>
+                        <a
+                            href="{% url 'generate_roadmap_page' %}"
+                            class="roadmap-dashboard-btn"
+                        >
 
-                </a>
+                            <i class="fas fa-sparkles"></i>
+
+                            Generate AI Roadmap
+
+                            <i class="fas fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                {% else %}
+
+                    <div class="roadmap-dashboard-actions">
+
+                        <a
+                            href="{% url 'assessment' %}"
+                            class="roadmap-dashboard-btn"
+                        >
+
+                            <i class="fas fa-clipboard-check"></i>
+
+                            Complete Assessment
+
+                            <i class="fas fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                {% endif %}
 
             </div>
 
         </div>
 
-    </section>
+    {% endif %}
+
+</section>
 
 
 
@@ -473,7 +1243,7 @@ Dashboard | DevPath AI
         <div class="quick-actions">
 
 
-            <a href="#"
+            <a href="{% url 'student_profile' %}"
                class="quick-action">
 
                 <div class="quick-action-icon">
@@ -499,7 +1269,7 @@ Dashboard | DevPath AI
             </a>
 
 
-            <a href="#"
+            <a href="{% url 'assessment' %}"
                class="quick-action">
 
                 <div class="quick-action-icon assessment">
@@ -525,7 +1295,7 @@ Dashboard | DevPath AI
             </a>
 
 
-            <a href="#"
+            <a href="{% url 'my_roadmap' %}"
                class="quick-action">
 
                 <div class="quick-action-icon roadmap">
@@ -592,6 +1362,47 @@ Dashboard | DevPath AI
 
 
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    document
+        .querySelectorAll("[data-progress]")
+        .forEach(function (element) {
+
+            const progress =
+                parseFloat(element.dataset.progress) || 0;
+
+            const safeProgress =
+                Math.min(Math.max(progress, 0), 100);
+
+            element.style.width = safeProgress + "%";
+        });
+
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const progressBar = document.querySelector(
+        ".roadmap-progress-fill[data-progress]"
+    );
+
+    if (progressBar) {
+
+        const progress =
+            parseFloat(progressBar.dataset.progress) || 0;
+
+        const safeProgress =
+            Math.min(Math.max(progress, 0), 100);
+
+        progressBar.style.width =
+            safeProgress + "%";
+    }
+
+});
+</script>
 
 {% endblock %}
 

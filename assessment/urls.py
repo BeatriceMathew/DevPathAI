@@ -36,4 +36,9 @@ urlpatterns = [
         views.assessment_result, 
         name="assessment_result"
     ),
+    path(
+        "skill-gap/",
+        views.skill_gap_analysis,
+        name="skill_gap_analysis"
+    ),
 ]

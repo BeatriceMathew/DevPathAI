@@ -150,7 +150,134 @@ Assessment Result | DevPath AI
         </div>
 
     </div>
+        <!-- ================= SKILL ANALYSIS ================= -->
 
+    <div class="skill-analysis-card">
+
+        <div class="skill-analysis-header">
+
+            <div class="skill-analysis-icon">
+                <i class="fas fa-chart-bar"></i>
+            </div>
+
+            <div>
+
+                <span class="result-section-label">
+                    SKILL ANALYSIS
+                </span>
+
+                <h2>
+                    Your Technical Skill Levels
+                </h2>
+
+                <p>
+                    Your performance has been analyzed skill by skill
+                    based on your assessment answers.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {% if skill_results %}
+
+        <div class="skill-results-grid">
+
+            {% for skill_result in skill_results %}
+
+            <div class="skill-result-card">
+
+                <!-- SKILL HEADER -->
+
+                <div class="skill-result-top">
+
+                    <div class="skill-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+
+                    <div class="skill-info">
+
+                        <h3>
+                            {{ skill_result.skill.name }}
+                        </h3>
+
+                        <span>
+                            {{ skill_result.correct_answers }}
+                            /
+                            {{ skill_result.total_questions }}
+                            correct
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PROGRESS -->
+
+                <div class="skill-progress-section">
+
+                    <div class="skill-progress-info">
+
+                        <span>
+                            Performance
+                        </span>
+
+                        <strong>
+                            {{ skill_result.percentage|floatformat:0 }}%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="skill-progress-bar">
+
+                        <div
+                            class="skill-progress-fill"
+                            style="width: {{ skill_result.percentage }}%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LEVEL -->
+
+                <div class="skill-level">
+
+                    <span>
+                        Current Level
+                    </span>
+
+                    <strong class="level-{{ skill_result.level|lower }}">
+                        {{ skill_result.level }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="no-skill-results">
+
+            <i class="fas fa-chart-pie"></i>
+
+            <p>
+                Skill-wise analysis is not available yet.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
 
     <!-- ================= PERFORMANCE MESSAGE ================= -->
 
@@ -259,6 +386,14 @@ Assessment Result | DevPath AI
 
                 Retake Assessment
 
+            </a>
+            <a href="{% url 'skill_gap_analysis' %}" class="primary-btn">
+                <i class="fas fa-chart-bar"></i>
+                View Skill Gap
+            </a>
+            <a href="{% url 'generate_roadmap_page' %}" class="primary-btn">
+                <i class="fas fa-robot"></i>
+                Generate My AI Roadmap
             </a>
 
         </div>

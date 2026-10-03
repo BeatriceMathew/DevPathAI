@@ -5,6 +5,18 @@ from .forms import RegisterForm, EditProfileForm
 from django.contrib.auth.models import User
 from .models import Skill, CareerPath, LearningRoadmap
 
+from assessment.models import (
+    SkillAssessment,
+    AssessmentResult,
+)
+
+from ai_engine.models import GeneratedRoadmap
+
+from roadmap.models import (
+    RoadmapAssessment,
+    RoadmapAssessmentAttempt,
+)
+
 # ==============================
 # STUDENT REGISTRATION
 # ==============================
@@ -133,7 +145,6 @@ def user_login(request):
         }
     )
 
-
 # ==============================
 # ADMIN DASHBOARD
 # ==============================
@@ -141,22 +152,359 @@ def user_login(request):
 @login_required
 def admin_dashboard(request):
 
-    students_count = User.objects.filter(
+    # =====================================================
+    # BASIC PLATFORM COUNTS
+    # =====================================================
+
+    students = User.objects.filter(
         is_staff=False,
         is_superuser=False
-    ).count()
+    )
+
+    students_count = students.count()
 
     skills_count = Skill.objects.filter(
         is_active=True
     ).count()
 
+    career_paths_count = CareerPath.objects.filter(
+        is_active=True
+    ).count()
+
+    assessment_count = AssessmentResult.objects.filter(
+        user__in=students
+    ).count()
+
+    roadmaps = GeneratedRoadmap.objects.filter(
+        user__in=students,
+        is_active=True
+    )
+
+    roadmaps_count = roadmaps.count()
+
+
+    # =====================================================
+    # COMPLETED ROADMAPS
+    # =====================================================
+
+    completed_roadmaps = 0
+
+    for roadmap in roadmaps:
+
+        phases = roadmap.roadmap_data.get(
+            "phases",
+            []
+        )
+
+        total_phases = len(phases)
+
+        if total_phases == 0:
+            continue
+
+        completed_phases = RoadmapAssessment.objects.filter(
+            roadmap=roadmap,
+            is_completed=True
+        ).values(
+            "phase_number"
+        ).distinct().count()
+
+        progress = round(
+            (completed_phases / total_phases) * 100
+        )
+
+        if progress == 100:
+            completed_roadmaps += 1
+
+
+    # =====================================================
+    # ASSESSMENT ANALYTICS
+    # =====================================================
+
+    assessed_students = AssessmentResult.objects.filter(
+        user__in=students
+    ).values(
+        "user"
+    ).distinct().count()
+
+    assessment_completion = 0
+
+    if students_count > 0:
+
+        assessment_completion = round(
+            (
+                assessed_students /
+                students_count
+            ) * 100
+        )
+
+
+    # =====================================================
+    # ROADMAP STARTED
+    # =====================================================
+
+    roadmap_started_students = 0
+
+    for roadmap in roadmaps:
+
+        has_attempt = RoadmapAssessmentAttempt.objects.filter(
+            assessment__roadmap=roadmap,
+            user=roadmap.user
+        ).exists()
+
+        if has_attempt:
+            roadmap_started_students += 1
+
+
+    roadmap_started_percentage = 0
+
+    if students_count > 0:
+
+        roadmap_started_percentage = round(
+            (
+                roadmap_started_students /
+                students_count
+            ) * 100
+        )
+
+
+    # =====================================================
+    # ROADMAP COMPLETION
+    # =====================================================
+
+    roadmap_completion_percentage = 0
+
+    if roadmaps_count > 0:
+
+        roadmap_completion_percentage = round(
+            (
+                completed_roadmaps /
+                roadmaps_count
+            ) * 100
+        )
+
+
+    # =====================================================
+    # LEARNING STATUS
+    # =====================================================
+
+    completed_percentage = roadmap_completion_percentage
+
+    students_with_roadmap = roadmaps.values(
+        "user"
+    ).distinct().count()
+
+    in_progress_students = max(
+        students_with_roadmap -
+        completed_roadmaps,
+        0
+    )
+
+    in_progress_percentage = 0
+
+    if students_count > 0:
+
+        in_progress_percentage = round(
+            (
+                in_progress_students /
+                students_count
+            ) * 100
+        )
+
+
+    not_started_percentage = max(
+        100 -
+        completed_percentage -
+        in_progress_percentage,
+        0
+    )
+
+
+    # =====================================================
+    # POPULAR CAREER PATHS
+    # =====================================================
+
+    career_path_data = []
+
+    career_paths = CareerPath.objects.filter(
+        is_active=True
+    )
+
+    for career in career_paths:
+
+        count = SkillAssessment.objects.filter(
+            user__in=students,
+            career_path=career
+        ).count()
+
+        if count > 0:
+
+            career_path_data.append({
+                "name": career.name,
+                "count": count,
+            })
+
+
+    career_path_data.sort(
+        key=lambda item: item["count"],
+        reverse=True
+    )
+
+    career_path_data = career_path_data[:5]
+
+
+    # =====================================================
+    # CAREER BAR PERCENTAGES
+    # =====================================================
+
+    max_career_count = 0
+
+    if career_path_data:
+
+        max_career_count = max(
+            item["count"]
+            for item in career_path_data
+        )
+
+    for item in career_path_data:
+
+        if max_career_count > 0:
+
+            item["percentage"] = round(
+                (
+                    item["count"] /
+                    max_career_count
+                ) * 100
+            )
+
+        else:
+
+            item["percentage"] = 0
+
+
+    # =====================================================
+    # RECENT STUDENTS
+    # =====================================================
+
+    recent_students = students.order_by(
+        "-date_joined"
+    )[:5]
+
+
+    # =====================================================
+    # RECENT ASSESSMENTS
+    # =====================================================
+
+    recent_assessments = AssessmentResult.objects.filter(
+        user__in=students
+    ).select_related(
+        "user"
+    ).order_by(
+        "-completed_at"
+    )[:5]
+
+
+    # =====================================================
+    # RECENT ROADMAPS
+    # =====================================================
+
+    recent_roadmaps = GeneratedRoadmap.objects.filter(
+        user__in=students
+    ).select_related(
+        "user"
+    ).order_by(
+        "-created_at"
+    )[:5]
+
+
+    # =====================================================
+    # AI LEARNING INSIGHT
+    # =====================================================
+
+    ai_insight = None
+
+    if career_path_data:
+
+        popular_career = career_path_data[0]
+
+        ai_insight = {
+            "title": "Most Selected Career Path",
+
+            "career": popular_career["name"],
+
+            "count": popular_career["count"],
+
+            "description": (
+                f"{popular_career['count']} student"
+                f"{'s' if popular_career['count'] != 1 else ''} "
+                f"currently selected "
+                f"{popular_career['name']}."
+            ),
+        }
+
+
+    # =====================================================
+    # CONTEXT
+    # =====================================================
+
+    context = {
+
+        "students_count":
+            students_count,
+
+        "skills_count":
+            skills_count,
+
+        "career_paths_count":
+            career_paths_count,
+
+        "assessment_count":
+            assessment_count,
+
+        "roadmaps_count":
+            roadmaps_count,
+
+        "completed_roadmaps":
+            completed_roadmaps,
+
+        "assessment_completion":
+            assessment_completion,
+
+        "roadmap_started_percentage":
+            roadmap_started_percentage,
+
+        "roadmap_completion_percentage":
+            roadmap_completion_percentage,
+
+        "completed_percentage":
+            completed_percentage,
+
+        "in_progress_percentage":
+            in_progress_percentage,
+
+        "not_started_percentage":
+            not_started_percentage,
+
+        "career_path_data":
+            career_path_data,
+
+        "recent_students":
+            recent_students,
+
+        "recent_assessments":
+            recent_assessments,
+
+        "recent_roadmaps":
+            recent_roadmaps,
+
+        "ai_insight":
+            ai_insight,
+    }
+
+
     return render(
         request,
         "admin_dashboard.html",
-        {
-            "students_count": students_count,
-            "skills_count": skills_count,
-        }
+        context
     )
 
 def admin_profile(request):

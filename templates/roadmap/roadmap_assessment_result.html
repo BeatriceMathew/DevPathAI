@@ -1,0 +1,300 @@
+{% extends "dashboard/student_base.html" %}
+{% load static %}
+
+{% block title %}Assessment Result | DevPath AI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/roadmap.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="result-page">
+
+    <!-- Top Header -->
+    <div class="result-header">
+
+        <div class="header-text">
+            <span class="eyebrow">
+                <i class="fa-solid fa-chart-line"></i>
+                PHASE {{ assessment.phase_number }} ASSESSMENT
+            </span>
+
+            <h1>{{ assessment.phase_title }}</h1>
+
+            <p>
+                Here is your assessment performance.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- Result Card -->
+    <div class="result-card {% if attempt.passed %}passed{% else %}failed{% endif %}">
+
+        <!-- Status Icon -->
+        <div class="status-icon">
+
+            {% if attempt.passed %}
+                <i class="fa-solid fa-check"></i>
+            {% else %}
+                <i class="fa-solid fa-rotate-right"></i>
+            {% endif %}
+
+        </div>
+
+
+        <!-- Status -->
+        {% if attempt.passed %}
+
+            <span class="status-badge success">
+                <i class="fa-solid fa-circle-check"></i>
+                Assessment Passed
+            </span>
+
+            <h2>Excellent Work! 🎉</h2>
+
+            <p class="result-message">
+                You have successfully completed this phase.
+                The next section of your personalized roadmap is now unlocked.
+            </p>
+
+        {% else %}
+
+            <span class="status-badge danger">
+                <i class="fa-solid fa-circle-xmark"></i>
+                Assessment Not Passed
+            </span>
+
+            <h2>Keep Learning 💪</h2>
+
+            <p class="result-message">
+                Review the learning materials and strengthen your
+                understanding before attempting the assessment again.
+            </p>
+
+        {% endif %}
+
+
+        <!-- Score -->
+        <div class="score-section">
+
+            <div class="score-circle">
+
+                <div class="score-value">
+                    {{ attempt.percentage|floatformat:0 }}%
+                </div>
+
+                <div class="score-label">
+                    Your Score
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Statistics -->
+        <div class="statistics">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <div>
+                    <strong>{{ attempt.score }}</strong>
+                    <span>Correct</span>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-list-check"></i>
+                </div>
+
+                <div>
+                    <strong>{{ attempt.total_questions }}</strong>
+                    <span>Questions</span>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-bullseye"></i>
+                </div>
+
+                <div>
+                    <strong>{{ assessment.passing_percentage }}%</strong>
+                    <span>Required</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Progress -->
+        <div class="progress-section">
+
+            <div class="progress-heading">
+
+                <span>Your Performance</span>
+
+                <strong>
+                    {{ attempt.percentage|floatformat:0 }}%
+                </strong>
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div
+                    class="progress-fill {% if attempt.passed %}success{% else %}failed{% endif %}"
+                    data-progress="{{ attempt.percentage }}">
+                </div>
+
+            </div>
+
+            <div class="progress-info">
+
+                {% if attempt.passed %}
+
+                    <span class="positive">
+                        <i class="fa-solid fa-check"></i>
+                        Passing score achieved
+                    </span>
+
+                {% else %}
+
+                    <span>
+                        <i class="fa-solid fa-info-circle"></i>
+                        You need {{ assessment.passing_percentage }}%
+                        or above to unlock the next section.
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- Message -->
+        <div class="learning-message">
+
+            {% if attempt.passed %}
+
+                <i class="fa-solid fa-unlock"></i>
+
+                <div>
+                    <strong>Next Phase Unlocked</strong>
+
+                    <p>
+                        Your roadmap will now guide you to the next
+                        learning phase.
+                    </p>
+                </div>
+
+            {% else %}
+
+                <i class="fa-solid fa-lightbulb"></i>
+
+                <div>
+                    <strong>Keep Improving</strong>
+
+                    <p>
+                        Go through the topics and projects in this phase,
+                        then try the assessment again.
+                    </p>
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- Actions -->
+        <div class="result-actions">
+
+            {% if attempt.passed %}
+
+                {% if next_phase %}
+
+                    <a
+                        href="{% url 'roadmap:start_roadmap_assessment' next_phase %}"
+                        class="btn-primary"
+                    >
+                        Continue to Next Phase
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                {% endif %}
+
+                <a
+                    href="{% url 'my_roadmap' %}"
+                    class="btn-secondary"
+                >
+                    <i class="fa-solid fa-map"></i>
+                    View My Roadmap
+                </a>
+
+            {% else %}
+
+                <a
+                    href="{% url 'roadmap:start_roadmap_assessment' assessment.phase_number %}"
+                    class="btn-primary"
+                >
+                    <i class="fa-solid fa-rotate-right"></i>
+                    Retry Assessment
+                </a>
+
+                <a
+                    href="{% url 'my_roadmap' %}"
+                    class="btn-secondary"
+                >
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Roadmap
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const progressBar =
+        document.querySelector(".progress-fill");
+
+    if (progressBar) {
+
+        const progress =
+            parseFloat(progressBar.dataset.progress) || 0;
+
+        const safeProgress =
+            Math.min(Math.max(progress, 0), 100);
+
+        progressBar.style.width =
+            safeProgress + "%";
+    }
+
+});
+
+</script>
+
+{% endblock %}

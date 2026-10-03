@@ -7,78 +7,92 @@ Admin Dashboard | DevPath AI
 {% endblock %}
 
 
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/admin_dashboard.css' %}">
+
+{% endblock %}
+
+
 {% block content %}
 
 <div class="admin-dashboard-content">
 
 
-    <!-- ================= TOP HEADER ================= -->
+    <!-- =====================================================
+         WELCOME HERO
+    ====================================================== -->
 
-    <header class="admin-topbar">
+    <section class="dashboard-hero">
 
-        <div>
+        <div class="hero-content">
 
-            <span class="dashboard-label">
+            <span class="hero-label">
                 ADMIN DASHBOARD
             </span>
 
             <h1>
-                Welcome back, Administrator 👋
+                Welcome back,
+                {{ request.user.first_name|default:"Administrator" }}
+                👋
             </h1>
 
             <p>
-                Manage and monitor the DevPath AI platform.
+                Monitor student learning, assessments and
+                AI-generated career roadmaps from one place.
             </p>
 
-        </div>
+            <div class="hero-actions">
 
+                <a href="{% url 'admin_reports' %}"
+                   class="hero-btn primary">
 
-        <div class="admin-top-actions">
+                    <i class="fas fa-chart-pie"></i>
 
-            <button type="button"
-                    class="notification-btn">
+                    View Reports
 
-                <i class="fas fa-bell"></i>
-
-            </button>
-
-
-            <div class="admin-avatar">
-
-                {{ request.user.username|first|upper }}
+                </a>
 
             </div>
 
         </div>
 
-    </header>
 
+        <div class="hero-decoration">
 
+            <div class="hero-circle circle-one"></div>
 
-    <!-- ================= STATISTICS ================= -->
+            <div class="hero-circle circle-two"></div>
 
-    <section class="stats-grid">
+            <div class="hero-icon">
 
-
-        <!-- STUDENTS -->
-
-        <div class="stat-card">
-
-            <div class="stat-icon students">
-
-                <i class="fas fa-user-graduate"></i>
+                <i class="fas fa-robot"></i>
 
             </div>
 
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PLATFORM OVERVIEW
+    ====================================================== -->
+
+    <section class="dashboard-section">
+
+        <div class="dashboard-section-heading">
 
             <div>
 
-                <span>
-                    Total Students
+                <span class="section-label">
+                    PLATFORM OVERVIEW
                 </span>
 
                 <h2>
-                    {{ students_count }}
+                    At a glance
                 </h2>
 
             </div>
@@ -86,248 +100,786 @@ Admin Dashboard | DevPath AI
         </div>
 
 
+        <div class="dashboard-stats">
 
-        <!-- SKILLS -->
 
-        <div class="stat-card">
+            <!-- TOTAL STUDENTS -->
 
-            <div class="stat-icon skills">
+            <div class="dashboard-stat-card">
 
-                <i class="fas fa-code"></i>
+                <div class="dashboard-stat-icon students">
+
+                    <i class="fas fa-user-graduate"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Students
+                    </span>
+
+                    <strong>
+                        {{ students_count }}
+                    </strong>
+
+                    <small>
+                        Registered students
+                    </small>
+
+                </div>
 
             </div>
 
 
+            <!-- TOTAL SKILLS -->
+
+            <div class="dashboard-stat-card">
+
+                <div class="dashboard-stat-icon skills">
+
+                    <i class="fas fa-code"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Skills
+                    </span>
+
+                    <strong>
+                        {{ skills_count }}
+                    </strong>
+
+                    <small>
+                        Active technical skills
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- CAREER PATHS -->
+
+            <div class="dashboard-stat-card">
+
+                <div class="dashboard-stat-icon careers">
+
+                    <i class="fas fa-route"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Career Paths
+                    </span>
+
+                    <strong>
+                        {{ career_paths_count }}
+                    </strong>
+
+                    <small>
+                        Available career paths
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- ASSESSMENTS -->
+
+            <div class="dashboard-stat-card">
+
+                <div class="dashboard-stat-icon assessments">
+
+                    <i class="fas fa-clipboard-check"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Assessments
+                    </span>
+
+                    <strong>
+                        {{ assessment_count }}
+                    </strong>
+
+                    <small>
+                        Completed assessments
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIVE ROADMAPS -->
+
+            <div class="dashboard-stat-card">
+
+                <div class="dashboard-stat-icon roadmaps">
+
+                    <i class="fas fa-map-marked-alt"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Active Roadmaps
+                    </span>
+
+                    <strong>
+                        {{ roadmaps_count }}
+                    </strong>
+
+                    <small>
+                        AI-generated roadmaps
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- COMPLETED ROADMAPS -->
+
+            <div class="dashboard-stat-card">
+
+                <div class="dashboard-stat-icon completed">
+
+                    <i class="fas fa-circle-check"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Completed Roadmaps
+                    </span>
+
+                    <strong>
+                        {{ completed_roadmaps }}
+                    </strong>
+
+                    <small>
+                        Successfully completed
+                    </small>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         STUDENT LEARNING ANALYTICS
+    ====================================================== -->
+
+    <section class="dashboard-section">
+
+
+        <div class="dashboard-section-heading">
+
             <div>
 
-                <span>
-                    Total Skills
+                <span class="section-label">
+                    LEARNING ANALYTICS
                 </span>
 
                 <h2>
-                    {{ skills_count }}
+                    Student learning overview
                 </h2>
+
+                <p>
+                    Track how students are progressing through
+                    assessments and personalized roadmaps.
+                </p>
 
             </div>
 
         </div>
 
 
+        <div class="analytics-grid">
 
-        <!-- CAREER PATHS -->
 
-        <div class="stat-card">
+            <!-- LEARNING PROGRESS -->
 
-            <div class="stat-icon careers">
+            <div class="analytics-card">
+
+
+                <div class="analytics-card-header">
+
+                    <div>
+
+                        <h3>
+                            Learning Progress
+                        </h3>
+
+                        <p>
+                            Overall student journey
+                        </p>
+
+                    </div>
+
+                    <div class="analytics-icon">
+
+                        <i class="fas fa-chart-line"></i>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ASSESSMENT -->
+
+                <div class="metric-progress">
+
+                    <div class="metric-header">
+
+                        <span>
+                            Assessment Completed
+                        </span>
+
+                        <strong>
+                            {{ assessment_completion }}%
+                        </strong>
+
+                    </div>
+
+                    <div class="metric-bar">
+
+                        <div
+                            class="metric-fill"
+                            data-progress="{{ assessment_completion }}">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ROADMAP STARTED -->
+
+                <div class="metric-progress">
+
+                    <div class="metric-header">
+
+                        <span>
+                            Roadmap Started
+                        </span>
+
+                        <strong>
+                            {{ roadmap_started_percentage }}%
+                        </strong>
+
+                    </div>
+
+                    <div class="metric-bar">
+
+                        <div
+                            class="metric-fill"
+                            data-progress="{{ roadmap_started_percentage }}">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ROADMAP COMPLETED -->
+
+                <div class="metric-progress">
+
+                    <div class="metric-header">
+
+                        <span>
+                            Roadmap Completed
+                        </span>
+
+                        <strong>
+                            {{ roadmap_completion_percentage }}%
+                        </strong>
+
+                    </div>
+
+                    <div class="metric-bar">
+
+                        <div
+                            class="metric-fill"
+                            data-progress="{{ roadmap_completion_percentage }}">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- LEARNING STATUS -->
+
+            <div class="analytics-card status-card">
+
+
+                <div class="analytics-card-header">
+
+                    <div>
+
+                        <h3>
+                            Learning Status
+                        </h3>
+
+                        <p>
+                            Current student distribution
+                        </p>
+
+                    </div>
+
+                    <div class="analytics-icon">
+
+                        <i class="fas fa-chart-pie"></i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="status-content">
+
+
+                    <div class="donut-wrapper">
+
+                        <div
+                            class="donut-chart"
+                            style="
+                                --completed: {{ completed_percentage }};
+                                --progress: {{ in_progress_percentage }};
+                            ">
+
+                            <div class="donut-center">
+
+                                <strong>
+                                    {{ students_count }}
+                                </strong>
+
+                                <span>
+                                    Students
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="status-legend">
+
+
+                        <div class="legend-item">
+
+                            <span class="legend-dot completed-dot"></span>
+
+                            <div>
+
+                                <strong>
+                                    {{ completed_percentage }}%
+                                </strong>
+
+                                <span>
+                                    Completed
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="legend-item">
+
+                            <span class="legend-dot progress-dot"></span>
+
+                            <div>
+
+                                <strong>
+                                    {{ in_progress_percentage }}%
+                                </strong>
+
+                                <span>
+                                    In Progress
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="legend-item">
+
+                            <span class="legend-dot pending-dot"></span>
+
+                            <div>
+
+                                <strong>
+                                    {{ not_started_percentage }}%
+                                </strong>
+
+                                <span>
+                                    Not Started
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CAREER PATHS + RECENT ACTIVITY
+    ====================================================== -->
+
+    <!-- =====================================================
+     CAREER ANALYTICS + PLATFORM SNAPSHOT
+====================================================== -->
+
+<section class="dashboard-section">
+
+    <div class="dashboard-two-column">
+
+
+        <!-- POPULAR CAREER PATHS -->
+
+        <div class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="section-label">
+                        CAREER ANALYTICS
+                    </span>
+
+                    <h2>
+                        Popular Career Paths
+                    </h2>
+
+                </div>
 
                 <i class="fas fa-route"></i>
 
             </div>
 
 
-            <div>
+            {% for career in career_path_data %}
 
-                <span>
-                    Career Paths
-                </span>
+            <div class="career-row">
 
-                <h2>
-                    0
-                </h2>
+                <div class="career-info">
 
-            </div>
+                    <span class="career-number">
+                        {{ forloop.counter }}
+                    </span>
 
-        </div>
+                    <span class="career-name">
+                        {{ career.name }}
+                    </span>
 
+                    <strong>
+                        {{ career.count }}
+                    </strong>
 
-
-        <!-- ASSESSMENTS -->
-
-        <div class="stat-card">
-
-            <div class="stat-icon assessments">
-
-                <i class="fas fa-clipboard-check"></i>
-
-            </div>
+                </div>
 
 
-            <div>
+                <div class="career-bar">
 
-                <span>
-                    Assessments
-                </span>
+                    <div
+                        class="career-bar-fill"
+                        data-progress="{{ career.percentage }}">
+                    </div>
 
-                <h2>
-                    0
-                </h2>
+                </div>
 
             </div>
 
-        </div>
+            {% empty %}
 
-
-    </section>
-
-
-
-    <!-- ================= MANAGEMENT ================= -->
-
-    <section class="section-heading">
-
-        <div>
-
-            <span>
-                PLATFORM MANAGEMENT
-            </span>
-
-            <h2>
-                Manage DevPath AI
-            </h2>
-
-        </div>
-
-    </section>
-
-
-
-    <section class="management-grid">
-
-
-        <!-- STUDENTS -->
-
-        <div class="management-card">
-
-            <div class="management-icon">
-
-                <i class="fas fa-user-graduate"></i>
-
-            </div>
-
-
-            <h3>
-                Student Management
-            </h3>
-
-
-            <p>
-                View registered students, monitor their
-                learning progress and manage accounts.
-            </p>
-
-
-            <a href="{% url 'students_list' %}">
-                Manage Students →
-            </a>
-
-        </div>
-
-
-
-        <!-- SKILLS -->
-
-        <div class="management-card">
-
-            <div class="management-icon">
-
-                <i class="fas fa-code"></i>
-
-            </div>
-
-
-            <h3>
-                Skill Management
-            </h3>
-
-
-            <p>
-                Add, update and manage technical skills used
-                by the AI recommendation system.
-            </p>
-
-
-            <a href="{% url 'skills_list' %}">
-                Manage Skills →
-            </a>
-
-        </div>
-
-
-
-        <!-- CAREER PATHS -->
-
-        <div class="management-card">
-
-            <div class="management-icon">
+            <div class="dashboard-empty">
 
                 <i class="fas fa-route"></i>
 
+                <p>
+                    No career path data available yet.
+                </p>
+
             </div>
 
-
-            <h3>
-                Career Paths
-            </h3>
+            {% endfor %}
 
 
-            <p>
-                Manage developer career paths and required
-                technical skills.
-            </p>
+            {% if career_path_data %}
 
+            <div class="career-summary">
 
-            <a href="#">
-                Manage Career Paths →
-            </a>
+                <div class="summary-line"></div>
+
+                <span>
+                    CAREER PATH SUMMARY
+                </span>
+
+                <div class="career-summary-grid">
+
+                    <div>
+
+                        <strong>
+                            {{ career_path_data|length }}
+                        </strong>
+
+                        <span>
+                            Active Paths
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            {{ career_path_data.0.count }}
+                        </strong>
+
+                        <span>
+                            Top Selection
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endif %}
 
         </div>
 
 
 
-        <!-- ROADMAPS -->
+        <!-- PLATFORM SNAPSHOT -->
 
-        <div class="management-card">
+        <div class="dashboard-panel snapshot-panel">
 
-            <div class="management-icon">
+            <div class="panel-header">
 
-                <i class="fas fa-map"></i>
+                <div>
+
+                    <span class="section-label">
+                        PLATFORM SNAPSHOT
+                    </span>
+
+                    <h2>
+                        Learning Overview
+                    </h2>
+
+                </div>
+
+                <i class="fas fa-layer-group"></i>
 
             </div>
 
 
-            <h3>
-                Learning Roadmaps
-            </h3>
+            <div class="snapshot-grid">
 
 
-            <p>
-                Create and manage personalized learning
-                roadmap content.
-            </p>
+                <!-- STUDENTS -->
+
+                <div class="snapshot-item">
+
+                    <div class="snapshot-icon students">
+
+                        <i class="fas fa-user-graduate"></i>
+
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            {{ students_count }}
+                        </strong>
+
+                        <span>
+                            Students
+                        </span>
+
+                    </div>
+
+                </div>
 
 
-            <a href="#">
-                Manage Roadmaps →
-            </a>
+                <!-- ASSESSED -->
+
+                <div class="snapshot-item">
+
+                    <div class="snapshot-icon assessed">
+
+                        <i class="fas fa-clipboard-check"></i>
+
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            {{ assessment_completion }}%
+                        </strong>
+
+                        <span>
+                            Assessment Completion
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ROADMAPS -->
+
+                <div class="snapshot-item">
+
+                    <div class="snapshot-icon roadmap">
+
+                        <i class="fas fa-map"></i>
+
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            {{ roadmaps_count }}
+                        </strong>
+
+                        <span>
+                            Active Roadmaps
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COMPLETED -->
+
+                <div class="snapshot-item">
+
+                    <div class="snapshot-icon completed">
+
+                        <i class="fas fa-circle-check"></i>
+
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            {{ completed_roadmaps }}
+                        </strong>
+
+                        <span>
+                            Completed Roadmaps
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROGRESS SUMMARY -->
+
+            <div class="snapshot-progress">
+
+                <div class="snapshot-progress-header">
+
+                    <span>
+                        Overall Roadmap Progress
+                    </span>
+
+                    <strong>
+                        {{ roadmap_completion_percentage }}%
+                    </strong>
+
+                </div>
+
+
+                <div class="snapshot-progress-bar">
+
+                    <div
+                        class="snapshot-progress-fill"
+                        data-progress="{{ roadmap_completion_percentage }}">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="snapshot-footer">
+
+                <span>
+                    <i class="fas fa-circle"></i>
+                    {{ roadmap_started_percentage }}% of students have started a roadmap
+                </span>
+
+            </div>
 
         </div>
 
 
-    </section>
+    </div>
+
+</section>
 
 
 
-    <!-- ================= RECENT ACTIVITY ================= -->
+<!-- =====================================================
+     RECENT ACTIVITY
+====================================================== -->
 
-    <section class="activity-section">
+<section class="dashboard-section">
+
+    <div class="dashboard-panel activity-panel">
 
 
-        <div class="section-heading">
+        <div class="panel-header">
 
             <div>
 
-                <span>
-                    ACTIVITY
+                <span class="section-label">
+                    PLATFORM ACTIVITY
                 </span>
 
                 <h2>
@@ -336,30 +888,236 @@ Admin Dashboard | DevPath AI
 
             </div>
 
-        </div>
-
-
-        <div class="empty-activity">
-
-            <i class="fas fa-chart-line"></i>
-
-
-            <h3>
-                No recent activity
-            </h3>
-
-
-            <p>
-                Student registrations and platform activities
-                will appear here.
-            </p>
+            <i class="fas fa-clock"></i>
 
         </div>
 
+
+        <div class="activity-list">
+
+
+            {% for student in recent_students %}
+
+            <div class="activity-item">
+
+                <div class="activity-icon student">
+
+                    <i class="fas fa-user-plus"></i>
+
+                </div>
+
+                <div class="activity-details">
+
+                    <strong>
+                        {{ student.get_full_name|default:student.username }}
+                    </strong>
+
+                    <span>
+                        Joined DevPath AI
+                    </span>
+
+                </div>
+
+                <time>
+                    {{ student.date_joined|timesince }} ago
+                </time>
+
+            </div>
+
+            {% endfor %}
+
+
+            {% for result in recent_assessments|slice:":3" %}
+
+            <div class="activity-item">
+
+                <div class="activity-icon assessment">
+
+                    <i class="fas fa-clipboard-check"></i>
+
+                </div>
+
+                <div class="activity-details">
+
+                    <strong>
+                        {{ result.user.get_full_name|default:result.user.username }}
+                    </strong>
+
+                    <span>
+                        Completed an assessment
+                    </span>
+
+                </div>
+
+                <time>
+                    {{ result.completed_at|timesince }} ago
+                </time>
+
+            </div>
+
+            {% endfor %}
+
+
+            {% for roadmap in recent_roadmaps|slice:":3" %}
+
+            <div class="activity-item">
+
+                <div class="activity-icon roadmap">
+
+                    <i class="fas fa-map"></i>
+
+                </div>
+
+                <div class="activity-details">
+
+                    <strong>
+                        {{ roadmap.user.get_full_name|default:roadmap.user.username }}
+                    </strong>
+
+                    <span>
+                        Generated an AI roadmap
+                    </span>
+
+                </div>
+
+                <time>
+                    {{ roadmap.created_at|timesince }} ago
+                </time>
+
+            </div>
+
+            {% endfor %}
+
+
+            {% if not recent_students and not recent_assessments and not recent_roadmaps %}
+
+            <div class="dashboard-empty">
+
+                <i class="fas fa-clock"></i>
+
+                <p>
+                    No recent activity available.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+    <!-- =====================================================
+         AI LEARNING INSIGHT
+    ====================================================== -->
+
+    <section class="dashboard-section">
+
+
+        <div class="ai-insight-card">
+
+
+            <div class="ai-insight-icon">
+
+                <i class="fas fa-sparkles"></i>
+
+            </div>
+
+
+            <div class="ai-insight-content">
+
+                <span>
+                    AI LEARNING INSIGHT
+                </span>
+
+
+                {% if ai_insight %}
+
+                    <h2>
+                        {{ ai_insight.title }}
+                    </h2>
+
+                    <p>
+                        {{ ai_insight.description }}
+                    </p>
+
+                {% else %}
+
+                    <h2>
+                        Your AI insights will appear here
+                    </h2>
+
+                    <p>
+                        Once students start selecting career paths,
+                        DevPath AI will show useful learning insights.
+                    </p>
+
+                {% endif %}
+
+
+            </div>
+
+
+            {% if ai_insight %}
+
+            <div class="ai-insight-value">
+
+                <strong>
+                    {{ ai_insight.count }}
+                </strong>
+
+                <span>
+                    students
+                </span>
+
+            </div>
+
+            {% endif %}
+
+
+        </div>
 
     </section>
 
 
 </div>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        document
+            .querySelectorAll("[data-progress]")
+            .forEach(function (element) {
+
+                const progress =
+                    parseFloat(
+                        element.dataset.progress
+                    ) || 0;
+
+                const safeProgress =
+                    Math.min(
+                        Math.max(progress, 0),
+                        100
+                    );
+
+                element.style.width =
+                    safeProgress + "%";
+
+            });
+
+    }
+);
+
+</script>
+
 
 {% endblock %}

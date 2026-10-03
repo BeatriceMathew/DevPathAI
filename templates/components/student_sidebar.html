@@ -77,21 +77,21 @@
 
             <i class="fas fa-clipboard-check"></i>
 
-            <span>Skill Assessment</span>
-
-        </a>
-
-        <a href="#"
-           class="student-nav-link">
-
-            <i class="fas fa-bullseye"></i>
-
             <span>Career Goal</span>
 
         </a>
 
+        <a href="{% url 'assessment_result' %}"
+           class="student-nav-link">
 
-        <a href="#"
+            <i class="fas fa-bullseye"></i>
+
+            <span>Skill Assessment</span>
+
+        </a>
+
+
+        <a href="{% url 'skill_gap_analysis' %}"
            class="student-nav-link">
 
             <i class="fas fa-brain"></i>
@@ -101,7 +101,7 @@
         </a>
 
 
-        <a href="#"
+        <a href="{% url 'my_roadmap' %}"
            class="student-nav-link">
 
             <i class="fas fa-map-marked-alt"></i>
@@ -111,7 +111,7 @@
         </a>
 
 
-        <a href="#"
+        <a href="{% url 'roadmap:my_progress' %}"
            class="student-nav-link">
 
             <i class="fas fa-chart-line"></i>
@@ -125,15 +125,7 @@
             ACCOUNT
         </span>
 
-
-        <a href="#"
-           class="student-nav-link">
-
-            <i class="fas fa-cog"></i>
-
-            <span>Settings</span>
-
-        </a>
+        
 
         <a href="{% url 'change_password' %}"
             class="student-nav-link">

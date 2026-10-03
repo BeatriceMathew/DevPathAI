@@ -1,0 +1,742 @@
+.assessment-result-page {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 60px 25px;
+}
+
+.result-card {
+    background: #ffffff;
+    border: 1px solid #e5ebe8;
+    border-radius: 22px;
+    padding: 50px 40px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(25, 50, 40, 0.07);
+}
+
+.result-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 28px;
+}
+
+.result-icon.success {
+    background: #e8f7ef;
+    color: #198754;
+}
+
+.result-icon.failed {
+    background: #fff4e5;
+    color: #d97706;
+}
+
+.result-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #198754;
+}
+
+.result-card h1 {
+    margin: 10px 0;
+    color: #172b24;
+}
+
+.result-card > p {
+    color: #6b7772;
+}
+
+.score-circle {
+    width: 150px;
+    height: 150px;
+    border: 8px solid #198754;
+    border-radius: 50%;
+    margin: 35px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.score-circle strong {
+    font-size: 36px;
+    color: #172b24;
+}
+
+.score-circle span {
+    color: #7b8782;
+    font-size: 13px;
+}
+
+.result-stats {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin: 30px 0;
+}
+
+.result-stats div {
+    display: flex;
+    flex-direction: column;
+}
+
+.result-stats strong {
+    font-size: 22px;
+    color: #172b24;
+}
+
+.result-stats span {
+    font-size: 12px;
+    color: #7b8782;
+}
+
+.unlock-message,
+.retry-message {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-align: left;
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin: 25px 0;
+}
+
+.unlock-message {
+    background: #edf9f2;
+    color: #176b42;
+}
+
+.retry-message {
+    background: #fff8eb;
+    color: #8a5a00;
+}
+
+.unlock-message i,
+.retry-message i {
+    font-size: 20px;
+}
+
+.unlock-message div {
+    display: flex;
+    flex-direction: column;
+}
+
+.unlock-message span {
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+.result-primary-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 25px;
+    border-radius: 10px;
+    background: #198754;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.result-primary-btn:hover {
+    background: #146c43;
+    color: white;
+}
+
+.back-roadmap-btn {
+    display: block;
+    margin-top: 20px;
+    color: #68756f;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* =========================================================
+   DEVPATH AI - ASSESSMENT RESULT
+   ========================================================= */
+
+.result-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 35px 30px 60px;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.result-header {
+    margin-bottom: 28px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+
+    color: #087f68;
+}
+
+.header-text h1 {
+    margin: 8px 0 6px;
+
+    font-size: 32px;
+    font-weight: 750;
+
+    color: #123f38;
+}
+
+.header-text p {
+    margin: 0;
+
+    color: #70807c;
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   MAIN RESULT CARD
+   ========================================================= */
+
+.result-card {
+    position: relative;
+
+    background: #ffffff;
+
+    border: 1px solid #e2ebe8;
+    border-radius: 24px;
+
+    padding: 45px 55px;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 35px rgba(11, 73, 62, 0.07);
+
+    overflow: hidden;
+}
+
+.result-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 5px;
+
+    background: #0d8b72;
+}
+
+.result-card.failed::before {
+    background: #d98b39;
+}
+
+
+/* =========================================================
+   STATUS ICON
+   ========================================================= */
+
+.status-icon {
+    width: 72px;
+    height: 72px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 27px;
+
+    background: #e5f5f0;
+    color: #087f68;
+}
+
+.result-card.failed .status-icon {
+    background: #fff1df;
+    color: #d47d25;
+}
+
+
+/* =========================================================
+   STATUS BADGE
+   ========================================================= */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 7px 14px;
+
+    border-radius: 30px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.success {
+    color: #087f68;
+    background: #e7f7f2;
+}
+
+.status-badge.danger {
+    color: #c86d18;
+    background: #fff0dd;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.result-card h2 {
+    margin: 16px 0 8px;
+
+    font-size: 34px;
+    font-weight: 750;
+
+    color: #123f38;
+}
+
+.result-message {
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    color: #687a75;
+
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   SCORE
+   ========================================================= */
+
+.score-section {
+    display: flex;
+    justify-content: center;
+
+    margin: 32px 0;
+}
+
+.score-circle {
+    width: 150px;
+    height: 150px;
+
+    border-radius: 50%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #edf9f5,
+            #ffffff
+        );
+
+    border: 8px solid #d8eee7;
+
+    box-shadow:
+        0 8px 25px rgba(10, 112, 91, 0.08);
+}
+
+.result-card.failed .score-circle {
+    border-color: #f7dfc2;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff7ec,
+            #ffffff
+        );
+}
+
+.score-value {
+    font-size: 36px;
+    font-weight: 800;
+
+    color: #087f68;
+}
+
+.result-card.failed .score-value {
+    color: #d17b26;
+}
+
+.score-label {
+    margin-top: 2px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #71827e;
+}
+
+
+/* =========================================================
+   STATISTICS
+   ========================================================= */
+
+.statistics {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 16px;
+
+    max-width: 720px;
+
+    margin: 0 auto 32px;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 18px;
+
+    text-align: left;
+
+    border: 1px solid #e5ece9;
+
+    border-radius: 15px;
+
+    background: #f9fbfa;
+}
+
+.stat-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #e4f4ef;
+    color: #087f68;
+}
+
+.stat-card strong {
+    display: block;
+
+    font-size: 20px;
+    font-weight: 750;
+
+    color: #173f39;
+}
+
+.stat-card span {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 12px;
+
+    color: #788984;
+}
+
+
+/* =========================================================
+   PROGRESS
+   ========================================================= */
+
+.progress-section {
+    max-width: 720px;
+
+    margin: 0 auto;
+
+    text-align: left;
+}
+
+.progress-heading {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 9px;
+
+    font-size: 13px;
+    font-weight: 650;
+
+    color: #526763;
+}
+
+.progress-heading strong {
+    color: #087f68;
+}
+
+.result-card.failed .progress-heading strong {
+    color: #d17b26;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: #e8eeec;
+}
+
+.progress-fill {
+    width: 0;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    transition: width 1s ease;
+}
+
+.progress-fill.success {
+    background: #087f68;
+}
+
+.progress-fill.failed {
+    background: #d17b26;
+}
+
+.progress-info {
+    margin-top: 9px;
+
+    font-size: 12px;
+
+    color: #788984;
+}
+
+.progress-info i {
+    margin-right: 4px;
+}
+
+.progress-info .positive {
+    color: #087f68;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   LEARNING MESSAGE
+   ========================================================= */
+
+.learning-message {
+    max-width: 720px;
+
+    margin: 28px auto 0;
+
+    padding: 17px 20px;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 14px;
+
+    text-align: left;
+
+    border-radius: 14px;
+
+    background: #f3f8f6;
+
+    border: 1px solid #e0ebe7;
+}
+
+.learning-message > i {
+    margin-top: 2px;
+
+    font-size: 19px;
+
+    color: #087f68;
+}
+
+.result-card.failed .learning-message > i {
+    color: #d17b26;
+}
+
+.learning-message strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 14px;
+
+    color: #244c45;
+}
+
+.learning-message p {
+    margin: 0;
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    color: #71817d;
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.result-actions {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 30px;
+}
+
+.result-actions a {
+    text-decoration: none;
+}
+
+.btn-primary,
+.btn-secondary {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    min-height: 46px;
+
+    padding: 0 22px;
+
+    border-radius: 12px;
+
+    font-size: 13px;
+    font-weight: 650;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.btn-primary {
+    color: #ffffff;
+
+    background: #087f68;
+
+    box-shadow:
+        0 5px 15px rgba(8, 127, 104, 0.18);
+}
+
+.btn-primary:hover {
+    color: #ffffff;
+
+    background: #066e5a;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(8, 127, 104, 0.25);
+}
+
+.btn-secondary {
+    color: #31534d;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe6e2;
+}
+
+.btn-secondary:hover {
+    color: #087f68;
+
+    background: #f4f9f7;
+
+    border-color: #bcd8d0;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .result-page {
+        padding: 25px 18px 45px;
+    }
+
+    .result-card {
+        padding: 35px 22px;
+    }
+
+    .statistics {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        justify-content: center;
+    }
+
+    .result-card h2 {
+        font-size: 28px;
+    }
+
+    .result-actions {
+        flex-direction: column;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .header-text h1 {
+        font-size: 26px;
+    }
+
+    .result-card {
+        border-radius: 18px;
+    }
+
+    .score-circle {
+        width: 130px;
+        height: 130px;
+    }
+
+    .score-value {
+        font-size: 31px;
+    }
+}

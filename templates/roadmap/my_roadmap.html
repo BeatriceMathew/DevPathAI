@@ -1,0 +1,534 @@
+{% extends 'dashboard/student_base.html' %}
+{% load static %}
+
+{% block title %}
+RoadMap | DevPath AI
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/my_roadmap.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="roadmap-page">
+
+    {% if error %}
+
+        <div class="empty">
+
+            <h2>
+                Unable to Generate Roadmap
+            </h2>
+
+            <p>
+                {{ error }}
+            </p>
+
+            <a href="{% url 'generate_roadmap_page' %}">
+                Try Again
+            </a>
+
+        </div>
+
+
+    {% elif roadmap %}
+
+
+        {% if ai_error %}
+
+            <div class="ai-notice">
+
+                <strong>
+                    AI Roadmap
+                </strong>
+
+                <p>
+                    Unable to generate AI roadmap.
+                    Please try again later.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- =========================================
+             HERO
+        ========================================== -->
+
+        <div class="hero">
+
+            <div class="hero-content">
+
+                <span class="hero-label">
+                    PERSONALIZED LEARNING PATH
+                </span>
+
+                <h1>
+                    🚀 Your AI Learning Roadmap
+                </h1>
+
+                <h2>
+                    {{ roadmap.career }}
+                </h2>
+
+                <p>
+                    {{ roadmap.roadmap_data.summary }}
+                </p>
+
+            </div>
+
+
+            <!-- Overall Progress -->
+
+            <div class="overall-progress">
+
+                <div class="progress-header">
+
+                    <span>
+                        Overall Progress
+                    </span>
+
+                    <strong>
+                        {{ progress_percentage }}%
+                    </strong>
+
+                </div>
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        data-progress="{{ progress_percentage }}"
+                    ></div>
+
+                </div>
+
+                <small>
+                    {{ completed_phases }}
+                    of
+                    {{ total_phases }}
+                    sections completed
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================================
+             PHASES
+        ========================================== -->
+
+        <div class="roadmap-phases">
+
+            {% for item in roadmap_phases %}
+
+
+                <div class="phase
+                    {% if item.status == 'completed' %}
+                        phase-completed
+                    {% elif item.status == 'available' %}
+                        phase-available
+                    {% else %}
+                        phase-locked
+                    {% endif %}
+                ">
+
+
+                    <!-- =================================
+                         PHASE HEADER
+                    ================================== -->
+
+                    <div class="phase-header">
+
+                        <div class="phase-heading">
+
+                            <div class="phase-number">
+
+                                {% if item.status == "completed" %}
+
+                                    <i class="fas fa-check"></i>
+
+                                {% elif item.status == "locked" %}
+
+                                    <i class="fas fa-lock"></i>
+
+                                {% else %}
+
+                                    {{ item.phase_number }}
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="phase-label">
+                                    PHASE {{ item.phase_number }}
+                                </span>
+
+                                <h2 class="phase-title">
+                                    {{ item.phase.title }}
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="duration">
+
+                            <i class="fas fa-clock"></i>
+
+                            {{ item.phase.estimated_weeks }}
+                            weeks
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================
+                         AI REASON
+                    ================================== -->
+
+                    <div class="reason">
+
+                        <strong>
+                            <i class="fas fa-robot"></i>
+                            Why AI recommends this
+                        </strong>
+
+                        <p>
+                            {{ item.phase.reason }}
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- =================================
+                         CONTENT SECTIONS
+                    ================================== -->
+
+                    <div class="sections">
+
+
+                        <!-- TOPICS -->
+
+                        <div class="section">
+
+                            <h3>
+                                <i class="fas fa-book-open"></i>
+                                Topics
+                            </h3>
+
+                            <ul>
+
+                                {% for topic in item.phase.topics %}
+
+                                    <li>
+
+                                        <i class="fas fa-circle-check"></i>
+
+                                        {{ topic }}
+
+                                    </li>
+
+                                {% endfor %}
+
+                            </ul>
+
+                        </div>
+
+
+
+                        <!-- PROJECTS -->
+
+                        <div class="section">
+
+                            <h3>
+                                <i class="fas fa-code"></i>
+                                Projects
+                            </h3>
+
+                            <ul>
+
+                                {% for project in item.phase.projects %}
+
+                                    <li>
+
+                                        <i class="fas fa-laptop-code"></i>
+
+                                        {{ project }}
+
+                                    </li>
+
+                                {% endfor %}
+
+                            </ul>
+
+                        </div>
+
+
+
+                        <!-- RESOURCES -->
+
+                        <div class="section">
+
+                            <h3>
+                                <i class="fas fa-link"></i>
+                                Resources
+                            </h3>
+
+                            <ul>
+
+                                {% for resource in item.phase.resources %}
+
+                                    <li>
+
+                                        <i class="fas fa-bookmark"></i>
+
+                                        {{ resource }}
+
+                                    </li>
+
+                                {% endfor %}
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================
+                         ASSESSMENT
+                    ================================== -->
+
+                    <div class="phase-assessment">
+
+
+                        {% if item.status == "completed" %}
+
+
+                            <!-- COMPLETED -->
+
+                            <div class="assessment-completed">
+
+                                <div class="assessment-icon success">
+
+                                    <i class="fas fa-check"></i>
+
+                                </div>
+
+
+                                <div class="assessment-info">
+
+                                    <strong>
+                                        Section Completed
+                                    </strong>
+
+                                    {% if item.assessment %}
+
+                                        <span>
+                                            Best Assessment Score:
+                                            <b>
+                                                {{ item.assessment.best_score|floatformat:0 }}%
+                                            </b>
+                                        </span>
+
+                                    {% endif %}
+
+                                </div>
+
+
+                                <div class="completed-badge">
+
+                                    <i class="fas fa-circle-check"></i>
+
+                                    Completed
+
+                                </div>
+
+                            </div>
+
+
+                        {% elif item.status == "available" %}
+
+
+                            <!-- AVAILABLE -->
+
+                            <div class="assessment-available">
+
+                                <div class="assessment-icon ai">
+
+                                    <i class="fas fa-brain"></i>
+
+                                </div>
+
+
+                                <div class="assessment-info">
+
+                                    <strong>
+                                        Section Assessment
+                                    </strong>
+
+                                    <span>
+                                        Complete this assessment with
+                                        <b>70% or above</b>
+                                        to unlock the next section.
+                                    </span>
+
+                                </div>
+
+
+                                <a
+                                    href="{% url 'roadmap:start_roadmap_assessment' item.phase_number %}"
+                                    class="assessment-button"
+                                >
+
+                                    <i class="fas fa-brain"></i>
+
+                                    Take AI Assessment
+
+                                    <i class="fas fa-arrow-right"></i>
+
+                                </a>
+
+                            </div>
+
+
+                        {% else %}
+
+
+                            <!-- LOCKED -->
+
+                            <div class="assessment-locked">
+
+                                <div class="assessment-icon locked">
+
+                                    <i class="fas fa-lock"></i>
+
+                                </div>
+
+
+                                <div class="assessment-info">
+
+                                    <strong>
+                                        Assessment Locked
+                                    </strong>
+
+                                    <span>
+                                        Complete the previous section
+                                        assessment with
+                                        <b>70% or above</b>
+                                        to unlock this section.
+                                    </span>
+
+                                </div>
+
+                                <div class="locked-badge">
+
+                                    <i class="fas fa-lock"></i>
+
+                                    Locked
+
+                                </div>
+
+                            </div>
+
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                </div>
+
+
+            {% empty %}
+
+
+                <div class="empty">
+
+                    <h2>
+                        No Roadmap Phases Available
+                    </h2>
+
+                    <p>
+                        Generate your personalized AI roadmap
+                        to start learning.
+                    </p>
+
+                </div>
+
+
+            {% endfor %}
+
+        </div>
+
+
+    {% else %}
+
+
+        <!-- =========================================
+             NO ROADMAP
+        ========================================== -->
+
+        <div class="empty">
+
+            <h2>
+                No AI Roadmap Yet
+            </h2>
+
+            <p>
+                Complete your assessment and generate
+                your personalized AI roadmap.
+            </p>
+
+            <a href="{% url 'generate_roadmap_page' %}">
+                Generate AI Roadmap
+            </a>
+
+        </div>
+
+
+    {% endif %}
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const progressFill = document.querySelector(".progress-fill");
+
+    if (progressFill) {
+
+        const progress = parseFloat(
+            progressFill.dataset.progress
+        ) || 0;
+
+        const safeProgress = Math.min(
+            Math.max(progress, 0),
+            100
+        );
+
+        progressFill.style.width = safeProgress + "%";
+    }
+
+});
+</script>
+
+{% endblock %}

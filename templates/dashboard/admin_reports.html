@@ -1,0 +1,837 @@
+{% extends 'admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+Admin Reports | DevPath AI
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/admin_reports.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="admin-reports-content">
+
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="admin-topbar">
+
+
+            <div>
+
+                <span class="page-label">
+                    ADMIN REPORTS
+                </span>
+
+
+                <h1>
+                    Reports & Analytics
+                </h1>
+
+
+                <p>
+                    Monitor student progress and identify
+                    students who may require additional support.
+                </p>
+
+            </div>
+
+
+            <div class="admin-user">
+
+
+                <div class="user-avatar">
+
+                    {{ request.user.first_name|first|default:request.user.username|first|upper }}
+
+                </div>
+
+
+                <div class="user-info">
+
+                    <strong>
+
+                        {{ request.user.get_full_name|default:request.user.username }}
+
+                    </strong>
+
+
+                    <span>
+                        Administrator
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             1. STUDENT LEARNING OVERVIEW
+        ================================================== -->
+
+        <section class="section">
+
+
+            <div class="section-title">
+
+                <div>
+
+                    <span class="eyebrow">
+                        OVERVIEW
+                    </span>
+
+
+                    <h2>
+                        Student Learning Overview
+                    </h2>
+
+
+                    <p>
+                        Overall student participation and
+                        roadmap progress.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stats-grid">
+
+
+                <!-- TOTAL STUDENTS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-users"></i>
+
+                    </div>
+
+
+                    <div class="stat-content">
+
+                        <span>
+                            Total Students
+                        </span>
+
+
+                        <strong>
+                            {{ total_students }}
+                        </strong>
+
+
+                        <small>
+                            Registered students
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ASSESSED -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-clipboard-check"></i>
+
+                    </div>
+
+
+                    <div class="stat-content">
+
+                        <span>
+                            Assessed Students
+                        </span>
+
+
+                        <strong>
+                            {{ assessed_students }}
+                        </strong>
+
+
+                        <small>
+                            Completed assessment
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ROADMAPS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-map"></i>
+
+                    </div>
+
+
+                    <div class="stat-content">
+
+                        <span>
+                            Roadmaps Generated
+                        </span>
+
+
+                        <strong>
+                            {{ total_roadmaps }}
+                        </strong>
+
+
+                        <small>
+                            Active AI roadmaps
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- IN PROGRESS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-spinner"></i>
+
+                    </div>
+
+
+                    <div class="stat-content">
+
+                        <span>
+                            In Progress
+                        </span>
+
+
+                        <strong>
+                            {{ students_in_progress }}
+                        </strong>
+
+
+                        <small>
+                            Students learning
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- COMPLETED -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+
+                    <div class="stat-content">
+
+                        <span>
+                            Completed Roadmaps
+                        </span>
+
+
+                        <strong>
+                            {{ completed_roadmaps }}
+                        </strong>
+
+
+                        <small>
+                            Fully completed
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- AVERAGE -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                    </div>
+
+
+                    <div class="stat-content">
+
+                        <span>
+                            Average Progress
+                        </span>
+
+
+                        <strong>
+                            {{ average_progress }}%
+                        </strong>
+
+
+                        <small>
+                            Across active roadmaps
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             2. STUDENT PROGRESS REPORT
+        ================================================== -->
+
+        <section class="section">
+
+
+            <div class="section-title">
+
+                <div>
+
+                    <span class="eyebrow">
+                        STUDENT PROGRESS
+                    </span>
+
+
+                    <h2>
+                        Student Progress Report
+                    </h2>
+
+
+                    <p>
+                        Current assessment and roadmap status
+                        for every student.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="table-card">
+
+
+                <div class="table-wrapper">
+
+
+                    <table>
+
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Student
+                                </th>
+
+                                <th>
+                                    Career Goal
+                                </th>
+
+                                <th>
+                                    Assessment
+                                </th>
+
+                                <th>
+                                    Roadmap Progress
+                                </th>
+
+                                <th>
+                                    Current Phase
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+
+                        <tbody>
+
+
+                            {% for item in student_progress %}
+
+
+                            <tr>
+
+
+                                <!-- STUDENT -->
+
+                                <td>
+
+                                    <div class="student-cell">
+
+
+                                        <div class="student-avatar">
+
+                                            {{ item.student.first_name|first|default:item.student.username|first|upper }}
+
+                                        </div>
+
+
+                                        <div>
+
+                                            <strong>
+
+                                                {{ item.student.get_full_name|default:item.student.username }}
+
+                                            </strong>
+
+
+                                            <span>
+
+                                                {{ item.student.email }}
+
+                                            </span>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </td>
+
+
+
+                                <!-- CAREER -->
+
+                                <td>
+
+                                    <span class="career-tag">
+
+                                        {{ item.career }}
+
+                                    </span>
+
+                                </td>
+
+
+
+                                <!-- ASSESSMENT -->
+
+                                <td>
+
+                                    {% if item.assessment != None %}
+
+                                        <strong>
+                                            {{ item.assessment }}%
+                                        </strong>
+
+                                    {% else %}
+
+                                        <span class="muted">
+                                            Not completed
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+
+
+                                <!-- ROADMAP -->
+
+                                <td>
+
+                                    <div class="progress-cell">
+
+
+                                        <div class="progress-bar">
+
+                                            <div
+                                                class="progress-fill"
+                                                data-progress="{{ item.roadmap_progress }}">
+                                            </div>
+
+                                        </div>
+
+
+                                        <span>
+
+                                            {{ item.roadmap_progress }}%
+
+                                        </span>
+
+
+                                    </div>
+
+                                </td>
+
+
+
+                                <!-- CURRENT PHASE -->
+
+                                <td>
+
+                                    <span class="phase-text">
+
+                                        {{ item.current_phase }}
+
+                                    </span>
+
+                                </td>
+
+
+
+                                <!-- STATUS -->
+
+                                <td>
+
+
+                                    {% if item.status == "Completed" %}
+
+                                        <span class="status completed">
+                                            Completed
+                                        </span>
+
+
+                                    {% elif item.status == "In Progress" %}
+
+                                        <span class="status progress">
+                                            In Progress
+                                        </span>
+
+
+                                    {% elif item.status == "Assessment Pending" %}
+
+                                        <span class="status pending">
+                                            Assessment Pending
+                                        </span>
+
+
+                                    {% elif item.status == "Roadmap Pending" %}
+
+                                        <span class="status pending">
+                                            Roadmap Pending
+                                        </span>
+
+
+                                    {% else %}
+
+                                        <span class="status started">
+                                            Started
+                                        </span>
+
+                                    {% endif %}
+
+
+                                </td>
+
+
+                            </tr>
+
+
+                            {% empty %}
+
+
+                            <tr>
+
+                                <td colspan="6">
+
+                                    <div class="table-empty">
+
+                                        <i class="fa-solid fa-users"></i>
+
+
+                                        <p>
+                                            No student progress data available.
+                                        </p>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                            {% endfor %}
+
+
+                        </tbody>
+
+
+                    </table>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             3. STUDENTS REQUIRING ATTENTION
+        ================================================== -->
+
+        <section class="section">
+
+
+            <div class="section-title">
+
+                <div>
+
+                    <span class="eyebrow">
+                        FOLLOW-UP
+                    </span>
+
+
+                    <h2>
+                        Students Requiring Attention
+                    </h2>
+
+
+                    <p>
+                        Students who may benefit from additional
+                        learning support.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="attention-grid">
+
+
+                {% for item in attention_students %}
+
+
+                <div class="attention-card">
+
+
+                    <div class="attention-header">
+
+
+                        <div class="student-avatar">
+
+                            {{ item.student.first_name|first|default:item.student.username|first|upper }}
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+
+                                {{ item.student.get_full_name|default:item.student.username }}
+
+                            </h3>
+
+
+                            <span>
+
+                                {{ item.career }}
+
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- REASONS -->
+
+                    <div class="attention-reasons">
+
+
+                        {% for reason in item.reasons %}
+
+
+                        <div class="reason">
+
+                            <i class="fa-solid fa-circle-exclamation"></i>
+
+
+                            <span>
+                                {{ reason }}
+                            </span>
+
+                        </div>
+
+
+                        {% endfor %}
+
+
+                    </div>
+
+
+
+                    <!-- METRICS -->
+
+                    <div class="attention-metrics">
+
+
+                        <div>
+
+                            <span>
+                                Assessment
+                            </span>
+
+
+                            <strong>
+
+                                {% if item.assessment != None %}
+
+                                    {{ item.assessment }}%
+
+                                {% else %}
+
+                                    —
+
+                                {% endif %}
+
+                            </strong>
+
+                        </div>
+
+
+
+                        <div>
+
+                            <span>
+                                Roadmap
+                            </span>
+
+
+                            <strong>
+
+                                {{ item.progress }}%
+
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                {% empty %}
+
+
+                <div class="empty-state">
+
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+
+                    <h3>
+                        No students require attention
+                    </h3>
+
+
+                    <p>
+                        There are currently no students
+                        matching the follow-up criteria.
+                    </p>
+
+
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- FOOTER -->
+
+        
+    </div>
+
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        document
+            .querySelectorAll("[data-progress]")
+            .forEach(function (element) {
+
+                const progress =
+                    parseFloat(
+                        element.dataset.progress
+                    ) || 0;
+
+                const safeProgress =
+                    Math.min(
+                        Math.max(progress, 0),
+                        100
+                    );
+
+                element.style.width =
+                    safeProgress + "%";
+
+            });
+
+    }
+);
+
+</script>
+
+
+
+
+{% endblock %}

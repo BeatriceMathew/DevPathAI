@@ -1,0 +1,304 @@
+{% extends 'dashboard/student_base.html' %}
+
+{% load static %}
+
+{% block title %}
+{{ assessment.phase_title }} | Assessment
+{% endblock %}
+
+
+{% block extra_css %}
+
+<style>
+
+    .assessment-page {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 30px 70px;
+    }
+
+    .assessment-header {
+        margin-bottom: 35px;
+    }
+
+    .assessment-label {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        color: #198754;
+    }
+
+    .assessment-header h1 {
+        margin: 8px 0;
+        font-size: 32px;
+        font-weight: 700;
+        color: #172b24;
+    }
+
+    .assessment-header p {
+        color: #6b7772;
+        margin: 0;
+    }
+
+    .assessment-info {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+    }
+
+    .info-card {
+        background: #ffffff;
+        border: 1px solid #e5ebe8;
+        border-radius: 12px;
+        padding: 12px 18px;
+    }
+
+    .info-card strong {
+        display: block;
+        color: #172b24;
+        font-size: 17px;
+    }
+
+    .info-card span {
+        font-size: 12px;
+        color: #7b8782;
+    }
+
+    .question-card {
+        background: #ffffff;
+        border: 1px solid #e5ebe8;
+        border-radius: 16px;
+        padding: 28px;
+        margin-bottom: 20px;
+        box-shadow: 0 6px 20px rgba(25, 50, 40, 0.04);
+    }
+
+    .question-number {
+        color: #198754;
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .question-text {
+        font-size: 18px;
+        line-height: 1.6;
+        font-weight: 600;
+        color: #1d2d27;
+        margin-bottom: 22px;
+    }
+
+    .options {
+        display: grid;
+        gap: 12px;
+    }
+
+    .option-label {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border: 1px solid #dfe7e3;
+        border-radius: 10px;
+        padding: 14px 16px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .option-label:hover {
+        border-color: #198754;
+        background: #f5faf7;
+    }
+
+    .option-label input {
+        accent-color: #198754;
+    }
+
+    .submit-area {
+        text-align: center;
+        margin-top: 35px;
+    }
+
+    .submit-btn {
+        border: none;
+        background: #198754;
+        color: white;
+        padding: 14px 30px;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .submit-btn:hover {
+        background: #146c43;
+    }
+
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="assessment-page">
+
+    <div class="assessment-header">
+
+        <span class="assessment-label">
+            AI ROADMAP ASSESSMENT
+        </span>
+
+        <h1>
+            {{ assessment.phase_title }}
+        </h1>
+
+        <p>
+            Test your understanding of the topics covered
+            in this section.
+        </p>
+
+        <div class="assessment-info">
+
+            <div class="info-card">
+                <strong>
+                    {{ assessment.questions|length }}
+                </strong>
+                <span>
+                    Questions
+                </span>
+            </div>
+
+            <div class="info-card">
+                <strong>
+                    70%
+                </strong>
+                <span>
+                    Passing Score
+                </span>
+            </div>
+
+            <div class="info-card">
+                <strong>
+                    AI Generated
+                </strong>
+                <span>
+                    Assessment
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+
+        {% for question in assessment.questions %}
+
+        <div class="question-card">
+
+            <div class="question-number">
+                QUESTION {{ forloop.counter }}
+            </div>
+
+            <div class="question-text">
+                {{ question.question }}
+            </div>
+
+
+            <div class="options">
+
+                <label class="option-label">
+
+                    <input
+                        type="radio"
+                        name="question_{{ forloop.counter0 }}"
+                        value="A"
+                        required
+                    >
+
+                    <span>
+                        <strong>A.</strong>
+                        {{ question.option_a }}
+                    </span>
+
+                </label>
+
+
+                <label class="option-label">
+
+                    <input
+                        type="radio"
+                        name="question_{{ forloop.counter0 }}"
+                        value="B"
+                    >
+
+                    <span>
+                        <strong>B.</strong>
+                        {{ question.option_b }}
+                    </span>
+
+                </label>
+
+
+                <label class="option-label">
+
+                    <input
+                        type="radio"
+                        name="question_{{ forloop.counter0 }}"
+                        value="C"
+                    >
+
+                    <span>
+                        <strong>C.</strong>
+                        {{ question.option_c }}
+                    </span>
+
+                </label>
+
+
+                <label class="option-label">
+
+                    <input
+                        type="radio"
+                        name="question_{{ forloop.counter0 }}"
+                        value="D"
+                    >
+
+                    <span>
+                        <strong>D.</strong>
+                        {{ question.option_d }}
+                    </span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+
+        <div class="submit-area">
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+
+                Submit Assessment
+                <i class="fas fa-arrow-right"></i>
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

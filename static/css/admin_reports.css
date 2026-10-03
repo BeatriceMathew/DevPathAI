@@ -1,0 +1,1185 @@
+/* =========================================================
+   DEVPATH AI - ADMIN REPORTS
+   Students Page Style
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+
+    --green-dark: #073f32;
+    --green: #0b4d3b;
+    --green-light: #e2efe8;
+    --green-soft: #edf6f1;
+
+    --cream: #f8f7f0;
+    --white: #ffffff;
+
+    --text-dark: #123f35;
+    --text: #425b53;
+    --muted: #6f817a;
+
+    --border: #dfe8e3;
+
+    --red: #c92f35;
+    --red-soft: #fff0f0;
+
+    --orange: #c87932;
+    --orange-soft: #fff4e9;
+
+    --blue: #527da8;
+    --blue-soft: #edf3f8;
+
+    --shadow: 0 4px 18px rgba(7, 63, 50, 0.06);
+
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+body {
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background: var(--cream);
+
+    color: var(--text-dark);
+
+}
+
+
+/* =========================================================
+   REPORT CONTENT
+========================================================= */
+
+.admin-reports-content {
+
+    width: 100%;
+
+     padding: 10px 30px 40px;
+
+}
+
+
+/* =========================================================
+   TOP HEADER
+========================================================= */
+
+.admin-topbar {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+    margin-bottom: 42px;
+
+}
+
+
+.page-label {
+
+    display: block;
+
+    color: var(--green);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+}
+
+
+.admin-topbar h1 {
+
+    margin-top: 8px;
+
+    color: var(--green-dark);
+
+    font-size: 38px;
+
+    line-height: 1.15;
+
+    font-weight: 700;
+
+    letter-spacing: -1px;
+
+}
+
+
+.admin-topbar p {
+
+    margin-top: 10px;
+
+    color: #688078;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================================
+   ADMIN USER
+========================================================= */
+
+.admin-user {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding-top: 2px;
+
+}
+
+
+.user-avatar {
+
+    width: 44px;
+    height: 44px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--green-light);
+
+    color: var(--green-dark);
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+}
+
+
+.user-info strong {
+
+    display: block;
+
+    color: var(--text-dark);
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+}
+
+
+.user-info span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section {
+
+    margin-bottom: 46px;
+
+}
+
+
+.section-title {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+
+}
+
+
+.eyebrow {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 8px 15px;
+
+    border-radius: 20px;
+
+    background: var(--green-light);
+
+    color: var(--green-dark);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+
+.section-title h2 {
+
+    margin-top: 20px;
+
+    color: #111d19;
+
+    font-size: 29px;
+
+    font-weight: 500;
+
+    letter-spacing: -0.7px;
+
+}
+
+
+.section-title p {
+
+    margin-top: 6px;
+
+    color: #667b73;
+
+    font-size: 14px;
+
+}
+
+
+/* =========================================================
+   LEARNING OVERVIEW
+========================================================= */
+
+.stats-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 18px;
+
+}
+
+
+.stat-card {
+
+    min-height: 128px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 22px;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 17px;
+
+    box-shadow: var(--shadow);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.stat-card:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 24px rgba(7, 63, 50, 0.09);
+
+}
+
+
+/* =========================================================
+   STAT ICON
+========================================================= */
+
+.stat-icon {
+
+    width: 46px;
+    height: 46px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: var(--green-soft);
+
+    color: var(--green);
+
+    font-size: 17px;
+
+}
+
+
+.stat-content {
+
+    min-width: 0;
+
+}
+
+
+.stat-content span {
+
+    display: block;
+
+    color: #647870;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+}
+
+
+.stat-content strong {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color: #111d19;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+}
+
+
+.stat-content small {
+
+    display: block;
+
+    margin-top: 7px;
+
+    color: #82918b;
+
+    font-size: 10px;
+
+    line-height: 1.4;
+
+}
+
+
+/* =========================================================
+   TABLE CARD
+========================================================= */
+
+.table-card {
+
+    width: 100%;
+
+    overflow: hidden;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 17px;
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+}
+
+
+table {
+
+    width: 100%;
+
+    min-width: 1050px;
+
+    border-collapse: collapse;
+
+}
+
+
+thead {
+
+    background: #f3f7f5;
+
+}
+
+
+th {
+
+    padding: 16px 18px;
+
+    text-align: left;
+
+    color: #52665f;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.7px;
+
+    white-space: nowrap;
+
+}
+
+
+td {
+
+    padding: 16px 18px;
+
+    border-top: 1px solid #e7eeea;
+
+    color: #425b53;
+
+    font-size: 13px;
+
+    vertical-align: middle;
+
+}
+
+
+tbody tr {
+
+    transition: background 0.2s ease;
+
+}
+
+
+tbody tr:hover {
+
+    background: #f9fbfa;
+
+}
+
+
+/* =========================================================
+   STUDENT CELL
+========================================================= */
+
+.student-cell {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    min-width: 190px;
+
+}
+
+
+.student-avatar {
+
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--green-light);
+
+    color: var(--green-dark);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+.student-cell strong {
+
+    display: block;
+
+    color: var(--text-dark);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+
+.student-cell span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: #81918b;
+
+    font-size: 10px;
+
+}
+
+
+/* =========================================================
+   CAREER TAG
+========================================================= */
+
+.career-tag {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    max-width: 180px;
+
+    padding: 6px 10px;
+
+    border-radius: 8px;
+
+    background: #edf5f1;
+
+    color: var(--green-dark);
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+}
+
+
+/* =========================================================
+   ASSESSMENT
+========================================================= */
+
+td > strong {
+
+    color: var(--text-dark);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress-cell {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 150px;
+
+}
+
+
+.progress-cell .progress-bar {
+
+    width: 105px;
+
+    height: 7px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background: #e8eeeb;
+
+}
+
+
+.progress-cell .progress-fill {
+
+    height: 100%;
+
+    width: 0;
+
+    border-radius: inherit;
+
+    background: var(--green);
+
+    transition: width 0.4s ease;
+
+}
+
+
+.progress-cell > span {
+
+    width: 38px;
+
+    color: var(--green-dark);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   CURRENT PHASE
+========================================================= */
+
+.phase-text {
+
+    display: block;
+
+    max-width: 250px;
+
+    color: #52665f;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 7px 11px;
+
+    border-radius: 9px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+}
+
+
+.status.completed {
+
+    background: #e4f3eb;
+
+    color: #23704e;
+
+}
+
+
+.status.progress {
+
+    background: var(--blue-soft);
+
+    color: #527da8;
+
+}
+
+
+.status.pending {
+
+    background: var(--orange-soft);
+
+    color: #a9652c;
+
+}
+
+
+.status.started {
+
+    background: #edf1ef;
+
+    color: #64746e;
+
+}
+
+
+.muted {
+
+    color: #8a9893;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   STUDENTS REQUIRING ATTENTION
+========================================================= */
+
+.attention-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+}
+
+
+.attention-card {
+
+    padding: 21px;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 17px;
+
+    border-left: 4px solid #d89152;
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.attention-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.attention-header .student-avatar {
+
+    width: 40px;
+    height: 40px;
+
+}
+
+
+.attention-header h3 {
+
+    color: var(--text-dark);
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+}
+
+
+.attention-header span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   ATTENTION REASONS
+========================================================= */
+
+.attention-reasons {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-top: 18px;
+
+}
+
+
+.reason {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 9px 11px;
+
+    border-radius: 8px;
+
+    background: #fff8f1;
+
+    color: #6e6258;
+
+    font-size: 11px;
+
+}
+
+
+.reason i {
+
+    color: #d89152;
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   ATTENTION METRICS
+========================================================= */
+
+.attention-metrics {
+
+    display: flex;
+
+    gap: 45px;
+
+    margin-top: 18px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid var(--border);
+
+}
+
+
+.attention-metrics > div {
+
+    min-width: 80px;
+
+}
+
+
+.attention-metrics span {
+
+    display: block;
+
+    color: #82918b;
+
+    font-size: 10px;
+
+}
+
+
+.attention-metrics strong {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--text-dark);
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-state {
+
+    width: 100%;
+
+    padding: 55px 25px;
+
+    text-align: center;
+
+    background: var(--white);
+
+    border: 1px dashed var(--border);
+
+    border-radius: 17px;
+
+}
+
+
+.empty-state i {
+
+    margin-bottom: 14px;
+
+    color: var(--green);
+
+    font-size: 28px;
+
+}
+
+
+.empty-state h3 {
+
+    color: var(--text-dark);
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+}
+
+
+.empty-state p {
+
+    margin-top: 6px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   TABLE EMPTY
+========================================================= */
+
+.table-empty {
+
+    padding: 45px 20px;
+
+    text-align: center;
+
+}
+
+
+.table-empty i {
+
+    color: var(--green);
+
+    font-size: 25px;
+
+}
+
+
+.table-empty p {
+
+    margin-top: 9px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.admin-footer {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 50px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid var(--border);
+
+    color: #899791;
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1300px) {
+
+    .admin-reports-content {
+
+        padding-left: 55px;
+        padding-right: 55px;
+
+    }
+
+}
+
+
+@media (max-width: 1100px) {
+
+    .stats-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .admin-reports-content {
+
+        padding: 35px 25px 40px;
+
+    }
+
+
+    .attention-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .admin-topbar {
+
+        gap: 25px;
+
+    }
+
+
+    .admin-topbar h1 {
+
+        font-size: 32px;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .admin-reports-content {
+
+        padding: 25px 16px 35px;
+
+    }
+
+
+    .admin-topbar {
+
+        flex-direction: column;
+
+    }
+
+
+    .admin-user {
+
+        align-self: flex-start;
+
+    }
+
+
+    .stats-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .section-title h2 {
+
+        font-size: 24px;
+
+    }
+
+
+    .admin-topbar h1 {
+
+        font-size: 29px;
+
+    }
+
+
+    .stat-card {
+
+        min-height: 110px;
+
+    }
+
+
+    .admin-footer {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 8px;
+
+    }
+
+}

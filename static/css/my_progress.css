@@ -1,0 +1,750 @@
+/* =========================================================
+   DEVPATH AI - MY PROGRESS
+   ========================================================= */
+
+.progress-page {
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 35px 30px 60px;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.progress-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 28px;
+}
+
+.page-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 1.3px;
+
+    color: #087f68;
+}
+
+.progress-header h1 {
+    margin: 8px 0 6px;
+
+    color: #123f38;
+
+    font-size: 32px;
+    font-weight: 750;
+}
+
+.progress-header p {
+    margin: 0;
+
+    color: #71827e;
+
+    font-size: 14px;
+}
+
+.roadmap-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 11px 18px;
+
+    border-radius: 11px;
+
+    color: #087f68;
+    background: #eef8f5;
+
+    border: 1px solid #d8ebe5;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 650;
+
+    transition: 0.2s ease;
+}
+
+.roadmap-btn:hover {
+    color: #087f68;
+    background: #e2f3ed;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   OVERALL CARD
+   ========================================================= */
+
+.overall-card {
+    padding: 28px 30px;
+
+    margin-bottom: 20px;
+
+    border-radius: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #e1ebe7;
+
+    box-shadow:
+        0 8px 28px rgba(12, 72, 61, 0.06);
+}
+
+.overall-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-label {
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 1.2px;
+
+    color: #7a8b87;
+}
+
+.overall-top h2 {
+    margin: 6px 0 0;
+
+    font-size: 34px;
+    font-weight: 800;
+
+    color: #123f38;
+}
+
+.overall-top h2 span {
+    font-size: 20px;
+    color: #9aa8a4;
+}
+
+.overall-top p {
+    margin: 2px 0 0;
+
+    color: #778782;
+    font-size: 13px;
+}
+
+.overall-percentage {
+    font-size: 40px;
+    font-weight: 800;
+
+    color: #087f68;
+}
+
+.overall-bar {
+    height: 10px;
+
+    margin-top: 22px;
+
+    border-radius: 20px;
+
+    background: #e8efed;
+
+    overflow: hidden;
+}
+
+.overall-fill {
+    width: 0;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: #087f68;
+
+    transition: width 1s ease;
+}
+
+
+/* =========================================================
+   STATISTICS
+   ========================================================= */
+
+.stats-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 16px;
+
+    margin-bottom: 22px;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 20px;
+
+    border-radius: 16px;
+
+    background: #ffffff;
+
+    border: 1px solid #e3ebe8;
+}
+
+.stat-icon {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 13px;
+
+    font-size: 17px;
+}
+
+.stat-icon.green {
+    color: #087f68;
+    background: #e5f5f0;
+}
+
+.stat-icon.blue {
+    color: #3976a7;
+    background: #e9f2fa;
+}
+
+.stat-icon.purple {
+    color: #7654a5;
+    background: #f1ebfa;
+}
+
+.stat-card strong {
+    display: block;
+
+    color: #183f39;
+
+    font-size: 20px;
+    font-weight: 750;
+}
+
+.stat-card span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #7a8985;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   CURRENT PHASE
+   ========================================================= */
+
+.current-card {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+
+    padding: 20px;
+
+    margin-bottom: 35px;
+
+    border-radius: 17px;
+
+    background: #edf8f5;
+
+    border: 1px solid #d8ebe5;
+}
+
+.current-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 14px;
+
+    background: #087f68;
+    color: #ffffff;
+}
+
+.current-info {
+    flex: 1;
+}
+
+.current-info > span {
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 1px;
+
+    color: #087f68;
+}
+
+.current-info h3 {
+    margin: 4px 0;
+
+    color: #214d45;
+
+    font-size: 16px;
+}
+
+.current-info p {
+    margin: 0;
+
+    color: #71827e;
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.continue-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 16px;
+
+    border-radius: 10px;
+
+    background: #087f68;
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 650;
+
+    white-space: nowrap;
+
+    transition: 0.2s ease;
+}
+
+.continue-btn:hover {
+    color: #ffffff;
+    background: #066e5a;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   SECTION HEADING
+   ========================================================= */
+
+.section-heading {
+    margin-bottom: 16px;
+}
+
+.section-heading span {
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 1.1px;
+
+    color: #7c8c88;
+}
+
+.section-heading h2 {
+    margin: 5px 0 0;
+
+    color: #173f39;
+
+    font-size: 22px;
+}
+
+
+/* =========================================================
+   PHASE LIST
+   ========================================================= */
+
+.phase-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.phase-card {
+    display: flex;
+    gap: 18px;
+
+    padding: 22px;
+
+    border-radius: 18px;
+
+    background: #ffffff;
+
+    border: 1px solid #e3ebe8;
+
+    transition: 0.2s ease;
+}
+
+.phase-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 25px rgba(12, 72, 61, 0.06);
+}
+
+.phase-card.locked {
+    background: #fafbfb;
+}
+
+
+/* =========================================================
+   PHASE NUMBER
+   ========================================================= */
+
+.phase-number {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 14px;
+
+    background: #edf7f4;
+    color: #087f68;
+
+    font-size: 16px;
+    font-weight: 750;
+}
+
+.phase-card.completed .phase-number {
+    background: #087f68;
+    color: #ffffff;
+}
+
+.phase-card.locked .phase-number {
+    background: #edf0ef;
+    color: #98a5a1;
+}
+
+
+/* =========================================================
+   PHASE INFO
+   ========================================================= */
+
+.phase-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.phase-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.phase-label {
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 1px;
+
+    color: #82918d;
+}
+
+.phase-top h3 {
+    margin: 4px 0 0;
+
+    color: #214b44;
+
+    font-size: 16px;
+}
+
+.phase-description {
+    max-width: 850px;
+
+    margin: 9px 0 15px;
+
+    color: #758580;
+
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.status.completed {
+    color: #087f68;
+    background: #e7f6f1;
+}
+
+.status.available {
+    color: #3976a7;
+    background: #eaf3fa;
+}
+
+.status.locked {
+    color: #8a9692;
+    background: #edf0ef;
+}
+
+
+/* =========================================================
+   PHASE PROGRESS
+   ========================================================= */
+
+.phase-progress {
+    max-width: 600px;
+}
+
+.phase-progress-top {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 6px;
+
+    font-size: 10px;
+
+    color: #82908c;
+}
+
+.phase-progress-top strong {
+    color: #087f68;
+}
+
+.phase-bar {
+    height: 7px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: #e9efed;
+}
+
+.phase-fill {
+    width: 0;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: #087f68;
+
+    transition: width 0.8s ease;
+}
+
+.phase-card.locked .phase-fill {
+    background: #b6c0bd;
+}
+
+
+/* =========================================================
+   ATTEMPT
+   ========================================================= */
+
+.attempt-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-top: 11px;
+
+    font-size: 11px;
+}
+
+.attempt-info span {
+    color: #7b8985;
+}
+
+.attempt-info i {
+    margin-right: 4px;
+}
+
+.attempt-info strong {
+    color: #087f68;
+}
+
+
+/* =========================================================
+   ACTION
+   ========================================================= */
+
+.phase-action {
+    margin-top: 14px;
+}
+
+.phase-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 9px 14px;
+
+    border-radius: 9px;
+
+    background: #087f68;
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 650;
+
+    transition: 0.2s ease;
+}
+
+.phase-btn:hover {
+    color: #ffffff;
+    background: #066e5a;
+}
+
+.completed-text {
+    color: #087f68;
+
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.locked-text {
+    color: #9aa5a2;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.empty-state {
+    padding: 60px 25px;
+
+    text-align: center;
+
+    border: 1px dashed #ccd9d5;
+
+    border-radius: 18px;
+
+    background: #fafcfc;
+}
+
+.empty-state > i {
+    font-size: 35px;
+
+    color: #9aa9a5;
+}
+
+.empty-state h3 {
+    margin: 14px 0 5px;
+
+    color: #35554e;
+}
+
+.empty-state p {
+    margin: 0 0 18px;
+
+    color: #7b8985;
+
+    font-size: 13px;
+}
+
+.empty-state a {
+    display: inline-block;
+
+    padding: 10px 17px;
+
+    border-radius: 10px;
+
+    background: #087f68;
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .progress-page {
+        padding: 25px 18px 45px;
+    }
+
+    .progress-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .current-card {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .continue-btn {
+        margin-left: 65px;
+    }
+
+    .phase-top {
+        flex-direction: column;
+    }
+}
+
+
+@media (max-width: 550px) {
+
+    .progress-header h1 {
+        font-size: 27px;
+    }
+
+    .overall-top h2 {
+        font-size: 28px;
+    }
+
+    .overall-percentage {
+        font-size: 30px;
+    }
+
+    .phase-card {
+        padding: 17px;
+    }
+
+    .phase-number {
+        width: 40px;
+        height: 40px;
+    }
+
+    .continue-btn {
+        width: 100%;
+        margin-left: 0;
+    }
+}

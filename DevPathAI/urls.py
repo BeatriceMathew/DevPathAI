@@ -47,5 +47,9 @@ urlpatterns = [
         "assessment/",
         include("assessment.urls")
     ),
+    path("api/", include("ai_engine.urls")),
+
+    path("roadmap/", include("roadmap.urls")),
+
 
 ]

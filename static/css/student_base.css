@@ -151,7 +151,7 @@ body {
 
 
 .student-sidebar-avatar {
-    width: 35px;
+    width: 40px;
 
     height: 35px;
 
@@ -237,7 +237,7 @@ body {
 
 
 .student-nav-link {
-    min-height: 40px;
+    min-height: 35px;
 
     padding: 0 11px;
 
@@ -285,7 +285,7 @@ body {
 /* ACTIVE */
 
 .student-nav-link.active {
-    background: #e3f0e9;
+    
 
     color: #0b4d3b;
 

@@ -339,17 +339,19 @@
    JOURNEY
 ========================================================= */
 
+/* =========================================================
+   JOURNEY
+   ========================================================= */
+
 .journey-card {
     position: relative;
 
     display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 
     gap: 10px;
 
-    padding: 28px 22px 23px;
+    padding: 26px 22px 22px;
 
     background: #ffffff;
 
@@ -358,23 +360,30 @@
     border-radius: 15px;
 
     box-shadow: 0 4px 16px rgba(7, 63, 50, 0.04);
+
+    overflow: hidden;
 }
 
+
+/* CONNECTING LINE */
 
 .journey-line {
     position: absolute;
 
-    top: 47px;
+    top: 45px;
 
     left: 13%;
-
     right: 13%;
 
     height: 2px;
 
     background: #dce6e1;
+
+    z-index: 0;
 }
 
+
+/* JOURNEY STEP */
 
 .journey-step {
     position: relative;
@@ -382,20 +391,23 @@
     z-index: 1;
 
     text-align: center;
+
+    min-width: 0;
+
+    padding: 0 8px;
 }
 
 
+/* NUMBER CIRCLE */
+
 .journey-number {
     width: 38px;
-
     height: 38px;
 
-    margin: 0 auto 10px;
+    margin: 0 auto 11px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     border-radius: 50%;
@@ -408,45 +420,206 @@
 
     color: #819089;
 
-    font-size: 12px;
-
+    font-size: 11px;
     font-weight: 800;
+
+    transition: all 0.25s ease;
 }
 
+
+/* COMPLETED */
 
 .journey-step.completed .journey-number {
     background: #0b4d3b;
 
     color: #ffffff;
 
-    box-shadow: 0 0 0 1px #0b4d3b;
+    box-shadow:
+        0 0 0 1px #0b4d3b,
+        0 4px 10px rgba(11, 77, 59, 0.16);
 }
 
+
+/* CURRENT */
 
 .journey-step.current .journey-number {
     background: #e2efe8;
 
     color: #0b4d3b;
 
-    box-shadow: 0 0 0 2px #0b4d3b;
+    box-shadow:
+        0 0 0 2px #0b4d3b,
+        0 4px 12px rgba(11, 77, 59, 0.12);
 }
 
 
+/* LOCKED */
+
+.journey-step.locked .journey-number {
+    background: #eef3f0;
+
+    color: #9aa59f;
+
+    box-shadow: 0 0 0 1px #dce6e1;
+}
+
+
+/* STEP TITLE */
+
 .journey-step h3 {
-    margin: 0 0 4px;
+    margin: 0 0 5px;
 
     color: #073f32;
 
     font-size: 13px;
+
+    font-weight: 700;
 }
 
 
+/* STEP DESCRIPTION */
+
 .journey-step p {
-    margin: 0;
+    max-width: 150px;
+
+    margin: 0 auto;
 
     color: #84908b;
 
     font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* COMPLETED TEXT */
+
+.journey-step.completed h3 {
+    color: #073f32;
+}
+
+
+/* CURRENT TEXT */
+
+.journey-step.current h3 {
+    color: #0b4d3b;
+}
+
+
+/* HOVER */
+
+.journey-step:hover .journey-number {
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   JOURNEY STATUS
+   ========================================================= */
+
+.journey-status {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    margin-top: 8px;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+.journey-status.completed-status {
+    color: #087f68;
+}
+
+.journey-status.current-status {
+    color: #a77424;
+}
+
+.journey-status.locked-status {
+    color: #9aa59f;
+}
+
+
+/* =========================================================
+   JOURNEY ACTION
+   ========================================================= */
+
+.journey-action {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    margin-top: 8px;
+
+    color: #087f68;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+}
+
+.journey-action:hover {
+    color: #075e50;
+
+    gap: 8px;
+}
+
+
+/* =========================================================
+   JOURNEY RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .journey-card {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 25px 10px;
+
+        padding: 25px 18px;
+    }
+
+    .journey-line {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .journey-card {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+
+        padding: 22px 15px;
+    }
+
+    .journey-step {
+        padding: 5px 0;
+    }
+
+    .journey-line {
+        display: none;
+    }
+
+    .journey-step p {
+        max-width: 230px;
+    }
+
 }
 
 
@@ -1071,4 +1244,1104 @@
         flex-direction: column;
     }
 
+}/* =====================================================
+   DEVPATH AI — PREMIUM SKILL ANALYSIS
+   ===================================================== */
+
+.ai-card {
+    position: relative;
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e5ebe8;
+
+    box-shadow:
+        0 8px 30px rgba(19, 63, 59, 0.05);
 }
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.ai-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 22px 24px;
+
+    border-bottom: 1px solid #edf1ef;
+}
+
+.ai-title-area {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.ai-icon {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #edf6f3;
+    color: #075e56;
+
+    font-size: 16px;
+}
+
+.ai-eyebrow {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #82908c;
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+}
+
+.ai-card-header h2 {
+    margin: 0;
+
+    color: #123f3b;
+
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.ai-live-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    background: #f2f7f5;
+
+    color: #6e817c;
+
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #0b8b78;
+}
+
+
+/* =====================================================
+   MAIN AI INSIGHT
+   ===================================================== */
+
+.ai-insight {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 20px 24px 0;
+
+    padding: 24px;
+
+    min-height: 145px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #073f3b 0%,
+            #075e56 100%
+        );
+
+    color: #ffffff;
+}
+
+.ai-insight-left {
+    max-width: 75%;
+}
+
+.ai-insight-label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: rgba(255,255,255,0.65);
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+}
+
+.ai-score {
+    margin-bottom: 7px;
+
+    color: #ffffff;
+
+    font-size: 43px;
+    font-weight: 600;
+    line-height: 1;
+
+    letter-spacing: -2px;
+}
+
+.ai-score span {
+    font-size: 22px;
+    letter-spacing: -1px;
+}
+
+.ai-insight p {
+    max-width: 360px;
+
+    margin: 0;
+
+    color: rgba(255,255,255,0.72);
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.ai-insight p strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   AI GRAPHIC
+   ===================================================== */
+
+.ai-insight-graphic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding-right: 10px;
+}
+
+.score-ring {
+    width: 82px;
+    height: 82px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            rgba(255,255,255,0.9) 0deg,
+            rgba(255,255,255,0.35) 130deg,
+            rgba(255,255,255,0.08) 130deg,
+            rgba(255,255,255,0.08) 360deg
+        );
+}
+
+.score-ring-inner {
+    width: 64px;
+    height: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #07534d;
+
+    color: #ffffff;
+
+    font-size: 20px;
+}
+
+
+/* =====================================================
+   SUMMARY
+   ===================================================== */
+
+.ai-summary {
+    display: grid;
+
+    grid-template-columns: 1fr auto 1.2fr auto 1.2fr;
+
+    align-items: center;
+
+    margin: 20px 24px 0;
+
+    padding: 18px 0;
+
+    border-top: 1px solid #edf1ef;
+    border-bottom: 1px solid #edf1ef;
+}
+
+.summary-item span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #899691;
+
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.summary-item strong {
+    display: block;
+
+    color: #173f3b;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.summary-divider {
+    width: 1px;
+    height: 32px;
+
+    background: #e6ece9;
+}
+
+
+/* =====================================================
+   PRIORITY AREA
+   ===================================================== */
+
+.ai-priority {
+    margin: 20px 24px 0;
+
+    padding: 20px;
+
+    background: #f7faf8;
+
+    border: 1px solid #e6eeeb;
+
+    border-radius: 12px;
+}
+
+.priority-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.priority-eyebrow {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #82908c;
+
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.priority-top h3 {
+    margin: 0;
+
+    color: #123f3b;
+
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.priority-score {
+    text-align: right;
+}
+
+.priority-score strong {
+    display: block;
+
+    color: #075e56;
+
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.priority-score span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #899691;
+
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   PROGRESS
+   ===================================================== */
+
+.priority-progress {
+    margin-top: 17px;
+}
+
+.progress-track {
+    width: 100%;
+    height: 5px;
+
+    overflow: hidden;
+
+    border-radius: 5px;
+
+    background: #dfe9e5;
+}
+
+.progress-fill {
+    height: 100%;
+
+    border-radius: 5px;
+
+    background: #087568;
+}
+
+
+/* =====================================================
+   LEVEL COMPARISON
+   ===================================================== */
+
+.level-comparison {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 13px;
+
+    color: #7b8985;
+
+    font-size: 10px;
+}
+
+.level-comparison strong {
+    margin-left: 4px;
+
+    color: #173f3b;
+
+    font-weight: 600;
+}
+
+.level-comparison i {
+    color: #a3afab;
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+.ai-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 18px 24px 22px;
+}
+
+.ai-card-footer p {
+    margin: 0;
+
+    color: #7c8985;
+
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.ai-card-footer p i {
+    margin-right: 5px;
+
+    color: #087568;
+}
+
+.ai-card-footer p strong {
+    color: #173f3b;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   BUTTON
+   ===================================================== */
+
+.ai-view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    flex-shrink: 0;
+
+    padding: 10px 15px;
+
+    border-radius: 8px;
+
+    background: #075e56;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+}
+
+.ai-view-btn:hover {
+    background: #064a44;
+
+    transform: translateY(-1px);
+}
+
+.ai-view-btn i {
+    font-size: 9px;
+}
+
+
+/* =====================================================
+   EMPTY STATE
+   ===================================================== */
+
+.ai-empty-state {
+    padding: 50px 25px;
+
+    text-align: center;
+}
+
+.empty-ai-icon {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 16px;
+
+    border-radius: 14px;
+
+    background: #edf6f3;
+
+    color: #075e56;
+
+    font-size: 18px;
+}
+
+.ai-empty-state h3 {
+    margin: 6px 0 8px;
+
+    color: #173f3b;
+
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.ai-empty-state p {
+    max-width: 330px;
+
+    margin: 0 auto 20px;
+
+    color: #7b8985;
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 850px) {
+
+    .ai-insight {
+        padding: 20px;
+    }
+
+    .ai-insight-graphic {
+        display: none;
+    }
+
+    .ai-insight-left {
+        max-width: 100%;
+    }
+
+    .ai-summary {
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+    }
+
+    .summary-divider {
+        display: none;
+    }
+
+    .ai-card-footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .ai-view-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* =========================================================
+   ROADMAP DASHBOARD - LIVE PROGRESS
+   ========================================================= */
+
+.roadmap-progress-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 9px;
+
+    font-size: 11px;
+    color: #7b8985;
+}
+
+.roadmap-progress-meta strong {
+    color: #087f68;
+}
+
+.roadmap-dashboard-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-top: 18px;
+}
+
+.roadmap-progress-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    padding: 10px 15px;
+
+    border-radius: 10px;
+
+    color: #087f68;
+    background: #eef8f5;
+
+    border: 1px solid #d9ebe5;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 650;
+
+    transition: 0.2s ease;
+}
+
+.roadmap-progress-btn:hover {
+    color: #087f68;
+    background: #e3f3ee;
+    transform: translateY(-2px);
+}
+
+.roadmap-dashboard-content > p strong {
+    color: #087f68;
+}
+
+@media (max-width: 600px) {
+
+    .roadmap-progress-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .roadmap-dashboard-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .roadmap-dashboard-actions a {
+        width: 100%;
+    }
+}
+
+/* =========================================================
+   DEVPATH AI — SKILLS OVERVIEW
+   ========================================================= */
+
+.skills-card {
+    min-height: 270px;
+}
+
+
+/* ================= SKILLS LIST ================= */
+
+.skills-list {
+    margin-top: 18px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 13px;
+}
+
+
+/* ================= SKILL ITEM ================= */
+
+.skill-item {
+    padding: 11px 12px;
+
+    background: #f9fbfa;
+
+    border: 1px solid #e8eeeb;
+
+    border-radius: 10px;
+
+    transition: all 0.2s ease;
+}
+
+.skill-item:hover {
+    background: #f5f9f7;
+
+    border-color: #d7e5df;
+
+    transform: translateY(-1px);
+}
+
+
+/* ================= TOP ================= */
+
+.skill-item-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+
+.skill-name-area {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    min-width: 0;
+}
+
+
+.skill-mini-icon {
+    width: 29px;
+    height: 29px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: #e5f0eb;
+
+    color: #0b4d3b;
+
+    font-size: 11px;
+}
+
+
+.skill-name-area div:last-child {
+    min-width: 0;
+}
+
+
+.skill-name-area strong {
+    display: block;
+
+    overflow: hidden;
+
+    color: #173f3b;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+.skill-name-area span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #899691;
+
+    font-size: 8px;
+}
+
+
+/* ================= SCORE ================= */
+
+.skill-level-area {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    flex-shrink: 0;
+}
+
+
+.skill-percentage {
+    color: #075e56;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+.skill-gap-badge,
+.skill-ready-badge {
+    padding: 3px 6px;
+
+    border-radius: 5px;
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.4px;
+}
+
+
+.skill-gap-badge {
+    background: #fff1e7;
+
+    color: #b66b2c;
+}
+
+
+.skill-ready-badge {
+    background: #e8f4ee;
+
+    color: #087568;
+}
+
+
+/* ================= PROGRESS ================= */
+
+.skill-progress {
+    margin-top: 9px;
+}
+
+
+.skill-progress-track {
+    width: 100%;
+
+    height: 4px;
+
+    overflow: hidden;
+
+    border-radius: 5px;
+
+    background: #e2ebe7;
+}
+
+
+.skill-progress-fill {
+    width: 0;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: #087568;
+
+    transition: width 0.7s ease;
+}
+
+
+/* ================= BOTTOM ================= */
+
+.skill-item-bottom {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 7px;
+
+    color: #899691;
+
+    font-size: 8px;
+}
+
+
+.skill-item-bottom strong {
+    color: #173f3b;
+
+    font-weight: 600;
+}
+
+
+.required-label {
+    color: #087568;
+
+    font-weight: 700;
+}
+
+
+.required-label i {
+    margin-right: 3px;
+
+    font-size: 7px;
+}
+
+
+.optional-label {
+    color: #9ba6a2;
+}
+
+
+/* ================= FOOTER ================= */
+
+.skills-card-footer {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-top: 15px;
+
+    padding-top: 13px;
+
+    border-top: 1px solid #edf1ef;
+}
+
+
+.skills-card-footer span {
+    color: #899691;
+
+    font-size: 8px;
+}
+
+
+.skills-card-footer span i {
+    margin-right: 4px;
+
+    color: #087568;
+}
+
+
+.skills-card-footer a {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    color: #075e56;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+.skills-card-footer a:hover {
+    color: #043f3a;
+
+    gap: 7px;
+}
+
+
+/* =========================================================
+   AI — NO GAP STATE
+   ========================================================= */
+
+.ai-no-gap {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 20px 24px 0;
+
+    padding: 16px;
+
+    background: #f2f8f5;
+
+    border: 1px solid #dcebe4;
+
+    border-radius: 12px;
+}
+
+
+.ai-no-gap > i {
+    color: #087568;
+
+    font-size: 20px;
+}
+
+
+.ai-no-gap strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #173f3b;
+
+    font-size: 12px;
+}
+
+
+.ai-no-gap p {
+    margin: 0;
+
+    color: #7c8985;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   AI INSIGHT — IMPROVED SCORE RING
+   ========================================================= */
+
+.ai-score {
+    line-height: 1;
+}
+
+
+/* =========================================================
+   RESPONSIVE SKILLS
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .skill-level-area {
+        gap: 5px;
+    }
+
+    .skill-gap-badge,
+    .skill-ready-badge {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .skills-card {
+        min-height: auto;
+    }
+
+    .skill-item-top {
+        gap: 7px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .skill-name-area strong {
+        max-width: 130px;
+    }
+
+    .skill-item-bottom {
+        font-size: 8px;
+    }
+
+    .skills-card-footer {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+}
+/* =========================================================
+   ROADMAP STATUS
+   ========================================================= */
+
+.roadmap-status-label {
+    display: inline-block;
+    margin-bottom: 6px;
+    color: #087f68;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.roadmap-dashboard-content > p strong {
+    color: #087f68;
+}
+
+.roadmap-dashboard-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.roadmap-progress-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    color: #087f68;
+    background: #eef8f5;
+    border: 1px solid #d9ebe5;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 650;
+    transition: 0.2s ease;
+}
+
+.roadmap-progress-btn:hover {
+    color: #087f68;
+    background: #e3f3ee;
+    transform: translateY(-2px);
+}
+

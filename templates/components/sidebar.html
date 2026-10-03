@@ -1,5 +1,28 @@
 {% load static %}
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>DevPathAI Admin</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Admin Sidebar CSS -->
+    <link rel="stylesheet"
+          href="{% static 'css/admin_sidebar.css' %}">
+
+</head>
+
+<body>
+
 <aside class="admin-sidebar">
 
     <!-- ================= LOGO ================= -->
@@ -22,11 +45,8 @@
     <div class="admin-profile">
 
         <div class="profile-icon">
-
             <i class="fas fa-user-shield"></i>
-
         </div>
-
 
         <div class="profile-details">
 
@@ -53,7 +73,6 @@
            class="{% if request.resolver_match.url_name == 'admin_dashboard' %}active{% endif %}">
 
             <i class="fas fa-chart-line"></i>
-
             <span>Dashboard</span>
 
         </a>
@@ -65,7 +84,6 @@
            class="{% if request.resolver_match.url_name == 'students_list' %}active{% endif %}">
 
             <i class="fas fa-user-graduate"></i>
-
             <span>Students</span>
 
         </a>
@@ -77,7 +95,6 @@
            class="{% if request.resolver_match.url_name == 'skills_list' %}active{% endif %}">
 
             <i class="fas fa-code"></i>
-
             <span>Skills</span>
 
         </a>
@@ -85,51 +102,32 @@
 
         <!-- Career Paths -->
 
-        <a href="{% url 'career_paths_list' %}" class="sidebar-link">
+        <a href="{% url 'career_paths_list' %}"
+           class="{% if request.resolver_match.url_name == 'career_paths_list' %}active{% endif %}">
+
             <i class="fas fa-route"></i>
             <span>Career Paths</span>
+
         </a>
 
 
-        <!-- Roadmaps -->
-
-        <a href="{% url 'learning_roadmaps_list' %}" class="sidebar-link">
-            <i class="fas fa-map"></i>
-            <span>Learning Roadmaps</span>
-        </a>
-
-
-        <!-- Assessments -->
+        <!-- Assessment -->
 
         <a href="{% url 'admin_assessment_questions' %}"
-            class="{% if request.resolver_match.url_name == 'admin_assessment_questions' or request.resolver_match.url_name == 'add_assessment_question' %}active{% endif %}">
+           class="{% if request.resolver_match.url_name == 'admin_assessment_questions' or request.resolver_match.url_name == 'add_assessment_question' %}active{% endif %}">
 
             <i class="fas fa-clipboard-check"></i>
-
             <span>Assessment</span>
-
-        </a>
-
-
-        <!-- Projects -->
-
-        <a href="#"
-           class="">
-
-            <i class="fas fa-lightbulb"></i>
-
-            <span>Projects</span>
 
         </a>
 
 
         <!-- Reports -->
 
-        <a href="#"
-           class="">
+        <a href="{% url 'admin_reports' %}"
+           class="{% if request.resolver_match.url_name == 'admin_reports' %}active{% endif %}">
 
             <i class="fas fa-chart-pie"></i>
-
             <span>Reports</span>
 
         </a>
@@ -141,14 +139,12 @@
 
     <div class="sidebar-bottom">
 
-
         <!-- Profile -->
 
         <a href="{% url 'admin_profile' %}"
            class="{% if request.resolver_match.url_name == 'admin_profile' %}active{% endif %}">
 
             <i class="fas fa-user"></i>
-
             <span>My Profile</span>
 
         </a>
@@ -160,7 +156,6 @@
            class="{% if request.resolver_match.url_name == 'edit_profile' %}active{% endif %}">
 
             <i class="fas fa-user-edit"></i>
-
             <span>Edit Profile</span>
 
         </a>
@@ -171,7 +166,6 @@
         <a href="{% url 'password_change' %}">
 
             <i class="fas fa-lock"></i>
-
             <span>Change Password</span>
 
         </a>
@@ -182,7 +176,6 @@
         <a href="{% url 'home' %}">
 
             <i class="fas fa-home"></i>
-
             <span>View Website</span>
 
         </a>
@@ -193,12 +186,13 @@
         <a href="{% url 'logout' %}">
 
             <i class="fas fa-sign-out-alt"></i>
-
             <span>Logout</span>
 
         </a>
 
-
     </div>
 
 </aside>
+
+</body>
+</html>
