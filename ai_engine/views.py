@@ -111,62 +111,54 @@ def create_roadmap_progress(user, roadmap):
 @login_required
 def generate_roadmap_page(request):
 
-    # Check whether the student already has a saved roadmap
+    # 1. Check for an existing active roadmap
     existing_roadmap = GeneratedRoadmap.objects.filter(
         user=request.user,
         is_active=True
     ).first()
 
+    # 2. If a roadmap already exists, open it directly
+    if existing_roadmap:
+        return redirect("my_roadmap")
+
+    # 3. Generate a roadmap only when none exists
     try:
+        roadmap_data = generate_ai_roadmap(request.user)
 
-        roadmap = generate_ai_roadmap(request.user)
-
-        # Deactivate previous roadmap
-        GeneratedRoadmap.objects.filter(
-            user=request.user,
-            is_active=True
-        ).update(
-            is_active=False
-        )
-
-        # Save new AI roadmap
+        # Save the new roadmap
         generated_roadmap = GeneratedRoadmap.objects.create(
             user=request.user,
-            career=roadmap["career"],
-            roadmap_data=roadmap,
+            career=roadmap_data["career"],
+            roadmap_data=roadmap_data,
             is_active=True
         )
 
+        # Create progress records for its topics
         create_roadmap_progress(
             request.user,
             generated_roadmap
         )
+
         return redirect("my_roadmap")
 
     except Exception as e:
-
-        # If a roadmap already exists, show it instead of
-        # displaying an error page.
-        if existing_roadmap:
-
-            return render(
-                request,
-                "roadmap/my_roadmap.html",
-                {
-                    "roadmap": existing_roadmap,
-                    "ai_error": str(e)
-                }
-            )
+        print(
+            f"Roadmap generation failed for user "
+            f"{request.user.username}: {type(e).__name__}: {e}"
+        )
 
         return render(
             request,
             "roadmap/my_roadmap.html",
             {
                 "roadmap": None,
-                "ai_error": str(e)
+                "ai_error": (
+                    "Your assessment is completed, but the AI roadmap "
+                    "could not be generated right now. Please try again "
+                    "later."
+                ),
             }
         )
-
 @login_required
 def my_roadmap(request):
 

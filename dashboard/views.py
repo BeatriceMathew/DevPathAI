@@ -18,13 +18,6 @@ from roadmap.models import RoadmapAssessment, RoadmapAssessmentAttempt
 @login_required
 def dashboard(request):
 
-    from assessment.models import (
-        SkillAssessment,
-        AssessmentResult,
-        SkillAssessmentResult
-    )
-    from accounts.models import CareerSkill
-
     # -----------------------------------
     # Career goal
     # -----------------------------------
@@ -38,6 +31,7 @@ def dashboard(request):
     if assessment and assessment.career_path:
         career_goal = assessment.career_path
 
+
     # -----------------------------------
     # Assessment result
     # -----------------------------------
@@ -45,6 +39,7 @@ def dashboard(request):
     assessment_result = AssessmentResult.objects.filter(
         user=request.user
     ).order_by("-completed_at").first()
+
 
     # -----------------------------------
     # Skill gap information
@@ -111,9 +106,12 @@ def dashboard(request):
                 "is_required": career_skill.is_required,
             })
 
+
         # Highest-priority skill that has a gap
+
         gap_skills = [
-            item for item in skill_gaps
+            item
+            for item in skill_gaps
             if item["gap"] > 0
         ]
 
@@ -125,7 +123,7 @@ def dashboard(request):
             priority_skill = gap_skills[0]
 
 
-            # -----------------------------------
+    # -----------------------------------
     # AI Roadmap Progress
     # -----------------------------------
 
@@ -140,9 +138,13 @@ def dashboard(request):
     current_phase = None
     latest_roadmap_attempt = None
 
+
     if roadmap:
 
-        phases = roadmap.roadmap_data.get("phases", [])
+        phases = roadmap.roadmap_data.get(
+            "phases",
+            []
+        )
 
         total_phases = len(phases)
 
@@ -164,9 +166,11 @@ def dashboard(request):
         )
 
         if total_phases > 0:
+
             roadmap_progress = round(
                 (completed_phases / total_phases) * 100
             )
+
 
         # -----------------------------------
         # Find current phase
@@ -184,6 +188,7 @@ def dashboard(request):
                 current_phase = phase
                 break
 
+
         # -----------------------------------
         # If every phase is completed
         # -----------------------------------
@@ -191,6 +196,7 @@ def dashboard(request):
         if current_phase is None and phases:
 
             current_phase = phases[-1]
+
 
         # -----------------------------------
         # Latest roadmap assessment attempt
@@ -206,51 +212,76 @@ def dashboard(request):
             .order_by("-completed_at")
             .first()
         )
-       # =========================================================
-        # JOURNEY STATUS
-        # =========================================================
 
-        profile_completed = bool(
-            request.user.first_name.strip()
-            and request.user.email.strip()
-        )
 
-        assessment_completed = assessment_result is not None
+    # =========================================================
+    # JOURNEY STATUS
+    #
+    # IMPORTANT:
+    # This section is OUTSIDE "if roadmap:"
+    # =========================================================
 
-        ai_analysis_completed = bool(
-            assessment_result
-            and career_goal
-        )
+    profile_completed = bool(
+        request.user.first_name.strip()
+        and request.user.email.strip()
+    )
 
-        roadmap_generated = roadmap is not None    
-        # -----------------------------------
-        # Dashboard
-        # -----------------------------------
+    assessment_completed = (
+        assessment_result is not None
+    )
 
-        return render(
-            request,
-            "dashboard/dashboard.html",
-            {
-                "career_goal": career_goal,
-                "assessment_result": assessment_result,
-                "skill_gaps": skill_gaps,
-                "priority_skill": priority_skill,
+    ai_analysis_completed = bool(
+        assessment_result
+        and career_goal
+    )
 
-                # Roadmap
-                "roadmap": roadmap,
-                "roadmap_progress": roadmap_progress,
-                "completed_phases": completed_phases,
-                "total_phases": total_phases,
-                "current_phase": current_phase,
-                "latest_roadmap_attempt": latest_roadmap_attempt,
+    roadmap_generated = (
+        roadmap is not None
+    )
 
-                # Journey
-                "profile_completed": profile_completed,
-                "assessment_completed": assessment_completed,
-                "ai_analysis_completed": ai_analysis_completed,
-                "roadmap_generated": roadmap_generated,
-            }
-        )
+
+    # =========================================================
+    # DASHBOARD
+    #
+    # IMPORTANT:
+    # This return is OUTSIDE "if roadmap:"
+    # =========================================================
+
+    return render(
+        request,
+        "dashboard/dashboard.html",
+        {
+            "career_goal": career_goal,
+
+            "assessment_result": assessment_result,
+
+            "skill_gaps": skill_gaps,
+
+            "priority_skill": priority_skill,
+
+            # Roadmap
+            "roadmap": roadmap,
+
+            "roadmap_progress": roadmap_progress,
+
+            "completed_phases": completed_phases,
+
+            "total_phases": total_phases,
+
+            "current_phase": current_phase,
+
+            "latest_roadmap_attempt": latest_roadmap_attempt,
+
+            # Journey
+            "profile_completed": profile_completed,
+
+            "assessment_completed": assessment_completed,
+
+            "ai_analysis_completed": ai_analysis_completed,
+
+            "roadmap_generated": roadmap_generated,
+        }
+    )
 
 @login_required
 def student_profile(request):

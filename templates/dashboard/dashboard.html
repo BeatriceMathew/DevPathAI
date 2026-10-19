@@ -152,48 +152,60 @@ Dashboard | DevPath AI
 
         <!-- ================= PROFILE ================= -->
 
-        <div class="
-            journey-step
-            {% if profile_completed %}
-                completed
-            {% else %}
-                current
-            {% endif %}
-        ">
+        <!-- ================= PROFILE ================= -->
 
-            <div class="journey-number">
+    <div class="
+        journey-step
+        {% if profile_completed %}
+            completed
+        {% else %}
+            current
+        {% endif %}
+    ">
 
-                {% if profile_completed %}
-                    <i class="fas fa-check"></i>
-                {% else %}
-                    01
-                {% endif %}
-
-            </div>
-
-            <h3>Profile</h3>
+        <div class="journey-number">
 
             {% if profile_completed %}
-
-                <p>
-                    Your profile is complete.
-                </p>
-
+                <i class="fas fa-check"></i>
             {% else %}
-
-                <p>
-                    Complete your student profile.
-                </p>
-
-                <a href="{% url 'student_profile' %}"
-                   class="journey-action">
-                    Complete Profile
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-
+                01
             {% endif %}
 
         </div>
+
+        <h3>Profile</h3>
+
+        {% if profile_completed %}
+
+            <p>
+                Your profile is complete.
+            </p>
+
+            <span class="journey-status completed-status">
+                <i class="fas fa-check-circle"></i>
+                Completed
+            </span>
+
+        {% else %}
+
+            <p>
+                Your profile is not completed yet.
+            </p>
+
+            <span class="journey-status current-status">
+                <i class="fas fa-user-edit"></i>
+                Action Required
+            </span>
+
+            <a href="{% url 'student_profile' %}"
+            class="journey-action">
+                Complete Profile
+                <i class="fas fa-arrow-right"></i>
+            </a>
+
+        {% endif %}
+
+    </div>
 
 
         <!-- ================= ASSESSMENT ================= -->
@@ -243,11 +255,11 @@ Dashboard | DevPath AI
                     Test your current technical skills.
                 </p>
 
-                <a href="{% url 'assessment:assessment' %}"
+                <a href="{% url 'assessment' %}"
                    class="journey-action">
                     Take Assessment
                     <i class="fas fa-arrow-right"></i>
-                </a>
+                </>
 
             {% else %}
 
@@ -560,17 +572,17 @@ Dashboard | DevPath AI
 
                 <!-- EMPTY STATE -->
 
-                <div class="skills-empty-state">
+                <div class="ai-empty-state">
 
                     <div class="empty-small-icon">
                         <i class="fas fa-code"></i>
                     </div>
 
-                    <h3>
+                    <h3 >
                         No skills assessed yet
                     </h3>
 
-                    <p>
+                    <p  style="display: flex;flex-direction: column; width: 100%; margin-top: 14px; text-align: center;">
                         Complete your skill assessment to discover
                         your strengths and areas to improve.
                     </p>

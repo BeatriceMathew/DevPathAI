@@ -1,494 +1,456 @@
+{% extends 'admin_base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block title %}Add Assessment Question | DevPath AI{% endblock %}
 
-<head>
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+    
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 
-    <meta charset="UTF-8">
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f7f6ee;
+        color: #073f38;
+        /* margin: 50px; */
+        
+    }
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    /* PAGE LAYOUT */
 
-    <title>Add Assessment Question | DevPath AI</title>
+    
 
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <link rel="stylesheet"
-        href="{% static 'css/admin_dashboard.css' %}">
-    <style>
+/* Main layout */
+.admin-layout {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    gap: 0;
+}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+/* Content area beside the sidebar */
+.admin-main {
+    flex: 1 1 0;
+    min-width: 0;
+    width: 0;
+    padding: 0;
+}
+
+/* Center the page content */
+.page,
+.question-page {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 35px 30px;
+}
+
+/* Center the heading and form together */
+.question-topbar,
+.top-bar,
+.form-card {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive layout */
+@media (max-width: 900px) {
+    .page,
+    .question-page {
+        padding: 25px 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .page,
+    .question-page {
+        padding: 20px 14px;
+    }
+
+    .form-card {
+        padding: 20px;
+    }
+}
+
+    .admin-main > * {
+        max-width: 100%;
+    }
+
+    
+
+    /* TOP BAR */
+
+    .top-bar,
+    .question-topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .heading-small,
+    .eyebrow {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: #0b6657;
+        margin-bottom: 10px;
+    }
+
+    h1 {
+        font-size: 34px;
+        line-height: 1.25;
+        margin-bottom: 8px;
+    }
+
+    .subtitle {
+        color: #667c78;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    /* BUTTONS */
+
+    .back-btn,
+    .cancel-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        text-decoration: none;
+        padding: 12px 18px;
+        border: 1px solid #d9e4df;
+        border-radius: 9px;
+        background: #fff;
+        color: #07584c;
+        font-weight: 600;
+        white-space: nowrap;
+        cursor: pointer;
+    }
+
+    .back-btn:hover,
+    .cancel-btn:hover {
+        background: #eef6f2;
+    }
+
+    /* FULL-WIDTH FORM CARD */
+
+    .form-card {
+        display: block;
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+        margin: 0;
+        padding: 30px;
+        background: #fff;
+        border: 1px solid #dce7e2;
+        border-radius: 16px;
+    }
+
+    .section-title {
+        font-size: 20px;
+        font-weight: 500;
+        margin: 0 0 22px;
+    }
+
+    /* FORM LAYOUT */
+
+    .form-grid,
+    .options-grid,
+    .answer-category {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px 24px;
+        width: 100%;
+    }
+
+    .form-group {
+        width: 100%;
+        min-width: 0;
+        margin-bottom: 20px;
+    }
+
+    .form-group label,
+    .form-card > form > .form-group > label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #173f39;
+    }
+
+    .required {
+        color: #c84a42;
+    }
+
+    /* FORM CONTROLS */
+
+    .form-group input:not([type="checkbox"]),
+    .form-group textarea,
+    .form-group select,
+    input:not([type="checkbox"]),
+    textarea,
+    select {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        padding: 13px 14px;
+        border: 1px solid #d5e2dd;
+        border-radius: 9px;
+        background: #fff;
+        color: #073f38;
+        font-family: inherit;
+        font-size: 14px;
+        outline: none;
+    }
+
+    textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+        border-color: #0b6657;
+        box-shadow: 0 0 0 3px rgba(11, 102, 87, 0.08);
+    }
+
+    select[multiple] {
+        min-height: 130px;
+    }
+
+    .help-text,
+    .form-group small {
+        display: block;
+        margin-top: 6px;
+        font-size: 12px;
+        color: #7a8b87;
+        line-height: 1.5;
+    }
+
+    /* ERROR MESSAGE */
+
+    .error {
+        margin-bottom: 25px;
+        padding: 13px 15px;
+        border: 1px solid #f0c7c3;
+        border-radius: 9px;
+        background: #fff1f0;
+        color: #a53b35;
+    }
+
+    /* CAREER MULTI-SELECT */
+
+    .multi-select-dropdown {
+        position: relative;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .multi-select-button {
+        width: 100%;
+        min-height: 48px;
+        padding: 13px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        border: 1px solid #d1dedd;
+        border-radius: 9px;
+        background: #fff;
+        color: #145c50;
+        font-family: inherit;
+        font-size: 14px;
+        text-align: left;
+        cursor: pointer;
+        transition: border-color 0.2s ease;
+    }
+
+    .multi-select-button:hover {
+        border-color: #145c50;
+    }
+
+    .multi-select-button i {
+        flex-shrink: 0;
+        font-size: 12px;
+        transition: transform 0.2s ease;
+    }
+
+    .multi-select-dropdown.open .multi-select-button i {
+        transform: rotate(180deg);
+    }
+
+    .multi-select-options {
+        display: none;
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 0;
+        width: 100%;
+        max-height: 230px;
+        overflow-y: auto;
+        padding: 8px;
+        border: 1px solid #d8e2e0;
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
+        z-index: 1000;
+    }
+
+    .multi-select-dropdown.open .multi-select-options {
+        display: block;
+    }
+
+    .career-checkbox {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 11px 10px;
+        margin: 0;
+        border-radius: 7px;
+        cursor: pointer;
+        color: #243534;
+        font-size: 14px;
+        font-weight: 400;
+        transition: background 0.15s ease;
+    }
+
+    .career-checkbox:hover {
+        background: #eef7f4;
+    }
+
+    .career-checkbox input[type="checkbox"] {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        overflow: hidden;
+    }
+
+    .career-checkbox input[type="checkbox"]:focus-visible
+    + .checkmark {
+        outline: 2px solid #0b6657;
+        outline-offset: 3px;
+    }
+
+    .checkmark {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 18px;
+        height: 18px;
+        border: 1.5px solid #b9c9c6;
+        border-radius: 5px;
+        transition: background 0.2s ease;
+    }
+
+    .career-checkbox input[type="checkbox"]:checked + .checkmark {
+        border-color: #145c50;
+        background: #145c50;
+    }
+
+    .career-checkbox input[type="checkbox"]:checked
+    + .checkmark::after {
+        content: "✓";
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .career-name {
+        flex: 1;
+        min-width: 0;
+        line-height: 1.4;
+    }
+
+    #careerDropdownText {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: left;
+    }
+
+    /* FORM ACTIONS */
+
+    .actions {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 30px;
+        padding-top: 25px;
+        border-top: 1px solid #e6ece9;
+    }
+
+    .save-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 22px;
+        border: none;
+        border-radius: 9px;
+        background: #075b4d;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .save-btn:hover {
+        background: #06483e;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+        .page,
+        .question-page {
+            padding: 25px 20px;
         }
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f7f6ee;
-            color: #073f38;
+        .top-bar,
+        .question-topbar {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .form-grid,
+        .options-grid,
+        .answer-category {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 0;
         }
 
-        /* =====================================================
-           PAGE LAYOUT
-        ===================================================== */
-
-        .admin-layout {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /*
-           Your existing student/admin sidebar component
-           occupies the left side.
-        */
-
-        .admin-main {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .page {
-            width: 100%;
-            max-width: none;
-            margin: 0;
-            padding: 40px 35px;
-        }
-
-
-        /* =====================================================
-           TOP BAR
-        ===================================================== */
-
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 35px;
-        }
-
-        .heading-small {
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: #0b6657;
-            margin-bottom: 10px;
+        .form-card {
+            padding: 20px;
         }
 
         h1 {
-            font-size: 36px;
-            margin-bottom: 8px;
+            font-size: 27px;
         }
 
-        .subtitle {
-            color: #667c78;
-            font-size: 15px;
+        .page,
+        .question-page {
+            padding: 20px 14px;
         }
+    }
+</style>
 
-
-        /* =====================================================
-           BACK BUTTON
-        ===================================================== */
-
-        .back-btn {
-            text-decoration: none;
-            padding: 12px 18px;
-            border: 1px solid #d9e4df;
-            border-radius: 10px;
-            background: white;
-            color: #07584c;
-            font-weight: 600;
-        }
-
-        .back-btn:hover {
-            background: #eef6f2;
-        }
-
-
-        /* =====================================================
-           FORM CARD
-        ===================================================== */
-
-        .form-card {
-            background: white;
-            border: 1px solid #dce7e2;
-            border-radius: 18px;
-            padding: 35px;
-        }
-
-        .section-title {
-            font-size: 20px;
-            margin-bottom: 25px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .form-group select {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            background: #fff;
-            font-size: 14px;
-        }
-
-        .form-group select[multiple] {
-            min-height: 130px;
-        }
-
-        .form-group small {
-            display: block;
-            margin-top: 6px;
-            color: #6b7280;
-        }
-
-        label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .required {
-            color: #c84a42;
-        }
-
-
-        /* =====================================================
-           FORM CONTROLS
-        ===================================================== */
-
-        input,
-        textarea,
-        select {
-            width: 100%;
-            padding: 13px 14px;
-            border: 1px solid #d5e2dd;
-            border-radius: 9px;
-            font-size: 14px;
-            font-family: inherit;
-            color: #073f38;
-            background: white;
-            outline: none;
-        }
-
-        textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        input:focus,
-        textarea:focus,
-        select:focus {
-            border-color: #0b6657;
-            box-shadow: 0 0 0 3px rgba(11, 102, 87, 0.08);
-        }
-
-
-        /* =====================================================
-           GRID
-        ===================================================== */
-
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .answer-category {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .help-text {
-            margin-top: 6px;
-            font-size: 12px;
-            color: #7a8b87;
-        }
-
-
-        /* =====================================================
-           ERROR
-        ===================================================== */
-
-        .error {
-            background: #fff1f0;
-            border: 1px solid #f0c7c3;
-            color: #a53b35;
-            padding: 13px 15px;
-            border-radius: 9px;
-            margin-bottom: 25px;
-        }
-
-
-        /* =====================================================
-           ACTIONS
-        ===================================================== */
-
-        .actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            margin-top: 30px;
-            padding-top: 25px;
-            border-top: 1px solid #e6ece9;
-        }
-
-        .cancel-btn {
-            text-decoration: none;
-            padding: 12px 20px;
-            border: 1px solid #d9e4df;
-            border-radius: 9px;
-            color: #526a65;
-            background: white;
-            font-weight: 600;
-        }
-
-        .save-btn {
-            border: none;
-            padding: 12px 22px;
-            border-radius: 9px;
-            background: #075b4d;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .save-btn:hover {
-            background: #06483e;
-        }
-
-
-        /* =====================================================
-           MOBILE
-        ===================================================== */
-
-        @media (max-width: 900px) {
-
-            .admin-layout {
-                display: block;
-            }
-
-            .page {
-                padding: 30px 20px;
-            }
-
-            .top-bar {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 20px;
-            }
-        }
-
-        @media (max-width: 700px) {
-
-            .options-grid,
-            .answer-category {
-                grid-template-columns: 1fr;
-            }
-
-            .form-card {
-                padding: 22px;
-            }
-
-            h1 {
-                font-size: 30px;
-            }
-        }
-        /* ================= MULTI SELECT DROPDOWN ================= */
-
-.multi-select-dropdown {
-    position: relative;
-    width: 100%;
-}
-
-.multi-select-button {
-    width: 100%;
-    min-height: 52px;
-    padding: 13px 16px;
-
-    background: #ffffff;
-
-    border: 1px solid #d1dedd;
-    border-radius: 10px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    color: #145c50;
-
-    font-size: 15px;
-    font-family: inherit;
-
-    cursor: pointer;
-
-    transition: 0.2s ease;
-}
-
-.multi-select-button:hover {
-    border-color: #145c50;
-}
-
-.multi-select-button i {
-    font-size: 12px;
-    transition: transform 0.2s ease;
-}
-
-.multi-select-dropdown.open
-.multi-select-button i {
-    transform: rotate(180deg);
-}
-
-
-/* OPTIONS CONTAINER */
-
-.multi-select-options {
-    display: none;
-
-    position: absolute;
-
-    top: calc(100% + 6px);
-    left: 0;
-
-    width: 100%;
-
-    max-height: 230px;
-
-    overflow-y: auto;
-
-    background: #ffffff;
-
-    border: 1px solid #d8e2e0;
-    border-radius: 10px;
-
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
-
-    z-index: 1000;
-
-    padding: 8px;
-}
-
-.multi-select-dropdown.open
-.multi-select-options {
-    display: block;
-}
-
-
-/* CAREER OPTION */
-
-.career-checkbox {
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    padding: 11px 10px;
-
-    border-radius: 7px;
-
-    cursor: pointer;
-
-    color: #243534;
-
-    font-size: 14px;
-
-    transition: 0.15s ease;
-}
-
-.career-checkbox:hover {
-    background: #eef7f4;
-}
-
-
-/* HIDE ORIGINAL CHECKBOX */
-
-.career-checkbox input {
-    position: absolute;
-
-    opacity: 0;
-
-    pointer-events: none;
-}
-
-
-/* CUSTOM CHECKBOX */
-
-.checkmark {
-    width: 18px;
-    height: 18px;
-
-    border: 1.5px solid #b9c9c6;
-
-    border-radius: 5px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    transition: 0.2s ease;
-}
-
-
-/* CHECKED STATE */
-
-.career-checkbox input:checked + .checkmark {
-    background: #145c50;
-
-    border-color: #145c50;
-}
-
-
-/* CHECK ICON */
-
-.career-checkbox input:checked + .checkmark::after {
-    content: "✓";
-
-    color: #ffffff;
-
-    font-size: 12px;
-
-    font-weight: 700;
-}
-
-
-/* CAREER NAME */
-
-.career-name {
-    flex: 1;
-
-    line-height: 1.4;
-}
-
-
-/* SELECTED TEXT */
-
-#careerDropdownText {
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-
-    white-space: nowrap;
-
-    text-align: left;
-}
-
-    </style>
 
 </head>
 
@@ -1036,3 +998,5 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 </script>
+
+{% endblock %}
